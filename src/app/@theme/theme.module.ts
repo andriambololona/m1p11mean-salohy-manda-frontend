@@ -25,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatListModule} from '@angular/material/list';
 
 
 const NB_MODULES = [
@@ -39,6 +40,7 @@ const NB_MODULES = [
   MatButtonModule,
   MatIconModule,
   MatSidenavModule,
+  MatListModule
 ];
 const COMPONENTS = [
   HeaderComponent,

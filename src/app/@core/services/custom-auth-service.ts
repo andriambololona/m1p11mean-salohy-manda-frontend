@@ -1,6 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map} from 'rxjs';
+import { Observable} from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { ApiResponse } from '../entity/api-response';
 import { Datatable } from '../entity/data-table';
@@ -45,7 +46,7 @@ export class CustomAuthService  {
         return response;
     }
 
-    authenticate(usename:string,password:string): Observable<HttpResponse<any>|Observable<never> >{
+    authenticate(usename:string,password:string): Observable<Observable<never>|HttpResponse<any> >{
         return this.apiService.post<any>(environment.generate_token_uri,{UserName:usename,Password:password}).pipe(
             map((x: HttpResponse<any>) => {
             //console.log("All user :",x);

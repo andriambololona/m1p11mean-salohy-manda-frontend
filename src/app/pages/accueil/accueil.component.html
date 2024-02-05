@@ -1,0 +1,42 @@
+
+
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/assets/image/onglerie-Institut-beaute-Aquareve-Pusey.png" class="d-block w-100" alt="..."   >
+        </div>
+        <div class="carousel-item">
+          <img src="/assets/image/618265361.jpg" class="d-block w-100" alt="..."  >
+        </div>
+        <div class="carousel-item">
+          <img src="/assets/image/makeUp.jpg" class="d-block w-100" alt="..."  >
+        </div>
+      </div>
+
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+
+
+<mat-grid-list cols="4" rowHeight="100px">
+
+    <mat-grid-tile  *ngFor=" let tile of tiles; track tile"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows"
+      [style.background]="tile.color">{{tile.text}}</mat-grid-tile>
+
+</mat-grid-list>
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile></mat-grid-tile>
+  <mat-grid-tile>2</mat-grid-tile>
+  <mat-grid-tile>3</mat-grid-tile>
+  <mat-grid-tile>4</mat-grid-tile>
+</mat-grid-list>

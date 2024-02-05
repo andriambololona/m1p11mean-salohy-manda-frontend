@@ -14,6 +14,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { AccueilComponent } from './accueil/accueil.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ClientComponent,
     EmployeComponent,
     ManagerComponent,
+    AccueilComponent,
   ],
   imports: [
 
