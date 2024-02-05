@@ -2,7 +2,7 @@
   <a class="logo" ><img class="logo1" src="/assets/image/icon_girly.jpg" width="50"/> <strong id="logo2">QUEEN <span id="logo3">BEAUTY</span></strong></a>
       <span class="example-spacer"></span>
       
-      <button mat-button [matMenuTriggerFor]="belowMenu">Menu1</button>
+      <!--<button mat-button [matMenuTriggerFor]="belowMenu">Menu1</button>
       <mat-menu #aboveMenu="matMenu" yPosition="above">
         <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button>
@@ -14,17 +14,48 @@
         <button mat-menu-item>Item 2</button>
       </mat-menu>
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">Menu3</button>
+      <button mat-button [matMenuTriggerFor]="belowMenu">Se Connecter</button>
       <mat-menu #beforeMenu="matMenu" xPosition="before">
         <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button>
       </mat-menu>
 
 
-      <button mat-button [matMenuTriggerFor]="belowMenu">Menu4</button>
+      <button mat-button [matMenuTriggerFor]="belowMenu">Inscription</button>
       <mat-menu #afterMenu="matMenu" xPosition="after">
         <button mat-menu-item>Item 1</button>
         <button mat-menu-item>Item 2</button>
+      </mat-menu>-->
+      <button mat-button mat-stroked-button>Se connecter</button>
+      <button mat-button mat-stroked-button color="accent">Inscription</button>
+      <button mat-icon-button  aria-label="Example icon-button with a menu">
+        <mat-icon>
+          notifications
+          </mat-icon>
+      </button>
+      <button mat-icon-button  aria-label="Example icon-button with a menu">
+        <mat-icon>
+          account_circle
+          </mat-icon>
+      </button>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>
+          settings
+          </mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>manage_accounts</mat-icon>
+          <span>Profil</span>
+        </button>
+        <button mat-menu-item disabled>
+          <mat-icon>voicemail</mat-icon>
+          <span>Check voice mail</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>logout</mat-icon>
+          <span>Deconnexion</span>
+        </button>
       </mat-menu>
-
+      
 </mat-toolbar>
