@@ -15,6 +15,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AccueilComponent } from './accueil/accueil.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -38,6 +40,8 @@ import { AccueilComponent } from './accueil/accueil.component';
     MatToolbarModule,
     MatIconModule,
     MatSidenavModule,
+    MatCardModule,
+    MatDividerModule
   ],
   providers: []
 })
