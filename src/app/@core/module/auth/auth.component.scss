@@ -1,0 +1,46 @@
+::ng-deep .nb-theme-default [nbInput].shape-rectangle {
+    border-radius: 12.25rem;
+}
+::ng-deep .nb-theme-default [nbButton].shape-rectangle {
+    border-radius: 11.25rem;
+}
+::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary {
+    background-color: #11547a;
+    border-color: #007bb2;
+    color: #ffffff;
+}
+::ng-deep label {
+    margin-left: 20px;
+}
+::ng-deep .nb-theme-default p, .nb-theme-default .paragraph {
+    //color: #000000;
+    color: #f9429de5;
+
+}
+.caption{
+    margin-left: 20px;
+}
+/* ::ng-deep .columns nb-layout-column {
+    padding: 0.5rem !important;
+} */
+
+.title{
+  color: #f9429de5;
+}
+.label{
+  //color: black;
+  color: #f9429de5;
+}
+.bt-connexion{
+  //color: #f9429d!important;
+  background-color:#f9429de5;
+  border-color:#f9429de5!important;
+}
+#flex-container
+{
+  //background-color: #f9429de5;
+  border-radius: 2.25rem;
+  height: 35em;
+  width:35em;
+}
+

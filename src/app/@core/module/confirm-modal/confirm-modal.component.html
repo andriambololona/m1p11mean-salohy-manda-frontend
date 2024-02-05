@@ -1,0 +1,35 @@
+<nb-card status="warning">
+  <nb-card-header>Confirmation</nb-card-header>
+  <nb-card-body>
+    {{message}}
+  </nb-card-body>
+  <nb-card-footer>
+    <button nbButton outline (click)="confirm()" status="success">Ok<i class='bx bx-check'></i></button>
+
+    <button class="buttonRefuser" (click)="decline()" nbButton outline status="danger">Refuser<i
+        class='bx bx-x'></i></button>
+  </nb-card-footer>
+</nb-card>
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-subtitle>Confirmation</mat-card-subtitle>
+    <mat-card-title>Shiba Inu</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{ message }}</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions>
+    <mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">No Thanks</button>
+      <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+    </mat-dialog-actions>
+  </mat-card-actions>
+
+  <mat-card-footer>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </mat-card-footer>
+
+</mat-card>
+</mat-dialog-content>
