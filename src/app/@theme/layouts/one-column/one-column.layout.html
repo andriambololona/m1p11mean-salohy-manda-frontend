@@ -1,23 +1,39 @@
-
 <app-header></app-header>
 <mat-drawer-container class="example-container" autosize>
-    <mat-drawer #drawer class="example-sidenav" mode="side">
-      <mat-list role="list">
-        <mat-list-item role="listitem">Prise de rendez-vous</mat-list-item>
-        <mat-list-item role="listitem">Historique des rendez-vous</mat-list-item>
-      </mat-list>
-    </mat-drawer>
-
-    <div class="example-sidenav-content">
-
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="drawer.toggle()">
-            <mat-icon>menu</mat-icon>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+      <!-- This is the tree node template for leaf nodes -->
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [routerLink]="[node.link]">
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button  class="icon_btn">
+          <mat-icon>
+            {{node.icon}}
+          </mat-icon>
         </button>
-        <ng-content select="router-outlet"></ng-content>
 
-        <app-footer class="footer"></app-footer>
-    </div>
+        <strong class="label_icon">{{node.name}}</strong>
+      </mat-tree-node>
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
+        <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+          <mat-icon>
+            {{node.icon}}
+            {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+          </mat-icon>
+        </button>
+        <strong class="label_icon">{{node.name}}</strong>
+      </mat-tree-node>
+    </mat-tree>
 
-  </mat-drawer-container>
+  </mat-drawer>
+  <div class="example-sidenav-content">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+      (click)="drawer.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <ng-content select="router-outlet"></ng-content>
 
+    <app-footer class="footer"></app-footer>
+  </div>
 
+</mat-drawer-container>

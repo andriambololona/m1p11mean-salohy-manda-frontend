@@ -1,5 +1,6 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
+import { ClientComponent } from '../pages/client/client.component';
 
 
 const routes: Routes = [
@@ -15,11 +16,7 @@ const routes: Routes = [
   ],
 }*/
 
-/*{path:'accueil',component:PagesComponent,children:[
-  {path:'',component:AccueilComponent},
-  {path:'bibliotheque',component:BibliothequeComponent},
-  {path:'archive',component:ArchiveComponent}
-]},*/
+//{path:'client',component:ClientComponent},
 ];
 const config: ExtraOptions = {
   useHash: true,
