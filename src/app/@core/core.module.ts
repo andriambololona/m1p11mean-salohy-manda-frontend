@@ -85,7 +85,7 @@ export class CoreModule {
     return <ModuleWithProviders<CoreModule>>{
       ngModule: CoreModule,
       providers: [
-                      ...NB_CORE_PROVIDERS,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+                      ...NB_CORE_PROVIDERS,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {disableClose:true}}
                   ],
     };
   }
