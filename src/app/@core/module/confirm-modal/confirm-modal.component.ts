@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./confirm-modal.component.scss'],
 })
 export class ConfirmModalComponent implements OnInit{
-  constructor(protected dialogRef:  MatDialogRef<ConfirmModalComponent>) { }
+  constructor(protected dialogRef:  MatDialogRef<ConfirmModalComponent>,@Inject(MAT_DIALOG_DATA) public data) { }
   @Input() title: any;
   @Input() message: any;
   result: Subject<boolean> = new Subject();
@@ -22,7 +22,7 @@ export class ConfirmModalComponent implements OnInit{
     this.result.next(false);
   }
   ngOnInit(): void {
-    console.log(this.result);
+    //console.log(this.result.next(true));
   }
 
 }

@@ -1,18 +1,19 @@
-<mat-dialog-content>
+
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-subtitle>Confirmation</mat-card-subtitle>
-      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-title>{{data.title}}</mat-card-title>
     </mat-card-header>
+
     <mat-card-content>
-      <p>{{ message }}</p>
+      <p>{{ data.message }}</p>
       <mat-divider></mat-divider>
     </mat-card-content>
+
     <mat-card-actions>
-      <mat-dialog-actions>
-        <button mat-button (click)="onNoClick()">No Thanks</button>
-        <button mat-button  cdkFocusInitial>Ok</button>
-      </mat-dialog-actions>
+      
+        <button mat-button (click)="onNoClick()">Non</button>
+        <button mat-button  cdkFocusInitial (click)="confirm()">D'accord</button>
+     
     </mat-card-actions>
 
     <mat-card-footer>
@@ -20,4 +21,4 @@
     </mat-card-footer>
 
   </mat-card>
-</mat-dialog-content>
+

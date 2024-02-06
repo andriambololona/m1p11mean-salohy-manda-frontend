@@ -1,12 +1,11 @@
 <mat-dialog-content>
   <div class="row">
-    <h2>Inscription</h2>
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Company (disabled)</mat-label>
-        <input matInput disabled value="Google">
-      </mat-form-field>
-
+    <div class="row">
+      <div class="col-11"><h2><mat-icon>person_add</mat-icon> Inscription</h2></div>
+      <div class="col-1"> <button mat-icon-button class="btn_close" (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
+    </div>
+    
+    <form class="example-form">     
       <table class="example-full-width" cellspacing="0"><tr>
         <td><mat-form-field class="example-full-width">
           <mat-label>Nom</mat-label>
@@ -48,8 +47,7 @@
 
   </div>
   <mat-dialog-actions>
-    <button class="btn btn-danger">Close</button>
-    <button class="btn btn-success">Ok</button>
+    <button mat-fab  extended  id="btn_valider" (click)="register()"><mat-icon>done</mat-icon> Valider</button>
   </mat-dialog-actions>
 </mat-dialog-content>
 

@@ -33,7 +33,7 @@ import { CoreModule } from '../@core/core.module';
     CommonModule,
     PagesRoutingModule,
     //MatSidenavModule,
-    CoreModule,
+    //CoreModule,
     ThemeModule,
     MatSlideToggleModule,
     MatButtonModule,

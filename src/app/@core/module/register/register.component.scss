@@ -1,8 +1,8 @@
-/*.example-form {
-  min-width: 150px;
-  max-width: 500px;
+.example-form {
+  //min-width: 150px;
+  //max-width: 500px;
   width: 100%;
-}*/
+}
 
 .example-full-width {
   width: 100%;
@@ -10,4 +10,11 @@
 
 td {
   padding-right: 8px;
+}
+.btn_close{
+  color: #c69294f8;
+}
+#btn_valider{
+  background-color: rgba(53, 51, 51, 0.575);
+  color: white;
 }

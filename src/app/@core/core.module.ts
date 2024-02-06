@@ -27,13 +27,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { RegisterComponent } from './module/register/register.component';
 import { MatCardModule } from '@angular/material/card';
 import { ConfirmModalComponent } from './module/confirm-modal/confirm-modal.component';
-import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogClose, MatDialogTitle, MatDialogContent, MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
 import { InputModalModule } from './module/input-modal/input-modal.module';
 import { InputMessageModalComponent } from './module/input-modal/input-message-modal/input-message-modal.component';
 import { MatDividerModule } from '@angular/material/divider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 const DATA_SERVICES: any[] = [{ provide: UserData, useClass: UserService }];
 
 const HTTP_INTERCEPTOR: any[] = [
@@ -64,7 +65,8 @@ export const NB_CORE_PROVIDERS = [
     MatSelectModule,
     MatDividerModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatIconModule,
   ],
 
   exports: [AuthModule],
@@ -82,7 +84,9 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return <ModuleWithProviders<CoreModule>>{
       ngModule: CoreModule,
-      providers: [...NB_CORE_PROVIDERS],
+      providers: [
+                      ...NB_CORE_PROVIDERS,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
+                  ],
     };
   }
 }

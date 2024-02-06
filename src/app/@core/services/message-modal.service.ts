@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmModalComponent } from '../module/confirm-modal/confirm-modal.component';
-@Injectable()
+@Injectable(
+  {providedIn:'root'}
+)
 export class MessageModalService{
     constructor(private dialogService: MatDialog){}
 

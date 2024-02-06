@@ -14,6 +14,7 @@ import { PagesModule } from './pages/pages.module';
 import { ThemeModule } from './@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CoreModule } from './@core/core.module';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatSidenavModule,
     ThemeModule.forRoot(),
+    CoreModule.forRoot(),
     PagesModule,
   ],
   providers: [],
