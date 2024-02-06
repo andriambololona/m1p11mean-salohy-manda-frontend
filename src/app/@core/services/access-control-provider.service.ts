@@ -1,7 +1,6 @@
 import { HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { NbAuthService, NbAuthToken } from "@nebular/auth";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
@@ -12,13 +11,13 @@ import { ApiService } from "./api.service";
 export class AccessControlProviderService {
 
   constructor(
-    private authService: NbAuthService,
+    //private authService: NbAuthService,
     private router: Router,
     private apiService: ApiService
   ) {}
 
 
-  getAccess(): Observable<any> {
+  /*getAccess(): Observable<any> {
 
     return this.authService.getToken().pipe(
       map((token: NbAuthToken) => {
@@ -34,7 +33,7 @@ export class AccessControlProviderService {
         }
       }),
     );
-  }
+  }*/
 
 
 }

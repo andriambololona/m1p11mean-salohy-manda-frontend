@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 @Component({
   selector: 'app-confirm-modal',
   templateUrl: './confirm-modal.component.html',
-  styleUrls: ['./confirm-modal.component.scss']
+  styleUrls: ['./confirm-modal.component.scss'],
 })
 export class ConfirmModalComponent implements OnInit{
   constructor(protected dialogRef:  MatDialogRef<ConfirmModalComponent>) { }
@@ -17,7 +17,7 @@ export class ConfirmModalComponent implements OnInit{
     this.dialogRef.close();
     this.result.next(true);
   }
-  decline() {
+  onNoClick() {
     this.dialogRef.close();
     this.result.next(false);
   }

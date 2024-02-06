@@ -15,10 +15,12 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
   {
     name: 'Rendez-vous',
     icon:'schedule',
-    children: [{name: 'Prise de rendez-vous',link:'/pages/client',icon:'assignment_add'}, {name: 'Historiques',link:'/pages/employe',icon:'history'}],
+    children: [
+      {name: 'Prise de rendez-vous',link:'/pages/client',icon:'assignment_add'},
+      {name: 'Historiques',link:'/pages/employe',icon:'history'}],
   },
   {
-    name: 'Vegetables',
+    name: 'Gestions des preferences',
     icon:'refresh',
     children: [
       {
@@ -69,11 +71,11 @@ export const TREE_DATA_MANAGER: FoodNode[] = [
     icon:'query_stats',
     children: [
       {
-        name: 'Green',
+        name: 'stat1',
         children: [{name: 'Broccoli',link:'/pages/manager'}, {name: 'Brussels sprouts',link:'/pages/manager'}],
       },
       {
-        name: 'Orange',
+        name: 'stat2',
         children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
       },
     ],

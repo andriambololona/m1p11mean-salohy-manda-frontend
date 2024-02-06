@@ -17,6 +17,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AccueilComponent } from './accueil/accueil.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
+import { CoreModule } from '../@core/core.module';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {MatDividerModule} from '@angular/material/divider';
     CommonModule,
     PagesRoutingModule,
     //MatSidenavModule,
+    CoreModule,
     ThemeModule,
     MatSlideToggleModule,
     MatButtonModule,

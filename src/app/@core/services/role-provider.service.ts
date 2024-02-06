@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NbRoleProvider } from '@nebular/security';
-import { NbAuthService, NbAuthToken } from '@nebular/auth';
+
 import { of as observableOf, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
@@ -9,15 +8,15 @@ import { ApiService } from './api.service';
 import { HttpParams } from '@angular/common/http';
 
 @Injectable()
-export class RoleProvider extends NbRoleProvider {
+export class RoleProvider {
     constructor(
-        private authService: NbAuthService,
+
         private router: Router,
         private apiService: ApiService
     ) {
-        super();
+        //super();
     }
-    getRole(): Observable<string> {
+    /*getRole(): Observable<string> {
         return this.authService.getToken().pipe(
             map((token: NbAuthToken) => {
                 if (token.isValid()) {
@@ -32,5 +31,5 @@ export class RoleProvider extends NbRoleProvider {
                 }
             }),
         );
-    }
+    }*/
 }

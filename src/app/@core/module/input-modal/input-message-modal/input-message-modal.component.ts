@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NbDialogRef } from '@nebular/theme';
 
 @Component({
   selector: 'input-message-modal',
@@ -14,18 +13,18 @@ export class InputMessageModalComponent implements OnInit {
   result: Subject<string> = new Subject();
   content:string = '';
   f = {};
-  constructor(protected dialogRef: NbDialogRef<InputMessageModalComponent>) { }
+  constructor() { }
 
   ngOnInit() {
   }
 
   save(){
-    this.dialogRef.close();
+    //this.dialogRef.close();
     this.result.next(this.content);
   }
 
   cancel(){
-    this.dialogRef.close();
+    //this.dialogRef.close();
     this.result.next(null);
   }
 

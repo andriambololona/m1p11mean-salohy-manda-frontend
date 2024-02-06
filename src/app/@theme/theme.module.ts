@@ -28,6 +28,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatListModule} from '@angular/material/list';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 const NB_MODULES = [
@@ -43,7 +44,8 @@ const NB_MODULES = [
   MatIconModule,
   MatSidenavModule,
   MatListModule,
-  MatTreeModule
+  MatTreeModule,
+  MatDialogModule,
 ];
 const COMPONENTS = [
   HeaderComponent,

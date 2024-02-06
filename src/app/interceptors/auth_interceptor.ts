@@ -3,7 +3,6 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpParams, HttpE
 import { Observable, throwError, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { NbAuthService, NbAuthResult, NbAuthToken } from '@nebular/auth';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/internal/operators/tap';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -11,14 +10,14 @@ import { ApiService } from '../@core/services/api.service';
 
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class AuthInterceptor //implements HttpInterceptor
+ {
   constructor(
-    private authService: NbAuthService,
     private router: Router,
     private apiService: ApiService
   ) {}
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  /*intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (!req.url.endsWith(environment.add_upload_abmform_uri) && !req.url.endsWith(environment.upload_moneygram_facture)) {
       req = req.clone({
         setHeaders: {
@@ -99,5 +98,5 @@ export class AuthInterceptor implements HttpInterceptor {
         return throwError(() => error);
       })
     );
-  }
+  }*/
 }

@@ -15,7 +15,7 @@ export class OneColumnLayoutComponent{
   showFiller = false;
 
   constructor() {
-    this.dataSource.data = TREE_DATA_EMPLOYE;
+    this.dataSource.data = TREE_DATA_CLIENT;
   }
 
   private _transformer = (node: FoodNode, level: number) => {

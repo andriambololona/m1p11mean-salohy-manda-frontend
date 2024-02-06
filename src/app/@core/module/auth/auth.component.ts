@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NbLoginComponent, NbAuthResult } from '@nebular/auth';
+
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -7,13 +7,13 @@ import { environment } from '../../../../environments/environment';
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent  extends NbLoginComponent implements OnInit {
+export class AuthComponent implements OnInit {
   loading:boolean = false;
   isLoginSuccessfull: boolean = false;
   ngOnInit() {
   }
 
-  login(): void{
+  /*login(): void{
     this.errors = [];
     this.messages = [];
     this.submitted = true;
@@ -39,7 +39,7 @@ export class AuthComponent  extends NbLoginComponent implements OnInit {
       console.log(result);
       console.log(result.getRedirect());
     });
-  }
+  }*/
 
   convertErrors(errors: Array<string> ): Array<string>{
     errors.forEach((element, index) => {
@@ -59,8 +59,8 @@ export class AuthComponent  extends NbLoginComponent implements OnInit {
     return messages;
   }
 
-  getConfigValue(key: string): any{
+  /*getConfigValue(key: string): any{
     return super.getConfigValue(key);
-  }
+  }*/
 
 }
