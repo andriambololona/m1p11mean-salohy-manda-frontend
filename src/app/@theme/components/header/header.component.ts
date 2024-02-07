@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { AuthComponent } from 'src/app/@core/module/auth/auth.component';
 import { RegisterComponent } from 'src/app/@core/module/register/register.component';
 
 @Component({
@@ -14,6 +15,17 @@ export class HeaderComponent {
 
   openDialogInscription(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
+      //data: {name: this.name, animal: this.animal},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+  }
+
+  openDialogConnexion(): void {
+    const dialogRef = this.dialog.open(AuthComponent, {
       //data: {name: this.name, animal: this.animal},
     });
 

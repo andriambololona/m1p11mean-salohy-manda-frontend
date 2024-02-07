@@ -1,7 +1,7 @@
 <mat-toolbar class="toolbar-container">
   <a class="logo" [routerLink]="['/pages/accueil']"><img class="logo1" src="/assets/image/icon_girly.jpg" width="50"/> <strong id="logo2"> QUEEN <span id="logo3">BEAUTY</span></strong></a>
       <span class="example-spacer"></span>
-      <button mat-button mat-stroked-button>Se connecter</button>
+      <button mat-button mat-stroked-button (click)="openDialogConnexion()">Se connecter</button>
       <button mat-button class="btn_pink" mat-stroked-button (click)="openDialogInscription()">Inscription</button>
       <button mat-icon-button  aria-label="Example icon-button with a menu">
         <mat-icon>

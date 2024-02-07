@@ -4,6 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AuthRoutingModule } from './auth-routing';
 import { AuthComponent } from './auth.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -12,6 +17,11 @@ import { AuthComponent } from './auth.component';
     FormsModule,
     RouterModule,
     AuthRoutingModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatButtonModule,
   ],
   declarations: [
       AuthComponent

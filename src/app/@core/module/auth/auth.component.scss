@@ -1,46 +1,36 @@
-::ng-deep .nb-theme-default [nbInput].shape-rectangle {
-    border-radius: 12.25rem;
+.example-form {
+  //min-width: 150px;
+  //max-width: 500px;
+  width: 100%;
 }
-::ng-deep .nb-theme-default [nbButton].shape-rectangle {
-    border-radius: 11.25rem;
-}
-::ng-deep .nb-theme-default [nbButton].appearance-filled.status-primary {
-    background-color: #11547a;
-    border-color: #007bb2;
-    color: #ffffff;
-}
-::ng-deep label {
-    margin-left: 20px;
-}
-::ng-deep .nb-theme-default p, .nb-theme-default .paragraph {
-    //color: #000000;
-    color: #f9429de5;
 
+.example-full-width {
+  width: 100%;
 }
-.caption{
-    margin-left: 20px;
-}
-/* ::ng-deep .columns nb-layout-column {
-    padding: 0.5rem !important;
-} */
 
-.title{
-  color: #f9429de5;
+td {
+  padding-right: 8px;
 }
-.label{
-  //color: black;
-  color: #f9429de5;
+.btn_close{
+  color: #c69294f8;
 }
-.bt-connexion{
-  //color: #f9429d!important;
-  background-color:#f9429de5;
-  border-color:#f9429de5!important;
+#btn_valider{
+  background-color: rgba(53, 51, 51, 0.575);
+  color: white;
+  margin-left: 200px;
 }
-#flex-container
-{
-  //background-color: #f9429de5;
-  border-radius: 2.25rem;
-  height: 35em;
-  width:35em;
+h2{
+ text-align: center;
+ font-size: 30px;
+}
+.button-container-div{
+  text-align: center!important;
+}
+.icon_circle{
+  size: 500px;
+}
+.forgot_pass{
+  cursor: pointer;
+  text-decoration: underline;
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { environment } from '../../../../environments/environment';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'auth',
@@ -9,10 +10,21 @@ import { environment } from '../../../../environments/environment';
 })
 export class AuthComponent implements OnInit {
   loading:boolean = false;
+  hide = true;
   isLoginSuccessfull: boolean = false;
+  constructor(public dialogRef: MatDialogRef<AuthComponent>){
+
+  }
   ngOnInit() {
   }
 
+  Login(){
+   this.dialogRef.close();
+  }
+
+  closeDialog() {
+    this.dialogRef.close();
+  }
   /*login(): void{
     this.errors = [];
     this.messages = [];
@@ -62,5 +74,6 @@ export class AuthComponent implements OnInit {
   /*getConfigValue(key: string): any{
     return super.getConfigValue(key);
   }*/
+
 
 }
