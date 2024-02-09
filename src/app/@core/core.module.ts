@@ -12,7 +12,6 @@ import { ApiService } from './services/api.service';
 import { RoleProvider } from './services/role-provider.service';
 import { CustomAccessChecker } from './services/custom-access-checker';
 import { UserData } from './data/users';
-import { UserService } from './mock/users.service';
 import { AuthInterceptor } from '../interceptors/auth_interceptor';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TestService } from './services/test.service';
@@ -35,6 +34,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { User } from './entity/user';
+import { ApiUserService } from './services/api/api.user.service';
+import { UserService } from './services/user.service';
 const DATA_SERVICES: any[] = [{ provide: UserData, useClass: UserService }];
 
 const HTTP_INTERCEPTOR: any[] = [
@@ -49,6 +51,7 @@ export const NB_CORE_PROVIDERS = [
   ...HTTP_INTERCEPTOR,
   AnalyticsService,
   { provide: AuthGuardService, useClass: AuthGuardService },
+  {provide:UserService,useClass:ApiUserService},
   AnalyticsService,
 ];
 
@@ -76,6 +79,7 @@ export const NB_CORE_PROVIDERS = [
     ConfirmModalComponent,
 
   ],
+
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
@@ -85,7 +89,9 @@ export class CoreModule {
     return <ModuleWithProviders<CoreModule>>{
       ngModule: CoreModule,
       providers: [
-                      ...NB_CORE_PROVIDERS,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {disableClose:true}}
+                      ...NB_CORE_PROVIDERS,{provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {disableClose:true}},
+
+
                   ],
     };
   }

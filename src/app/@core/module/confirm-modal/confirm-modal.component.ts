@@ -26,3 +26,4 @@ export class ConfirmModalComponent implements OnInit{
   }
 
 }
+ 

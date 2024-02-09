@@ -17,16 +17,55 @@ export class AuthInterceptor //implements HttpInterceptor
     private apiService: ApiService
   ) {}
 
-  /*intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (!req.url.endsWith(environment.add_upload_abmform_uri) && !req.url.endsWith(environment.upload_moneygram_facture)) {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    let { url, method, headers, body } = req;
+    //return this.handleRequest(req, next, null);
+     if (url.endsWith(environment.register_uri) && method === 'POST') {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
-        }
+        },
+        //body: body += '&client_id=' + environment.client_id
       });
+      console.log("interceptor ");
+      return next.handle(req);
     }
-    let { url, method, headers, body } = req;
+    if (req.url.endsWith(environment.generate_token_uri) && method==='POST') {
+     // console.log("interceptor3 ");
+      req = req.clone({
+        setHeaders: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        //body: body += '&client_id=' + environment.client_id
+      });
+      console.log(req.headers);
+
+      return next.handle(req);
+    } else {
+      console.log("interceptor2")
+      req = req.clone({
+        setHeaders: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      });
+      return next.handle(req);
+    }
+
+  }
+  /*handleRequest(req: HttpRequest<any>, next: HttpHandler, token: NbAuthOAuth2Token) {
+     const JWT = `Bearer ${token.getValue()}`;
+    req = req.clone({
+      setHeaders: {
+        Authorization: JWT,
+      },
+    });
+    return next.handle(req);
+  }*/
+
+    /*let { url, method, headers, body } = req;
     if (url.endsWith(environment.logout_uri) && method === 'GET') {
       return next.handle(req);
     }
@@ -73,30 +112,6 @@ export class AuthInterceptor //implements HttpInterceptor
             );
           }
         }));
-    }
+    }*/
   }
 
-  handleRequest(req: HttpRequest<any>, next: HttpHandler, token: NbAuthToken) {
-    const JWT = `Bearer ${token.getValue()}`;
-    req = req.clone({
-      setHeaders: {
-        Authorization: JWT,
-      },
-    });
-    return next.handle(req).pipe(
-      tap(evt => {
-        return evt;
-      }),
-      catchError(error => {
-        if (error instanceof HttpErrorResponse) {
-          if (error.status == 403) {
-            this.router.navigate(['/']);
-          } else if (error.status == 401) {
-            this.router.navigate([environment.login_uri]);
-          }
-        }
-        return throwError(() => error);
-      })
-    );
-  }*/
-}

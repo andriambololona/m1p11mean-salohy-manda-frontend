@@ -15,6 +15,8 @@ import { ThemeModule } from './@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CoreModule } from './@core/core.module';
+import { ApiUserService } from './@core/services/api/api.user.service';
+import { UserService } from './@core/services/user.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,7 @@ import { CoreModule } from './@core/core.module';
     CoreModule.forRoot(),
     PagesModule,
   ],
-  providers: [],
+  providers: [{provide:UserService,useClass:ApiUserService},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

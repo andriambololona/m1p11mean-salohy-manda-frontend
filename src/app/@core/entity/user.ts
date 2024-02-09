@@ -1,3 +1,6 @@
+import { Groupe } from "./groupe";
+import { Service } from "./service";
+
 export class User{
   nom:string;
   prenom:string;
@@ -5,8 +8,8 @@ export class User{
   password:string;
   est_verifie:boolean;
   salt:string;
-  groupes:any;
-  contacts:string;
-  compte:number;
-  preferences:Array<any>;
+  groupes:Array<Groupe>=[];
+  contacts:Map<string,string>;
+  compte:Map<number,number>;
+  preferences:Array<Array<Groupe>|Array<Service>>;
 }

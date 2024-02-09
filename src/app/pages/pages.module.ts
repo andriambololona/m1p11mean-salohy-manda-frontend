@@ -18,6 +18,10 @@ import { AccueilComponent } from './accueil/accueil.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule} from '@angular/material/divider';
 import { CoreModule } from '../@core/core.module';
+import { ApiUserService } from '../@core/services/api/api.user.service';
+import { UserService } from '../@core/services/user.service';
+import { AccueilModule } from './accueil/accueil.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -34,6 +38,7 @@ import { CoreModule } from '../@core/core.module';
     PagesRoutingModule,
     //MatSidenavModule,
     //CoreModule,
+    HttpClientModule,
     ThemeModule,
     MatSlideToggleModule,
     MatButtonModule,
@@ -43,8 +48,9 @@ import { CoreModule } from '../@core/core.module';
     MatIconModule,
     MatSidenavModule,
     MatCardModule,
-    MatDividerModule
+    MatDividerModule,
+    AccueilModule
   ],
-  providers: []
+  providers: [{provide:UserService,useClass:ApiUserService},]
 })
 export class PagesModule { }

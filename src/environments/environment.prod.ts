@@ -14,10 +14,12 @@ export const environment = {
   //api_host:'http://192.168.210.2:51943',
   //api_host:'http://localhost:51943',
   //api_host:'http://192.168.210.103:51943',//Dev
-  api_host:'http://192.168.210.104:61177',
+  //api_host:'http://192.168.210.104:61177',
+  api_host:'http://localhost:3000',
   //api_host:'https://accescash-backend', //Prod
   //api_host:'http://192.168.210.2:56140',
   generate_token_uri: '/api/user/token',
+  register_uri:'/api/user/test/addUser',
   logout_uri: "/api/user/logout",
   login_uri: 'auth/login',
 

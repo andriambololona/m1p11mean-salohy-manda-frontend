@@ -29,6 +29,9 @@ import {MatListModule} from '@angular/material/list';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ApiUserService } from '../@core/services/api/api.user.service';
+import { UserService } from '../@core/services/user.service';
+import { ApiService } from '../@core/services/api.service';
 
 
 const NB_MODULES = [
@@ -67,12 +70,16 @@ const COMPONENTS = [
   exports: [CommonModule, ...COMPONENTS],
   //declarations: [...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS],
+
+
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {
     return <ModuleWithProviders<ThemeModule>>{
       ngModule: ThemeModule,
       providers: [
+        {provide:UserService,useClass:ApiUserService},
+        ApiService
       ],
     };
   }

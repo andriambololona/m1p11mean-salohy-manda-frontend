@@ -1,7 +1,8 @@
-import { LocalDataSource } from 'ng2-smart-table';
+//import { LocalDataSource } from 'ng2-smart-table';
 import { Observable, of, Subject } from 'rxjs';
 
-export class ApiTableDataSource extends LocalDataSource {
+/*export class ApiTableDataSource extends LocalDataSource
+ {
     constructor(data?: any[]){
         super(data)
     }
@@ -20,4 +21,4 @@ export class ApiTableDataSource extends LocalDataSource {
         this.pageChangesSuject.next(page);
         return super.setPage(page, doEmit);
     }
-}
+}*/

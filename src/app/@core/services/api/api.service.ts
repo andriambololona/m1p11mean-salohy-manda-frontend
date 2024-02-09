@@ -7,6 +7,16 @@ import { environment } from '../../../../environments/environment';
 @Injectable()
 export class ApiService {
 
+  private httpHeaders = {
+    headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Accept': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    })
+};
+   headerss= new HttpHeaders()
+  .set('Access-Control-Allow-Origin', '*');
+
   constructor(private http: HttpClient) { }
 
   private formatErrors(error: any) {
@@ -14,7 +24,8 @@ export class ApiService {
   }
 
   post<T>(path: string, body: Object = {}): Observable<HttpResponse<T> | Observable<never>> {
-    return this.http.post<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response' })
+
+    return this.http.post<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response'})
       .pipe(catchError(this.formatErrors));
   }
 
