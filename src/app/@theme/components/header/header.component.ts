@@ -15,6 +15,7 @@ export class HeaderComponent {
 
   openDialogInscription(): void {
     const dialogRef = this.dialog.open(RegisterComponent, {
+    
       //data: {name: this.name, animal: this.animal},
     });
 

@@ -1,6 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { AuthRoutingModule } from './auth-routing';
 import { AuthComponent } from './auth.component';
@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    ReactiveFormsModule
   ],
   declarations: [
       AuthComponent

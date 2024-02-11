@@ -32,7 +32,7 @@ import { InputMessageModalComponent } from './module/input-modal/input-message-m
 import { MatDividerModule } from '@angular/material/divider';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { User } from './entity/user';
 import { ApiUserService } from './services/api/api.user.service';
@@ -70,6 +70,7 @@ export const NB_CORE_PROVIDERS = [
     MatInputModule,
     FormsModule,
     MatIconModule,
+    ReactiveFormsModule
   ],
 
   exports: [AuthModule],

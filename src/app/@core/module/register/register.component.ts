@@ -12,6 +12,10 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit{
+  hide1 = true;
+  hide2=true;
+  user:User=new User();
+  validateEmail:boolean=true;
   constructor(private messageModalService: MessageModalService,public dialogRef: MatDialogRef<RegisterComponent>,private userService:UserService){
 
   }
@@ -22,11 +26,11 @@ export class RegisterComponent implements OnInit{
     this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
       if(confirm){
         let userReq=new UserRequest();
-        userReq.nom="nom";
+        userReq.nom="salohy";
         userReq.prenom="prenom";
-        userReq.email="nom@gmail.com";
+        userReq.email="salohy@gmail.com";
         userReq.password="password";
-        userReq.salt="salt";
+        //userReq.salt="salt";
         let map=new Map<string,string>();
         map.set("num1","161515151515");
         map.set("num2","115115151515151515");

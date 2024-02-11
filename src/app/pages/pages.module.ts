@@ -22,6 +22,7 @@ import { ApiUserService } from '../@core/services/api/api.user.service';
 import { UserService } from '../@core/services/user.service';
 import { AccueilModule } from './accueil/accueil.module';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -49,7 +50,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     MatCardModule,
     MatDividerModule,
-    AccueilModule
+    FormsModule,
+    AccueilModule,
+    ReactiveFormsModule
   ],
   providers: [{provide:UserService,useClass:ApiUserService},]
 })

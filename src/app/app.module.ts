@@ -13,7 +13,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { PagesModule } from './pages/pages.module';
 import { ThemeModule } from './@theme/theme.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './@core/core.module';
 import { ApiUserService } from './@core/services/api/api.user.service';
 import { UserService } from './@core/services/user.service';
@@ -38,6 +38,7 @@ import { UserService } from './@core/services/user.service';
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     PagesModule,
+    ReactiveFormsModule
   ],
   providers: [{provide:UserService,useClass:ApiUserService},],
   bootstrap: [AppComponent]

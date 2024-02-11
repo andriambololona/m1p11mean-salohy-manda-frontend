@@ -19,7 +19,7 @@ export const environment = {
   api_host:'http://localhost:3000',
   // api_host:'http://192.168.210.103:50943',
   //api_host:'http://192.168.210.104:61177',
-  register_uri:'/api/user/test/addUser',
+  register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
   logout_uri: "/api/user/logout",
   login_uri: 'auth/login',

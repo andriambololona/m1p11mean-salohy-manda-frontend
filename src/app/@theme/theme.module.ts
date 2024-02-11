@@ -16,7 +16,7 @@ import {
 } from './layouts';
 
 import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemeRoutingModule } from './theme-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -49,6 +49,8 @@ const NB_MODULES = [
   MatListModule,
   MatTreeModule,
   MatDialogModule,
+  FormsModule,
+  ReactiveFormsModule
 ];
 const COMPONENTS = [
   HeaderComponent,
