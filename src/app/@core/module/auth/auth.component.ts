@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { environment } from '../../../../environments/environment';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UserService } from '../../services/user.service';
+import { User } from '../../entity/user';
+import { UserRequest } from '../../entity/request/userRequest';
+import { TokenStorageService } from '../../services/token-storage.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'auth',
@@ -9,49 +14,52 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./auth.component.scss']
 })
 export class AuthComponent implements OnInit {
+  user=new User();
   loading:boolean = false;
   hide = true;
   isLoginSuccessfull: boolean = false;
-  constructor(public dialogRef: MatDialogRef<AuthComponent>){
+  validateEmail:boolean=true;
+  isSpinner:boolean=false;
+  isDisabledButton:boolean=true;
+  @Output() authUser=new EventEmitter();
+  constructor(public dialogRef: MatDialogRef<AuthComponent>,private userService:UserService,private tokenStorageService:TokenStorageService){
 
   }
   ngOnInit() {
+    this.user.email="salohy@gmail.com";
+    this.user.password="password";
   }
 
   Login(){
-   this.dialogRef.close();
+    this.isSpinner=true;
+    var userRequest=new UserRequest();
+    userRequest.email=this.user.email;
+    userRequest.password=this.user.password;
+    console.log(userRequest);
+
+    this.userService.login(true,userRequest).subscribe({
+      next:(data:HttpResponse<any>)=>{
+        this.tokenStorageService.saveRole(data.body.roles);
+        this.tokenStorageService.saveId(data.body.id);
+        this.tokenStorageService.saveEmail(data.body.email);
+        this.authUser.emit(data);
+        this.isSpinner=false;
+        this.dialogRef.close();
+
+      },error:(err)=>{
+        this.isSpinner=false;
+        console.log(err.message);
+      }
+    });
+   //this.dialogRef.close();
   }
 
   closeDialog() {
     this.dialogRef.close();
   }
-  /*login(): void{
-    this.errors = [];
-    this.messages = [];
-    this.submitted = true;
-    this.loading = true;
-    this.service.authenticate(this.strategy, {email: this.user.username, password: this.user.password, client_id: environment.client_id}).subscribe((result: NbAuthResult) => {
-      this.submitted = false;
-      if (result.isSuccess()) {
-        this.isLoginSuccessfull = true;
-        let messg = result.getMessages();
-        this.messages = this.convertMessages(messg);
-      } else {
-        let errs = result.getErrors();
-        this.errors = this.convertErrors(errs);
-      }
-      this.loading = false;
-      const redirect = result.getRedirect();
-      if (redirect) {
-        setTimeout(() => {
-          return this.router.navigateByUrl(redirect);
-        }, this.redirectDelay);
-      }
-      this.cd.detectChanges();
-      console.log(result);
-      console.log(result.getRedirect());
-    });
-  }*/
+  login(): void{
+
+  }
 
   convertErrors(errors: Array<string> ): Array<string>{
     errors.forEach((element, index) => {

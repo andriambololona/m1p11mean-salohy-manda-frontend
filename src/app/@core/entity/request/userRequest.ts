@@ -4,7 +4,7 @@ export class UserRequest
   prenom:string;
   email:string;
   password:string;
-  //contacts:Map<string,string>;
+  contacts:Map<string,string>;
   //salt:string
   /*UserRequest(nom,prenom,email,password,contacts){
     var userRequest=new UserRequest();

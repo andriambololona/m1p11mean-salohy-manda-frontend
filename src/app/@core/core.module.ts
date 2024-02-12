@@ -37,6 +37,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { User } from './entity/user';
 import { ApiUserService } from './services/api/api.user.service';
 import { UserService } from './services/user.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 const DATA_SERVICES: any[] = [{ provide: UserData, useClass: UserService }];
 
 const HTTP_INTERCEPTOR: any[] = [
@@ -70,7 +71,8 @@ export const NB_CORE_PROVIDERS = [
     MatInputModule,
     FormsModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
 
   exports: [AuthModule],

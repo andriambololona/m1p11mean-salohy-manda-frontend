@@ -22,7 +22,7 @@ export const environment = {
   register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
   logout_uri: "/api/user/logout",
-  login_uri: 'auth/login',
+  login_uri: '/api/auth/signin',
 
 
   upload_moneygram_facture: "/api/moneygram/recu/upload",

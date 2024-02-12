@@ -21,7 +21,7 @@ export const environment = {
   generate_token_uri: '/api/user/token',
   register_uri:'/api/user/test/addUser',
   logout_uri: "/api/user/logout",
-  login_uri: 'auth/login',
+  login_uri: '/api/auth/signin',
 
   upload_moneygram_facture: "/api/moneygram/recu/upload",
   add_upload_abmform_uri:""

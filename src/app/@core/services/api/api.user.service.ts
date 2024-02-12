@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 //import { GetTableDataParam } from '../@core/entity/get-table-data-param';
 import { Observable } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
+import { HttpParamsOptions, HttpResponse } from '@angular/common/http';
 //import { Datatable } from '../@core/entity/data-table';
 
 import { map, catchError } from 'rxjs/operators';
@@ -62,6 +62,16 @@ export class ApiUserService extends UserService {
     );
   }
 
+  login(showErrorNotif:boolean,user:UserRequest):Observable<HttpResponse<any>|Observable<never>>{
+    return this.apiService.post<any>(environment.login_uri,user).pipe(
+      map((x:HttpResponse<any>)=>{
+        return this.handleResponse<any>(showErrorNotif,x)
+      }),
+      catchError((error)=>{
+        return this.catchError(showErrorNotif,error);
+      })
+    );
+  }
   /*getAll(showErrorNotif:boolean, getTableDataParam: GetTableDataParam): Observable<HttpResponse<ApiResponse<Datatable<Array<Users>>>> | Observable<never>>{
         return this.apiService.post<ApiResponse<Datatable<Array<Users>>>>(environment.getAllUserUri, getTableDataParam).pipe(
             map((x: HttpResponse<ApiResponse<Datatable<Array<Users>>>>) => {

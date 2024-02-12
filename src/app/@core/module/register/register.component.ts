@@ -16,42 +16,51 @@ export class RegisterComponent implements OnInit{
   hide2=true;
   user:User=new User();
   validateEmail:boolean=true;
+  isSpinner:boolean=false;
+  confirmPassword:string;
+  errorConfirmationPassword:boolean=false;
   constructor(private messageModalService: MessageModalService,public dialogRef: MatDialogRef<RegisterComponent>,private userService:UserService){
 
   }
   ngOnInit(): void {
 
   }
+
+  confirmPass(event:any){
+    this.confirmPassword=event.target.value;
+    console.log(this.confirmPassword);
+  }
+
   register(){
     this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
       if(confirm){
+        this.isSpinner=true;
         let userReq=new UserRequest();
-        userReq.nom="salohy";
-        userReq.prenom="prenom";
-        userReq.email="salohy@gmail.com";
-        userReq.password="password";
-        //userReq.salt="salt";
+        userReq.nom=this.user.nom;
+        userReq.prenom=this.user.prenom;
+        userReq.email=this.user.email;
+        userReq.password=this.user.password;
         let map=new Map<string,string>();
         map.set("num1","161515151515");
         map.set("num2","115115151515151515");
         //userReq.contacts=map;
-        console.log(userReq);
-
-        this.userService.createUser(true,userReq).subscribe((data)=>{
-          //console.log(data);
-          //console.log('success');
-          this.dialogRef.close();
-
-        },(err)=>{
-          console.log(err);
-
-          console.log("erreur");
-
+        //userReq.contacts=map;
+       if(this.user.password==this.confirmPassword){
+        this.userService.createUser(true,userReq).subscribe({
+          next:(data)=>{
+            this.isSpinner=false;
+            this.dialogRef.close();
+          },
+          error:(err)=>{
+            console.log(err);
+            console.log("erreur");
+          }
         })
-
-      }
-      else{
-        console.log('error');
+       }
+       else{
+        this.isSpinner=false;
+        this.errorConfirmationPassword=true;
+       }
 
       }
     })

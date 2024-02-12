@@ -5,6 +5,8 @@ const REFRESHTOKEN_KEY = 'auth-refreshtoken';
 const USERNAME_KEY = 'username';
 const ROLE_KEY = 'role';
 const CATEGORIE_KEY='categorie';
+const EMAIL_kEY='email';
+const ID_KEY='id';
 
 @Injectable({
   providedIn: 'root'
@@ -45,14 +47,14 @@ export class TokenStorageService {
     const user = window.localStorage.getItem(USERNAME_KEY);
     return user
   }
-  public saveRole(role: string): void {
+  public saveRole(role: Array<string>): void {
     window.localStorage.removeItem(ROLE_KEY);
-    window.localStorage.setItem(ROLE_KEY, role);
+    window.localStorage.setItem(ROLE_KEY, JSON.stringify(role));
   }
 
   public getRole(): any {
-    const role = window.localStorage.getItem(ROLE_KEY);
-    return role
+    const role = JSON.parse(window.localStorage.getItem(ROLE_KEY));
+    return Array.isArray(role);
   }
   public saveCategorie(departement: string): void {
     window.localStorage.removeItem(CATEGORIE_KEY);
@@ -62,5 +64,22 @@ export class TokenStorageService {
   public getCategorie(): any {
     const departement = window.localStorage.getItem(CATEGORIE_KEY);
     return departement
+  }
+  public saveEmail(email:string){
+    window.localStorage.removeItem(EMAIL_kEY);
+    window.localStorage.setItem(EMAIL_kEY,email);
+  }
+
+  public getEmail():any{
+    return window.localStorage.getItem(EMAIL_kEY);
+  }
+
+  public saveId(id:string){
+    window.localStorage.removeItem(ID_KEY);
+    window.localStorage.setItem(ID_KEY,id);
+  }
+
+  public geId():any{
+    return window.localStorage.getItem(ID_KEY);
   }
 }

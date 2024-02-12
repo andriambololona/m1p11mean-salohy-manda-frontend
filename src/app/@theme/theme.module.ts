@@ -32,6 +32,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ApiUserService } from '../@core/services/api/api.user.service';
 import { UserService } from '../@core/services/user.service';
 import { ApiService } from '../@core/services/api.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 const NB_MODULES = [
@@ -50,7 +51,8 @@ const NB_MODULES = [
   MatTreeModule,
   MatDialogModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatProgressSpinnerModule
 ];
 const COMPONENTS = [
   HeaderComponent,
