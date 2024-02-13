@@ -23,6 +23,7 @@ import { UserService } from '../@core/services/user.service';
 import { AccueilModule } from './accueil/accueil.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClientModule } from './client/client.module';
 
 
 @NgModule({
@@ -34,11 +35,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AccueilComponent,
   ],
   imports: [
-
-    CommonModule,
+    //CommonModule,
     PagesRoutingModule,
-    //MatSidenavModule,
-    //CoreModule,
     HttpClientModule,
     ThemeModule,
     MatSlideToggleModule,
@@ -52,7 +50,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatDividerModule,
     FormsModule,
     AccueilModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ClientModule
   ],
   providers: [{provide:UserService,useClass:ApiUserService},]
 })

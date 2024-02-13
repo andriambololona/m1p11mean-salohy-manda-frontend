@@ -1,7 +1,7 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { ExampleFlatNode, FoodNode,TREE_DATA_CLIENT, TREE_DATA_EMPLOYE, TREE_DATA_MANAGER } from './tree.menu';
+import { ExampleFlatNode, FoodNode,TREE_DATA_CLIENT, TREE_DATA_EMPLOYE, TREE_DATA_MANAGER} from './tree.menu';
 import { TokenStorageService } from 'src/app/@core/services/token-storage.service';
 
 
@@ -18,17 +18,20 @@ export class OneColumnLayoutComponent implements OnInit{
 
   constructor(private tokenStorageService:TokenStorageService) {
     let roles=tokenStorageService.getRole();
-    roles.forEach(element => {
-      if(element=='GROUPE_MANAGER'){
-        this.dataSource.data = TREE_DATA_MANAGER;
-      }
-      else if(element=='GROUPE_CLIENT'){
-        this.dataSource.data = TREE_DATA_CLIENT;
-      }
-      else{
-        this.dataSource.data = TREE_DATA_EMPLOYE;
-      }
-    });
+    if(roles){
+      roles.forEach(element => {
+        if(element=='GROUPE_CLIENT'){
+          this.dataSource.data = TREE_DATA_CLIENT;
+        }
+        if(element=='GROUPE_MANAGER'){
+          this.dataSource.data = TREE_DATA_MANAGER;
+        }
+        if(element=='GROUPE_EMPLOYE'){
+          this.dataSource.data = TREE_DATA_EMPLOYE;
+        }
+      });
+    }
+
 
   }
 

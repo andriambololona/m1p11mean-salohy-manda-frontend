@@ -3,12 +3,12 @@ import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AccueilComponent } from './accueil.component';
 
 const routes: Routes = [
-  {
+  /*{
     path: '',
-    redirectTo: 'accueil',
+    redirectTo: 'ac',
     pathMatch: 'full',
-  },
-  {path:'accueil',component:AccueilComponent}
+  },*/
+  {path:'',component:AccueilComponent}
 ];
 const config: ExtraOptions = {
   useHash: true,

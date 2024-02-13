@@ -17,12 +17,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './@core/core.module';
 import { ApiUserService } from './@core/services/api/api.user.service';
 import { UserService } from './@core/services/user.service';
+import { CommonModule } from '@angular/common';
+import { ClientModule } from './pages/client/client.module';
 
 @NgModule({
   declarations: [
     AppComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -38,7 +41,7 @@ import { UserService } from './@core/services/user.service';
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
     PagesModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [{provide:UserService,useClass:ApiUserService},],
   bootstrap: [AppComponent]
