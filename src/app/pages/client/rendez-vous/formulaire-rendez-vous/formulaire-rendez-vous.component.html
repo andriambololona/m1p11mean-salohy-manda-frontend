@@ -1,76 +1,71 @@
-<mat-card class="card">
-  <mat-card-content>
-    <h1 class="title">Organisez votre rendez-vous</h1>
-    <div class="dateTimePicker">
-      <mat-form-field>
-        <input matInput [ngxMatDatetimePicker]="pickerCustomIcon " placeholder="Choose a date"
-          [formControl]="dateControl" [min]="minDate" [max]="maxDate" [disabled]="disabled">
-        <mat-datepicker-toggle matSuffix [for]="$any(pickerCustomIcon)">
-        </mat-datepicker-toggle>
-        <ngx-mat-datetime-picker #pickerCustomIcon [showSpinners]="showSpinners" [showSeconds]="showSeconds"
-          [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi" [color]="color">
-        </ngx-mat-datetime-picker>
-      </mat-form-field>
+<form #myform="ngForm" novalidate>
 
+  <mat-card class="card">
+    <mat-card-content>
+      <h1 class="title">Organisez votre rendez-vous</h1>
+      <div class="dateTimePicker">
+        <mat-form-field>
+          <input matInput [ngxMatDatetimePicker]="pickerCustomIcon " placeholder="Choose a date" [(ngModel)]="rendez_vous.date"
+            [formControl]="dateControl" [min]="minDate" [max]="maxDate" [disabled]="disabled">
+          <mat-datepicker-toggle matSuffix [for]="$any(pickerCustomIcon)">
+          </mat-datepicker-toggle>
+          <ngx-mat-datetime-picker #pickerCustomIcon [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond" [touchUi]="touchUi"
+            [color]="color">
+          </ngx-mat-datetime-picker>
+        </mat-form-field>
+
+      </div>
+      <div class="select">
+        <mat-form-field>
+          <mat-label>Favorite animal</mat-label>
+          <mat-select [formControl]="animalControl"  required>
+            <mat-option>--</mat-option>
+
+            <mat-option *ngFor="let animal of animals" [value]="animal">{{animal.name}}</mat-option>
+
+          </mat-select>
+
+          <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+
+          <mat-hint>{{animalControl.value?.sound}}</mat-hint>
+        </mat-form-field>
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+  <mat-divider></mat-divider>
+  <br>
+  <h1 class="title">Services</h1>
+  <br>
+  <div class="drag-and-drop">
+    <div class="example-container">
+      <h2>To do</h2>
+
+      <div cdkDropList [cdkDropListData]="todo" id="todo" [cdkDropListConnectedTo]="['done']" class="example-list"
+        (cdkDropListDropped)="drop($event)">
+
+        <div class="example-box" cdkDrag *ngFor="let item of todo">{{item}}</div>
+
+      </div>
     </div>
-    <div class="select">
-      <mat-form-field>
-        <mat-label>Favorite animal</mat-label>
-        <mat-select [formControl]="animalControl" required>
-          <mat-option>--</mat-option>
 
-          <mat-option *ngFor="let animal of animals" [value]="animal">{{animal.name}}</mat-option>
+    <div class="example-container">
+      <h2>Done</h2>
 
-        </mat-select>
+      <div cdkDropList [cdkDropListData]="done" id="done" [cdkDropListConnectedTo]="['todo']" class="example-list"
+        (cdkDropListDropped)="drop($event)">
 
-        <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+        <div class="example-box" cdkDrag *ngFor="let item of done">{{item}}</div>
 
-        <mat-hint>{{animalControl.value?.sound}}</mat-hint>
-      </mat-form-field>
+
+      </div>
+    </div>
+    <div>
+      <button class="btn-enregistrer" mat-fab extended (click)="valider_rendez_vous()">Enregistrer</button>
     </div>
 
-
-  </mat-card-content>
-</mat-card>
-<mat-divider></mat-divider>
-<br>
-<h1 class="title">Services</h1>
-<br>
-<div class="drag-and-drop">
-  <div class="example-container">
-    <h2>To do</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="todo"
-      id="todo"
-      [cdkDropListConnectedTo]="['done']"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-
-        <div class="example-box" cdkDrag *ngFor="let item of todo" >{{item}}</div>
-
-    </div>
   </div>
 
-  <div class="example-container">
-    <h2>Done</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="done"
-      id="done"
-      [cdkDropListConnectedTo]="['todo']"
-      class="example-list"
-      (cdkDropListDropped)="drop($event)">
-
-        <div class="example-box" cdkDrag *ngFor="let item of done" >{{item}}</div>
-
-
-    </div>
-  </div>
-  <div>
-    <button class="btn-enregistrer" mat-fab extended>Enregistrer</button>
-  </div>
-</div>
-
+</form>

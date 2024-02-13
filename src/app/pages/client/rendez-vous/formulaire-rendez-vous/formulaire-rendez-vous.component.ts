@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormControlName, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import * as moment from 'moment';
+import { Rendezvous } from 'src/app/@core/entity/rendezvous';
 
 
 interface Animal {
@@ -20,6 +21,8 @@ interface Animal {
 export class FormulaireRendezVousComponent implements OnInit{
 
   @ViewChild('pickerCustomIcon ') pickerCustomIcon : any;
+
+  rendez_vous=new Rendezvous();
 
   public date: moment.Moment;
   public disabled = false;
@@ -67,5 +70,10 @@ export class FormulaireRendezVousComponent implements OnInit{
         event.currentIndex,
       );
     }
+  }
+  valider_rendez_vous()
+  {
+    console.log(this.rendez_vous.date);
+    
   }
 }

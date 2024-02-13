@@ -9,4 +9,5 @@ export class Rendezvous
   prestations:Array<Service|User>;
   date:Date;
   dateFin:Date;
+  autre:string;
 }

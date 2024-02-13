@@ -52,7 +52,7 @@ import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous
       MatCardModule,
       MatDividerModule,
       DragDropModule,
-      FormulaireRendezVousModule
+      //FormulaireRendezVousModule,
   ],
   providers: [
    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }

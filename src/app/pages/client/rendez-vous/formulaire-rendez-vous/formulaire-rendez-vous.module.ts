@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormulaireRendezVousComponent } from './formulaire-rendez-vous.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormField } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { MatFormField } from '@angular/material/form-field';
     FormulaireRendezVousRoutingModule,
     CommonModule,
     MatCardModule,
+    //FormsModule,
   ]
 })
 export class FormulaireRendezVousModule { }
