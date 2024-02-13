@@ -52,9 +52,9 @@ export class TokenStorageService {
     window.localStorage.setItem(ROLE_KEY, JSON.stringify(role));
   }
 
-  public getRole(): any {
+  public getRole(): Array<string> {
     const role = JSON.parse(window.localStorage.getItem(ROLE_KEY));
-    return Array.isArray(role);
+    return role;
   }
   public saveCategorie(departement: string): void {
     window.localStorage.removeItem(CATEGORIE_KEY);

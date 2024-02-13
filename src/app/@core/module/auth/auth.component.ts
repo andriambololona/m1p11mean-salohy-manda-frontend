@@ -22,6 +22,7 @@ export class AuthComponent implements OnInit {
   isSpinner:boolean=false;
   isDisabledButton:boolean=true;
   @Output() authUser=new EventEmitter();
+  errorMessage:string;
   constructor(public dialogRef: MatDialogRef<AuthComponent>,private userService:UserService,private tokenStorageService:TokenStorageService){
 
   }
@@ -48,7 +49,7 @@ export class AuthComponent implements OnInit {
 
       },error:(err)=>{
         this.isSpinner=false;
-        console.log(err.message);
+       this.errorMessage="Identifiant ou mot de passe erroné";
       }
     });
    //this.dialogRef.close();

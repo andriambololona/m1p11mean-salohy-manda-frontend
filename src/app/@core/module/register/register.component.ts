@@ -43,7 +43,9 @@ export class RegisterComponent implements OnInit{
         let map=new Map<string,string>();
         map.set("num1","161515151515");
         map.set("num2","115115151515151515");
-        //userReq.contacts=map;
+        //userReq.contacts=JSON.stringify(Object.fromEntries(map));
+        console.log(userReq);
+
         //userReq.contacts=map;
        if(this.user.password==this.confirmPassword){
         this.userService.createUser(true,userReq).subscribe({
@@ -55,7 +57,7 @@ export class RegisterComponent implements OnInit{
             console.log(err);
             console.log("erreur");
           }
-        })
+        });
        }
        else{
         this.isSpinner=false;

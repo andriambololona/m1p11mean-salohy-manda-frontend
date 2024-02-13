@@ -2,12 +2,20 @@
   <div class="row">
     <div class="row">
       <div class="col-11">
-        <h2><mat-icon class="icon_circle">account_circle</mat-icon> Connexion</h2>
+        <h2 style="text-align: center;"><mat-icon class="icon_circle">account_circle</mat-icon> Connexion</h2>
       </div>
       <div class="col-1"> <button mat-icon-button class="btn_close" (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
     </div>
 
+
+
+
     <form class="example-form" #myform="ngForm" novalidate>
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage!=undefined">
+        <h2 style="text-align: center;color: rgb(12, 11, 11);"><strong>Oupss</strong></h2>
+        <hr>
+        <div class="error-message"><mat-icon>report</mat-icon><span > {{errorMessage}}</span></div>
+      </div>
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>

@@ -62,5 +62,10 @@ export class HeaderComponent implements OnInit{
     })
   }
 
+  logout(){
+    this.tokenStorage.signOut();
+    this.isVisibleButtonMenu=false;
+    this.authUser.emit(null);
+  }
 
 }

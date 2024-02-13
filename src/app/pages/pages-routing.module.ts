@@ -5,10 +5,16 @@ import { PagesComponent } from './pages.component';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'accueil',
+    pathMatch: 'full',
+  },
+  {
+
+    path: '',
     component: PagesComponent,
     children: [
       {
-        path:'',loadChildren:()=>import('./accueil/accueil.module').then(m=>m.AccueilModule),
+        path:'accueil',loadChildren:()=>import('./accueil/accueil.module').then(m=>m.AccueilModule),
       },
       {
         path: 'client',

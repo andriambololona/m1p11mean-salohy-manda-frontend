@@ -17,7 +17,19 @@ export class OneColumnLayoutComponent implements OnInit{
   currentAuth:any;
 
   constructor(private tokenStorageService:TokenStorageService) {
-    this.dataSource.data = TREE_DATA_CLIENT;
+    let roles=tokenStorageService.getRole();
+    roles.forEach(element => {
+      if(element=='GROUPE_MANAGER'){
+        this.dataSource.data = TREE_DATA_MANAGER;
+      }
+      else if(element=='GROUPE_CLIENT'){
+        this.dataSource.data = TREE_DATA_CLIENT;
+      }
+      else{
+        this.dataSource.data = TREE_DATA_EMPLOYE;
+      }
+    });
+
   }
 
   ngOnInit(): void {
