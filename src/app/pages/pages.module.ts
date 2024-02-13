@@ -24,6 +24,7 @@ import { AccueilModule } from './accueil/accueil.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientModule } from './client/client.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { ClientModule } from './client/client.module';
   ],
   imports: [
     //CommonModule,
+    //BrowserModule,
     PagesRoutingModule,
     HttpClientModule,
     ThemeModule,
@@ -51,7 +53,7 @@ import { ClientModule } from './client/client.module';
     FormsModule,
     AccueilModule,
     ReactiveFormsModule,
-    ClientModule
+    //ClientModule
   ],
   providers: [{provide:UserService,useClass:ApiUserService},]
 })

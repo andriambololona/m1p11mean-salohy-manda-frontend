@@ -18,6 +18,7 @@ import { FormulaireRendezVousRoutingModule } from './rendez-vous/formulaire-rend
 import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule } from '@angular/material/divider';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous.module';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -36,8 +37,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     HistoriqueRendezVousComponent
   ],
   imports: [
-      //CommonModule,
-      //BrowserModule,
+      CommonModule,
       ClientRoutingModule,
       HttpClientModule,
       MatDatepickerModule,
@@ -51,7 +51,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
       MatSelectModule,
       MatCardModule,
       MatDividerModule,
-      DragDropModule
+      DragDropModule,
+      FormulaireRendezVousModule
   ],
   providers: [
    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }

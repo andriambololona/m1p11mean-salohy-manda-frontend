@@ -25,7 +25,7 @@ import { ClientModule } from './pages/client/client.module';
     AppComponent,
   ],
   imports: [
-    CommonModule,
+    //CommonModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -40,7 +40,7 @@ import { ClientModule } from './pages/client/client.module';
     MatSidenavModule,
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-    PagesModule,
+    //PagesModule,
     ReactiveFormsModule,
   ],
   providers: [{provide:UserService,useClass:ApiUserService},],

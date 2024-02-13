@@ -23,7 +23,7 @@
 
         </mat-select>
 
-        <mat-error ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
+        <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error>
 
         <mat-hint>{{animalControl.value?.sound}}</mat-hint>
       </mat-form-field>
@@ -33,9 +33,10 @@
   </mat-card-content>
 </mat-card>
 <mat-divider></mat-divider>
+<br>
 <h1 class="title">Services</h1>
 <br>
-<div>
+<div class="drag-and-drop">
   <div class="example-container">
     <h2>To do</h2>
 
@@ -68,4 +69,8 @@
 
     </div>
   </div>
+  <div>
+    <button class="btn-enregistrer" mat-fab extended>Enregistrer</button>
+  </div>
 </div>
+
