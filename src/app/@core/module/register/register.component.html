@@ -1,6 +1,5 @@
 <mat-dialog-content>
   <div class="row">
-
     <div class="col-11">
       <h2><mat-icon>person_add</mat-icon> Inscription</h2>
     </div>
@@ -15,13 +14,11 @@
           <input matInput #nom="ngModel"  id="nom" [(ngModel)]="user.nom" name="nom" minlength="1"
             required>
             <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="error">
-
               <div *ngIf="nom.errors?.['required']">
                 <i class='bx bx-error-circle'></i> Veuillez fournir un nom valide.
               </div>
             </div>
         </mat-form-field>
-
       </div>
       <div class="col-6">
         <mat-form-field class="example-full-width">
@@ -54,7 +51,13 @@
         <mat-form-field class="example-full-width">
           <mat-label>Contact</mat-label>
           <span matTextPrefix>+261 &nbsp;</span>
-          <input matInput type="tel">
+          <input matInput type="tel" name="contact" id="contact" [(ngModel)]="user.contacts" #contact="ngModel" required>
+          <div *ngIf="contact.invalid && (contact.dirty || contact.touched)" class="error">
+
+            <div *ngIf="contact.errors?.['required']">
+              <i class='bx bx-error-circle'></i> Champ obligatoire.
+            </div>
+          </div>
         </mat-form-field>
       </div>
     </div>
@@ -62,19 +65,19 @@
     <div class="row">
       <mat-form-field class="example-full-width">
         <mat-label>Mot de passe</mat-label>
-        <input matInput [type]="hide1 ? 'password' : 'text'" id="pass" name="pass" [(ngModel)]="user.password" #pass="ngModel" minlength="8"  required>
-
+        <input matInput [type]="hide1 ? 'password' : 'text'" id="pass" name="pass" [(ngModel)]="user.password"  #pass="ngModel" minlength="8"  required>
         <button mat-icon-button matSuffix (click)="hide1 = !hide1" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide1">
           <mat-icon>{{hide1 ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <div *ngIf="(pass.invalid) && (pass.dirty
         )" class="error">
-          <div *ngIf="pass.errors?.['minlength']"><i class='bx bx-error-circle'></i>le mot de passe doit avoir au moin 8 caractere.</div>
-          <div *ngIf="pass.errors?.['required']"><i class='bx bx-error-circle'></i>Champ Obligatoire.</div>
-
+          <div *ngIf="pass.errors?.['minlength']"><i class='bx bx-error-circle'></i> le mot de passe doit avoir au moin 8 caractere.</div>
+          <div *ngIf="pass.errors?.['required']"><i class='bx bx-error-circle'></i> Champ Obligatoire.</div>
+          <!--<div *ngIf="pass.errors?.['pattern']"><i class='bx bx-error-circle'></i> Le mot de passe doit contenir au moins une majuscule et un caractère spécial.</div>-->
         </div>
       </mat-form-field>
+
       <mat-form-field class="example-full-width">
         <mat-label>Confirmation du mot de passe</mat-label>
         <input matInput [type]="hide2 ? 'password' : 'text'" (change)="confirmPass($event)">
@@ -85,17 +88,14 @@
         <div *ngIf="errorConfirmationPassword">
           <p class="error">le mot de passe n'est pas identique</p>
         </div>
-
       </mat-form-field>
+
       <mat-form-field class="example-full-width">
         <mat-label>Code Postal</mat-label>
         <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
         <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
       </mat-form-field>
     </div>
-
-
-
     <mat-dialog-actions>
       <button mat-fab extended id="btn_valider" [disabled]="!myform.form.valid"
         (click)="register()"><mat-icon>done</mat-icon> Valider</button>

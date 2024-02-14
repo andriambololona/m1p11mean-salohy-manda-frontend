@@ -41,10 +41,10 @@ export class RegisterComponent implements OnInit{
         userReq.email=this.user.email;
         userReq.password=this.user.password;
         let map=new Map<string,string>();
-        map.set("num1","161515151515");
-        map.set("num2","115115151515151515");
-        //userReq.contacts=JSON.stringify(Object.fromEntries(map));
-        console.log(userReq);
+        map.set("num1","0355555555");
+        map.set("num2","03222222");
+        userReq.contacts=Array.from(map.entries());
+        //console.log(userReq);
 
         //userReq.contacts=map;
        if(this.user.password==this.confirmPassword){

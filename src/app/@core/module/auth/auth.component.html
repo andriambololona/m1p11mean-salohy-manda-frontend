@@ -4,50 +4,49 @@
       <div class="col-11">
         <h2 style="text-align: center;"><mat-icon class="icon_circle">account_circle</mat-icon> Connexion</h2>
       </div>
-      <div class="col-1"> <button mat-icon-button class="btn_close" (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
+      <div class="col-1"> <button mat-icon-button class="btn_close"
+          (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
     </div>
-
-
-
-
     <form class="example-form" #myform="ngForm" novalidate>
       <div class="alert alert-danger" role="alert" *ngIf="errorMessage!=undefined">
         <h2 style="text-align: center;color: rgb(12, 11, 11);"><strong>Oupss</strong></h2>
         <hr>
-        <div class="error-message"><mat-icon>report</mat-icon><span > {{errorMessage}}</span></div>
+        <div class="error-message"><mat-icon>report</mat-icon><span> {{errorMessage}}</span></div>
       </div>
       <table class="example-full-width" cellspacing="0">
         <tr>
           <td>
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input matInput type="email" [(ngModel)]="user.email" id="email" name="email" #email="ngModel" [email]="validateEmail" #prmEmail="ngModel"  required>
+              <input matInput type="email" [(ngModel)]="user.email" id="email" name="email" #email="ngModel"
+                [email]="validateEmail" #prmEmail="ngModel" required>
               <div *ngIf="(email.invalid) && (email.dirty || email.touched)" class="error">
-                <div *ngIf="prmEmail.errors?.['email']"><i class='bx bx-error-circle'></i>Veuillez fournir une mail valide.</div>
+                <div *ngIf="prmEmail.errors?.['email']"><i class='bx bx-error-circle'></i>Veuillez fournir une mail
+                  valide.</div>
                 <div *ngIf="email.errors?.['required']"><i class='bx bx-error-circle'></i>Champ Obligatoire.</div>
               </div>
             </mat-form-field>
           </td>
         </tr>
       </table>
-
-
       <mat-form-field class="example-full-width">
         <mat-label>Mot de passe</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password" id="password" >
+        <input matInput [type]="hide ? 'password' : 'text'" [(ngModel)]="user.password" name="password" id="password">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
           [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
       </mat-form-field>
-      <diV class="forgot_pass"> <p>Mot de passe oublié</p></diV>
-
+      <diV class="forgot_pass">
+        <p>Mot de passe oublié</p>
+      </diV>
+      
     </form>
 
   </div>
   <mat-dialog-actions>
 
-      <button mat-fab extended id="btn_valider" (click)="Login()" [disabled]="!myform.form.valid">Se connecter</button>
+    <button mat-fab extended id="btn_valider" (click)="Login()" [disabled]="!myform.form.valid">Se connecter</button>
 
   </mat-dialog-actions>
   <div class="spinner">
