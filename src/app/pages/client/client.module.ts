@@ -19,6 +19,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatDividerModule } from '@angular/material/divider';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous.module';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -52,6 +54,8 @@ import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous
       MatCardModule,
       MatDividerModule,
       DragDropModule,
+      MatTableModule,
+      MatPaginatorModule
       //FormulaireRendezVousModule,
   ],
   providers: [

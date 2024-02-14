@@ -33,6 +33,7 @@ import { ApiUserService } from '../@core/services/api/api.user.service';
 import { UserService } from '../@core/services/user.service';
 import { ApiService } from '../@core/services/api.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { RouterModule } from '@angular/router';
 
 
 const NB_MODULES = [
@@ -52,7 +53,8 @@ const NB_MODULES = [
   MatDialogModule,
   FormsModule,
   ReactiveFormsModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  RouterModule,
 ];
 const COMPONENTS = [
   HeaderComponent,

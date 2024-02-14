@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthComponent } from 'src/app/@core/module/auth/auth.component';
 import { RegisterComponent } from 'src/app/@core/module/register/register.component';
@@ -14,7 +15,7 @@ export class HeaderComponent implements OnInit{
   showFiller = false;
   isVisibleButtonMenu:boolean=false;
   @Output() authUser=new EventEmitter<any>();
-  constructor(public dialog: MatDialog,private tokenStorage:TokenStorageService) {}
+  constructor(public dialog: MatDialog,private tokenStorage:TokenStorageService,private route:Router) {}
 
   ngOnInit(): void {
     if(this.tokenStorage.geId()){
@@ -66,6 +67,7 @@ export class HeaderComponent implements OnInit{
     this.tokenStorage.signOut();
     this.isVisibleButtonMenu=false;
     this.authUser.emit(null);
+    this.route.navigateByUrl('/');
   }
 
 }
