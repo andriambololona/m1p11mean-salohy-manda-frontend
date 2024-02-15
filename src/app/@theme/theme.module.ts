@@ -34,6 +34,8 @@ import { UserService } from '../@core/services/user.service';
 import { ApiService } from '../@core/services/api.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
+import { ManagerService } from '../@core/services/manager.service';
+import { ApiManagerService } from '../@core/services/api/api-manager.service';
 
 
 const NB_MODULES = [
@@ -85,6 +87,7 @@ export class ThemeModule {
       ngModule: ThemeModule,
       providers: [
         {provide:UserService,useClass:ApiUserService},
+        {provide:ManagerService,useClass:ApiManagerService},
         ApiService
       ],
     };

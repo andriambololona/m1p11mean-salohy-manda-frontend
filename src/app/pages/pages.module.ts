@@ -36,7 +36,7 @@ import { BrowserModule } from '@angular/platform-browser';
     AccueilComponent,
   ],
   imports: [
-    //CommonModule,
+    CommonModule,
     //BrowserModule,
     PagesRoutingModule,
     HttpClientModule,

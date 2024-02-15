@@ -38,6 +38,8 @@ import { User } from './entity/user';
 import { ApiUserService } from './services/api/api.user.service';
 import { UserService } from './services/user.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ManagerService } from './services/manager.service';
+import { ApiManagerService } from './services/api/api-manager.service';
 const DATA_SERVICES: any[] = [{ provide: UserData, useClass: UserService }];
 
 const HTTP_INTERCEPTOR: any[] = [
@@ -53,6 +55,7 @@ export const NB_CORE_PROVIDERS = [
   AnalyticsService,
   { provide: AuthGuardService, useClass: AuthGuardService },
   {provide:UserService,useClass:ApiUserService},
+  {provide:ManagerService,useClass:ApiManagerService},
   AnalyticsService,
 ];
 

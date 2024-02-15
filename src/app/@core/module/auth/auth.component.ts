@@ -36,10 +36,11 @@ export class AuthComponent implements OnInit {
     var userRequest=new UserRequest();
     userRequest.email=this.user.email;
     userRequest.password=this.user.password;
-    console.log(userRequest);
+  
 
     this.userService.login(true,userRequest).subscribe({
       next:(data:HttpResponse<any>)=>{
+        console.log(data);
         this.tokenStorageService.saveRole(data.body.roles);
         this.tokenStorageService.saveId(data.body.id);
         this.tokenStorageService.saveEmail(data.body.email);
@@ -58,9 +59,8 @@ export class AuthComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
-  login(): void{
-
-  }
+ 
+  
 
   convertErrors(errors: Array<string> ): Array<string>{
     errors.forEach((element, index) => {

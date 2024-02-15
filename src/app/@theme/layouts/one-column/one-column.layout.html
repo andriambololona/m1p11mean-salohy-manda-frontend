@@ -1,8 +1,8 @@
 
 <app-header (authUser)="getAuthUser($event)"></app-header>
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container"autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
-    <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <mat-tree [dataSource]="dataSource" *ngIf="currentAuth" [treeControl]="treeControl">
       <!-- This is the tree node template for leaf nodes -->
       <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [routerLink]="[node.link]">
         <!-- use a disabled button to provide padding for tree leaf -->
@@ -28,11 +28,12 @@
 
   </mat-drawer>
   <div class="example-sidenav-content" >
-    <button *ngIf="currentAuth" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+    <button  mat-icon-button class="example-icon"  *ngIf="currentAuth"  aria-label="Example icon-button with menu icon"
       (click)="drawer.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
     <ng-content select="router-outlet"></ng-content>
+   
     <app-footer></app-footer>
   </div>
 
