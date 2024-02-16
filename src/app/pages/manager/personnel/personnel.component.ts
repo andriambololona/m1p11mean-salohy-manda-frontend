@@ -14,7 +14,7 @@ import { ManagerService } from 'src/app/@core/services/manager.service';
 export class PersonnelComponent implements OnInit {
 
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['position', 'nom', 'prenom', 'email'];
+  displayedColumns: string[] = [ 'nom', 'prenom', 'email','activation','verification','action'];
   dataSource :MatTableDataSource<any>;
   length:number;//colonne total sans pagination
   pageSize:number;//nombre row initial
