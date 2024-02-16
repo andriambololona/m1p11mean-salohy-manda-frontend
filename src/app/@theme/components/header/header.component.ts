@@ -20,8 +20,10 @@ export class HeaderComponent implements OnInit{
   constructor(public dialog: MatDialog,private tokenStorage:TokenStorageService,private route:Router) {}
 
   ngOnInit(): void {
-    if(this.tokenStorage.geId()){
+    if(this.tokenStorage){
       this.isVisibleButtonMenu=true;
+      this.isVisibleButtonSignin=false;
+      this.isVisibleButtonSignup=false;
     }
   }
 
