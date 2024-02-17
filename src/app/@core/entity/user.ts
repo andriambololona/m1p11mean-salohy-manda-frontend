@@ -6,7 +6,8 @@ export class User{
   prenom:string;
   email:string;
   password:string;
-  est_verifie:boolean;
+  estVerifie:boolean;
+  estActif:boolean;
   salt:string;
   groupes:Array<Groupe>=[];
   contacts:Map<string,string>;

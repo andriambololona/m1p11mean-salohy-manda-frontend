@@ -28,6 +28,11 @@ export class ApiService {
     return this.http.post<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response'})
       .pipe(catchError(this.formatErrors));
   }
+  put<T>(path: string, body: Object = {}, params: HttpParams = new HttpParams()): Observable<HttpResponse<T> | Observable<never>> {
+
+    return this.http.put<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response',params})
+      .pipe(catchError(this.formatErrors));
+  }
 
   get<T>(path: string, params: HttpParams = new HttpParams(), headers: HttpHeaders = new HttpHeaders()): Observable<HttpResponse<T> | Observable<never>> {
     return this.http.get<T>(`${environment.api_host}${path}`, { observe: 'response', params, headers })

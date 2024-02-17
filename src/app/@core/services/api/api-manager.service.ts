@@ -16,6 +16,7 @@ import { ApiResponse } from './api-response';
 
 import { UserRequest } from '../../entity/request/userRequest';
 import { ManagerService } from '../manager.service';
+import { User } from '../../entity/user';
 
 @Injectable()
 export class ApiManagerService extends ManagerService {
@@ -59,4 +60,25 @@ export class ApiManagerService extends ManagerService {
         })
       );
   }
+
+  updateStatusUser(showErrorNotif: boolean, user: UserRequest,status:boolean): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+
+    return this.apiService.put<ApiResponse<any>>(environment.update_status+"?status="+status , user).pipe(
+
+        map((x: HttpResponse<ApiResponse<any>>) => {
+            console.log(x);
+            
+            return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+
+        }),
+
+        catchError(error => {
+
+            return this.catchError(showErrorNotif, error);
+
+        })
+
+    );
+
+}
 }
