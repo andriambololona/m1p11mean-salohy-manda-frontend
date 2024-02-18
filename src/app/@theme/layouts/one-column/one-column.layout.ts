@@ -40,7 +40,7 @@ export class OneColumnLayoutComponent implements OnInit{
     let roles=this.tokenStorageService.getRole();
     
    this.dynamicTree(roles);
-    this.currentAuth=this.tokenStorageService.geId();
+    this.currentAuth=this.tokenStorageService.getId();
   }
 
   

@@ -19,8 +19,8 @@ export class HeaderComponent implements OnInit{
   @Output() authUser=new EventEmitter<any>();
   constructor(public dialog: MatDialog,private tokenStorage:TokenStorageService,private route:Router) {}
 
-  ngOnInit(): void {
-    if(this.tokenStorage){
+  ngOnInit(): void {  
+    if(this.tokenStorage.getId()!=null){
       this.isVisibleButtonMenu=true;
       this.isVisibleButtonSignin=false;
       this.isVisibleButtonSignup=false;

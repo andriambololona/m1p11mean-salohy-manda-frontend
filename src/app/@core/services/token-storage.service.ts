@@ -79,7 +79,9 @@ export class TokenStorageService {
     window.localStorage.setItem(ID_KEY,id);
   }
 
-  public geId():any{
+  public getId():any{
     return window.localStorage.getItem(ID_KEY);
   }
+
+  
 }

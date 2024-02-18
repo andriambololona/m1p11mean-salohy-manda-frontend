@@ -10,10 +10,12 @@ import { FormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ModalDetailsPersonnelComponent } from './personnel/modal-details-personnel/modal-details-personnel.component';
 
 @NgModule({
   declarations: [
-    PersonnelComponent
+    PersonnelComponent,
+    ModalDetailsPersonnelComponent
   ],
   imports: [
     CommonModule,
