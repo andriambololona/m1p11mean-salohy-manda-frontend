@@ -6,5 +6,7 @@ export class Service
   comission:number;
   slug:string;
   vers:number;
+  createdAt:Date;
+  updatedAt:Date;
 
 }

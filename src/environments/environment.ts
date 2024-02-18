@@ -26,5 +26,6 @@ export const environment = {
   getAllPersonnel_uri:'/api/user/manager/allPersonnel',
   update_status:'/api/user/manager/update_status',
   upload_moneygram_facture: "/api/moneygram/recu/upload",
+  getAllService_uri:"/api/service/manager/allService",
   add_upload_abmform_uri:""
 };

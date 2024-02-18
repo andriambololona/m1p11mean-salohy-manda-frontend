@@ -11,11 +11,13 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModalDetailsPersonnelComponent } from './personnel/modal-details-personnel/modal-details-personnel.component';
+import { ServicesComponent } from './services/services.component';
 
 @NgModule({
   declarations: [
     PersonnelComponent,
-    ModalDetailsPersonnelComponent
+    ModalDetailsPersonnelComponent,
+    ServicesComponent
   ],
   imports: [
     CommonModule,
