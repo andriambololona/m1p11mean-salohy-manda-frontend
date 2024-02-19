@@ -93,6 +93,14 @@ export class AuthInterceptor implements HttpInterceptor
       if (error instanceof HttpErrorResponse && error.status === 401) {
         return this.handle401Error(req, next);
       }
+      if(error instanceof HttpErrorResponse && error.status === 403){
+        console.log("403");
+        
+        this.tokenStorage.signOut();
+        setTimeout(()=>{
+          this.router.navigate(['/']);
+        },0)
+      }
 
       return throwError(error);
     }));
@@ -116,20 +124,21 @@ export class AuthInterceptor implements HttpInterceptor
     }else{
       this.isRefreshing=true;
       let refreshToken:RefreshTokenRequest=new RefreshTokenRequest();
-      refreshToken.token=this.tokenStorage.getToken();
+      refreshToken.refreshToken=this.tokenStorage.getRefreshToken();
       
       return this.customAuthService.refreshToken(refreshToken).pipe(
         switchMap((data: any) => {
           console.log("switchMap2: ");
-          console.log(data);
-
-
-          this.tokenStorage.saveToken(data.body.token)
+          //console.log(data);
+          //console.log(data.body.accessToken);
+          //console.log(data.body.refreshToken);
+          
+          this.tokenStorage.saveToken(data.body.accessToken)
           this.tokenStorage.saveRefreshToken(data.body.refreshToken)
-          const JWT = `Bearer ${this.tokenStorage.getToken()}`;
+          //const JWT = `Bearer ${this.tokenStorage.getToken()}`;
           req = req.clone({
             setHeaders: {
-              Authorization: JWT,
+              'x-access-token': this.tokenStorage.getToken(),
             },
           });
           this.isRefreshing=false;
@@ -146,7 +155,7 @@ export class AuthInterceptor implements HttpInterceptor
           //window.location.reload();
 
           setTimeout(()=>{
-            this.router.navigate(['/auth/login']);
+            this.router.navigate(['/']);
           },0)
 
           return throwError(err);

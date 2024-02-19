@@ -42,6 +42,8 @@ import { ApiManagerService } from './services/api/api-manager.service';
 import { CustomAuthService } from './services/custom-auth-service';
 import { CustomAuthInterceptor } from '../interceptors/custom_auth.interceptor';
 import { ApiService } from './services/api/api.service';
+import { ClientService } from './services/client.service';
+import { ApiClientService } from './services/api/api-client.service';
 const DATA_SERVICES: any[] = [{ provide: UserData, useClass: UserService }];
 
 const HTTP_INTERCEPTOR: any[] = [
@@ -59,6 +61,7 @@ export const NB_CORE_PROVIDERS = [
 
   { provide: AuthGuardService, useClass: AuthGuardService },
   {provide:UserService,useClass:ApiUserService},
+  {provide:ClientService,useClass:ApiClientService},
   {provide:ManagerService,useClass:ApiManagerService},
 ];
 

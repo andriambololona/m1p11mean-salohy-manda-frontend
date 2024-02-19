@@ -1,5 +1,5 @@
 export class RefreshTokenRequest{
   _id:string;
-  token:string;
+  refreshToken:string;
   expiryDate:Date;
 }

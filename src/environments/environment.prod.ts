@@ -17,6 +17,7 @@ export const environment = {
   logout_uri: "/api/user/logout",
   login_uri: '/api/auth/signin',
   getAllPersonnel_uri:'/api/user/manager/allPersonnel',
+  getAllersonnelEmploye_uri:'/api/user/client/allPersonnelEmploye',
   update_status:'/api/user/manager/update_status',
   upload_moneygram_facture: "/api/moneygram/recu/upload",
   getAllService_uri:"/api/service/manager/allService",
