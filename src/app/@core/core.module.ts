@@ -8,7 +8,6 @@ import {
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { AnalyticsService } from './utils/analytics.service';
 import { environment } from 'src/environments/environment';
-import { ApiService } from './services/api.service';
 import { RoleProvider } from './services/role-provider.service';
 import { CustomAccessChecker } from './services/custom-access-checker';
 import { UserData } from './data/users';
@@ -40,23 +39,27 @@ import { UserService } from './services/user.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ManagerService } from './services/manager.service';
 import { ApiManagerService } from './services/api/api-manager.service';
+import { CustomAuthService } from './services/custom-auth-service';
+import { CustomAuthInterceptor } from '../interceptors/custom_auth.interceptor';
+import { ApiService } from './services/api/api.service';
 const DATA_SERVICES: any[] = [{ provide: UserData, useClass: UserService }];
 
 const HTTP_INTERCEPTOR: any[] = [
   { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+  //{ provide: HTTP_INTERCEPTORS, useClass: CustomAuthInterceptor, multi: true }
 ];
 
 export const NB_CORE_PROVIDERS = [
   ApiService,
   TestService,
-  AccessControlProviderService,
+  CustomAuthService,
   ...DATA_SERVICES,
   ...HTTP_INTERCEPTOR,
   AnalyticsService,
+
   { provide: AuthGuardService, useClass: AuthGuardService },
   {provide:UserService,useClass:ApiUserService},
   {provide:ManagerService,useClass:ApiManagerService},
-  AnalyticsService,
 ];
 
 @NgModule({
@@ -75,7 +78,8 @@ export const NB_CORE_PROVIDERS = [
     FormsModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AuthModule
   ],
 
   exports: [AuthModule],

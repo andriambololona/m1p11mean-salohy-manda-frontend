@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModalDetailsPersonnelComponent } from './personnel/modal-details-personnel/modal-details-personnel.component';
 import { ServicesComponent } from './services/services.component';
+import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ServicesComponent } from './services/services.component';
     MatButtonModule,
     MatIconModule,
     MatTooltipModule
-  ]
+  ],
+  providers:[{provide:CustomAuthService}]
 })
 export class ManagerModule { }

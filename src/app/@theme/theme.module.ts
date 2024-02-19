@@ -31,11 +31,12 @@ import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/m
 import { MatDialogModule } from '@angular/material/dialog';
 import { ApiUserService } from '../@core/services/api/api.user.service';
 import { UserService } from '../@core/services/user.service';
-import { ApiService } from '../@core/services/api.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { ManagerService } from '../@core/services/manager.service';
 import { ApiManagerService } from '../@core/services/api/api-manager.service';
+import { CoreModule } from '../@core/core.module';
+import { CustomAuthService } from '../@core/services/custom-auth-service';
 
 
 const NB_MODULES = [
@@ -79,7 +80,6 @@ const COMPONENTS = [
   //declarations: [...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS],
 
-
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders<ThemeModule> {
@@ -88,7 +88,8 @@ export class ThemeModule {
       providers: [
         {provide:UserService,useClass:ApiUserService},
         {provide:ManagerService,useClass:ApiManagerService},
-        ApiService
+
+
       ],
     };
   }

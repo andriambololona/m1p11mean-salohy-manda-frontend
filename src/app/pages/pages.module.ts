@@ -25,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientModule } from './client/client.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { CustomAuthService } from '../@core/services/custom-auth-service';
+
 
 
 @NgModule({
@@ -55,6 +57,6 @@ import { BrowserModule } from '@angular/platform-browser';
     ReactiveFormsModule,
     //ClientModule
   ],
-  providers: [{provide:UserService,useClass:ApiUserService},]
+  providers: [{provide:UserService,useClass:ApiUserService}]
 })
 export class PagesModule { }

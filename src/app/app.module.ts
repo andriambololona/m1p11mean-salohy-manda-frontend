@@ -12,13 +12,15 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { PagesModule } from './pages/pages.module';
 import { ThemeModule } from './@theme/theme.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './@core/core.module';
 import { ApiUserService } from './@core/services/api/api.user.service';
 import { UserService } from './@core/services/user.service';
 import { CommonModule } from '@angular/common';
 import { ClientModule } from './pages/client/client.module';
+import { CustomAuthInterceptor } from './interceptors/custom_auth.interceptor';
+import { CustomAuthService } from './@core/services/custom-auth-service';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,7 @@ import { ClientModule } from './pages/client/client.module';
     //PagesModule,
     ReactiveFormsModule,
   ],
-  providers: [{provide:UserService,useClass:ApiUserService},],
+  providers: [{provide:UserService,useClass:ApiUserService},CustomAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

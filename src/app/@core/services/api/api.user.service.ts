@@ -73,7 +73,7 @@ export class ApiUserService extends UserService {
       })
     );
   }
- 
+
   /*getAll(showErrorNotif:boolean, getTableDataParam: GetTableDataParam): Observable<HttpResponse<ApiResponse<Datatable<Array<Users>>>> | Observable<never>>{
         return this.apiService.post<ApiResponse<Datatable<Array<Users>>>>(environment.getAllUserUri, getTableDataParam).pipe(
             map((x: HttpResponse<ApiResponse<Datatable<Array<Users>>>>) => {

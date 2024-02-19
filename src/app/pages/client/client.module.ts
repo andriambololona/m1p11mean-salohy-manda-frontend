@@ -21,6 +21,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous.module';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -60,6 +61,7 @@ import {MatTableDataSource, MatTableModule} from '@angular/material/table';
   ],
   providers: [
    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
+   {provide:CustomAuthService}
   ]
 })
 export class ClientModule { }

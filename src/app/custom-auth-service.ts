@@ -2,22 +2,20 @@ import { HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { environment } from '../../../environments/environment';
-import { ApiResponse } from '../entity/api-response';
-import { Datatable } from '../entity/data-table';
-import { ApiService } from './api/api.service';
-import { TokenStorageService } from './token-storage.service';
+
 import {
     MatSnackBar,
     MatSnackBarHorizontalPosition,
     MatSnackBarVerticalPosition,
   } from '@angular/material/snack-bar';
-import { RefreshTokenRequest } from '../entity/request/refreshTokenRequest';
+import { environment } from 'src/environments/environment';
+import { ApiService } from './@core/services/api.service';
+import { TokenStorageService } from './@core/services/token-storage.service';
+
 
 @Injectable()
 export class CustomAuthService  {
-    constructor(private apiService:ApiService,
-      private tokenStorageService:TokenStorageService  ){
+    constructor(private apiService:ApiService,private tokenStorageService:TokenStorageService  ){
     }
 
     catchError(showErrorNotif: boolean, error: any): Observable<never>{
@@ -50,8 +48,9 @@ export class CustomAuthService  {
 
 
 
-    refreshToken(body:RefreshTokenRequest): Observable<Observable<never> | HttpResponse<any>>{
+    refreshToken(): Observable<Observable<never> | HttpResponse<any>>{
       //this.hubService.stopConnection();
+      let body={};
         return this.apiService.post(environment.refresh_token_uri,body).pipe(
             map((x: HttpResponse<any>) => {
             console.log("refresh token");

@@ -14,7 +14,7 @@ export class CustomAuthInterceptor implements HttpInterceptor {
     //private authService: NbAuthService,
     private router: Router,
     private tokenStorage: TokenStorageService,
-    private customAuthService: CustomAuthService,
+    private customAuthService: CustomAuthService){
 
 
   }
@@ -36,7 +36,7 @@ export class CustomAuthInterceptor implements HttpInterceptor {
       return next.handle(req);
 
     }
-    if (req.url.endsWith(environment.add_contrat_uri) && method==='POST') {
+    if (req.url.endsWith(environment.register_uri) && method==='POST') {
       //console.log("interceptor3 ");
       //console.log(req.headers.keys);
       //return next.hvbfdsdfggfsandle(req);
@@ -129,7 +129,7 @@ export class CustomAuthInterceptor implements HttpInterceptor {
 
     }else{
       this.isRefreshing=true;
-      return this.customAuthService.refreshToken().pipe(
+/*       return this.customAuthService.refreshToken().pipe(
         switchMap((data: any) => {
           console.log("switchMap2: ");
           console.log(data);
@@ -155,17 +155,17 @@ export class CustomAuthInterceptor implements HttpInterceptor {
           this.tokenStorage.signOut();
           //this.hubService.stopConnection();
           //window.location.reload();
-          /*this.hubService.notificationNonLu=[];
+          this.hubService.notificationNonLu=[];
           this.hubService.lenNotificationNonLu=0;
           this.commentService.lenCommentaireNonLu=0;
-          this.commentService.commentaireNonLu=[];*/
+          this.commentService.commentaireNonLu=[];
           setTimeout(()=>{
             this.router.navigate(['/auth/login']);
           },0)
 
           return throwError(err);
         })
-      );
+      ); */
 
     }
   }

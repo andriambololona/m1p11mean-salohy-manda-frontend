@@ -48,8 +48,8 @@ export class ApiManagerService extends ManagerService {
   getAllPersonnel(showErrorNotif: boolean,page:number,limit:number): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
       return this.apiService.get<ApiResponse<any>>(environment.getAllPersonnel_uri+"?page="+page+"&limit="+limit).pipe(
         map((x: HttpResponse<ApiResponse<any>>) => {
-          
-     
+
+
           return this.handleResponse<ApiResponse<any>>(
             showErrorNotif,
             x
@@ -64,8 +64,8 @@ export class ApiManagerService extends ManagerService {
   getAllService(showErrorNotif: boolean,page:number,limit:number): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
     return this.apiService.get<ApiResponse<any>>(environment.getAllService_uri+"?page="+page+"&limit="+limit).pipe(
       map((x: HttpResponse<ApiResponse<any>>) => {
-       
-   
+
+
         return this.handleResponse<ApiResponse<any>>(
           showErrorNotif,
           x
@@ -83,7 +83,7 @@ export class ApiManagerService extends ManagerService {
 
         map((x: HttpResponse<ApiResponse<any>>) => {
             console.log(x);
-            
+
             return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
 
         }),
