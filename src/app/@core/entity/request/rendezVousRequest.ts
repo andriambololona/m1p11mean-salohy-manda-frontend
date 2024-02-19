@@ -1,9 +1,8 @@
-import { Service } from "./service";
-import { User } from "./user";
+import { Service } from "../service";
+import { User } from "../user";
 
-export class Rendezvous
+export class RendezVousRequest
 {
-  _id:string;
   client:User;
   montant:number;
   gestionnaire:User;

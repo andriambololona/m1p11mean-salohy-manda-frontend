@@ -117,6 +117,7 @@ export class AuthInterceptor implements HttpInterceptor
       this.isRefreshing=true;
       let refreshToken:RefreshTokenRequest=new RefreshTokenRequest();
       refreshToken.token=this.tokenStorage.getToken();
+      
       return this.customAuthService.refreshToken(refreshToken).pipe(
         switchMap((data: any) => {
           console.log("switchMap2: ");
