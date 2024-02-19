@@ -12,6 +12,7 @@ import {
     MatSnackBarHorizontalPosition,
     MatSnackBarVerticalPosition,
   } from '@angular/material/snack-bar';
+import { RefreshTokenRequest } from '../entity/request/refreshTokenRequest';
 
 @Injectable()
 export class CustomAuthService  {
@@ -46,23 +47,11 @@ export class CustomAuthService  {
         return response;
     }
 
-    authenticate(usename:string,password:string): Observable<Observable<never>|HttpResponse<any> >{
-        return this.apiService.post<any>(environment.generate_token_uri,{UserName:usename,Password:password}).pipe(
-            map((x: HttpResponse<any>) => {
-            //console.log("All user :",x);
-            return this.handleResponse<HttpResponse<any>>(false, x);
-        }),
-        catchError(error => {
-            console.log("error:",error);
-            return this.catchError(false, error);
-        })
-        )
-    }
 
-    refreshToken(): Observable<Observable<never> | HttpResponse<any>>{
+
+    refreshToken(body:RefreshTokenRequest): Observable<Observable<never> | HttpResponse<any>>{
       //this.hubService.stopConnection();
-        return this.apiService.post(environment.generate_token_uri,{Token:this.tokenStorageService.getToken()
-            ,RefreshToken:this.tokenStorageService.getRefreshToken()}).pipe(
+        return this.apiService.post(environment.refresh_token_uri,body).pipe(
             map((x: HttpResponse<any>) => {
             console.log("refresh token");
             return this.handleResponse<HttpResponse<any>>(false, x);

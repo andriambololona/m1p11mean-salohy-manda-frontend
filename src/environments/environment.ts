@@ -21,6 +21,7 @@ export const environment = {
   //api_host:'http://192.168.210.104:61177',
   register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
+  refresh_token_uri:'/api/auth/refreshtoken',
   logout_uri: "/api/user/logout",
   login_uri: '/api/auth/signin',
   getAllPersonnel_uri:'/api/user/manager/allPersonnel',

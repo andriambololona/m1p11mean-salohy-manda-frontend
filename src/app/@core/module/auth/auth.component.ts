@@ -32,11 +32,13 @@ export class AuthComponent implements OnInit {
   }
 
   Login(){
+    console.log("tonga");
+
     this.isSpinner=true;
     var userRequest=new UserRequest();
     userRequest.email=this.user.email;
     userRequest.password=this.user.password;
-  
+
 
     this.userService.login(true,userRequest).subscribe({
       next:(data:HttpResponse<any>)=>{
@@ -44,12 +46,16 @@ export class AuthComponent implements OnInit {
         this.tokenStorageService.saveRole(data.body.roles);
         this.tokenStorageService.saveId(data.body.id);
         this.tokenStorageService.saveEmail(data.body.email);
+        //this.tokenStorageService.saveToken(data.body.);
+        //this.tokenStorageService.saveRefreshToken(data.body.)
         this.authUser.emit(data);
         this.isSpinner=false;
         this.dialogRef.close();
 
       },error:(err)=>{
         this.isSpinner=false;
+        console.log(err);
+
        this.errorMessage="Identifiant ou mot de passe erroné";
       }
     });
@@ -59,8 +65,8 @@ export class AuthComponent implements OnInit {
   closeDialog() {
     this.dialogRef.close();
   }
- 
-  
+
+
 
   convertErrors(errors: Array<string> ): Array<string>{
     errors.forEach((element, index) => {
