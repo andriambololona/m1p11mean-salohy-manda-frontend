@@ -13,12 +13,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ModalDetailsPersonnelComponent } from './personnel/modal-details-personnel/modal-details-personnel.component';
 import { ServicesComponent } from './services/services.component';
 import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
     PersonnelComponent,
     ModalDetailsPersonnelComponent,
-    ServicesComponent
+    ServicesComponent,
+
   ],
   imports: [
     CommonModule,
@@ -29,7 +34,10 @@ import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
     FormsModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers:[{provide:CustomAuthService}]
 })

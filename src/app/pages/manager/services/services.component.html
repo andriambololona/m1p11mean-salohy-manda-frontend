@@ -1,21 +1,32 @@
 <div class="container">
     <div class="card text-center" id="card-search">
         <div class="card-body" id="recherche">
-            <div class="row" id="row_recherche">
-                <div class="col-3">
-                    <input class="form-control">
-                </div>
-                <div class="col-3">
-                    <input class="form-control">
-                </div>
-                <div class="col-4">
-                  <button mat-fab extended color="accent">
-                    <mat-icon>favorite</mat-icon>
-                    Rechercher
-                  </button>
-                </div>
-            </div>
-            <Button class="btn btn-primary">Ajout de service</Button>
+          <div class="example-container">
+            <mat-form-field hintLabel="Max 10 characters">
+              <mat-label>Enter some input</mat-label>
+              <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+              <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Select me</mat-label>
+              <mat-select>
+                <mat-option value="option">Option</mat-option>
+              </mat-select>
+              <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+            </mat-form-field>
+
+              <button mat-fab extended color="accent">
+                      <mat-icon>search</mat-icon>
+                      Rechercher
+              </button>
+          </div>
+          <div class="example-button-row">
+            <button mat-fab extended color="primary">
+              <mat-icon>add</mat-icon>
+              Ajout de service
+            </button>
+          </div>
         </div>
 
       </div>
