@@ -16,6 +16,11 @@ import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ModalAjoutServiceComponent } from './services/modal-ajout-service/modal-ajout-service.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalDetailServiceComponent } from './services/modal-detail-service/modal-detail-service.component';
+
+
 
 
 @NgModule({
@@ -23,6 +28,9 @@ import { MatSelectModule } from '@angular/material/select';
     PersonnelComponent,
     ModalDetailsPersonnelComponent,
     ServicesComponent,
+    ModalAjoutServiceComponent,
+    ModalDetailServiceComponent,
+   
 
   ],
   imports: [
@@ -37,7 +45,9 @@ import { MatSelectModule } from '@angular/material/select';
     MatTooltipModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+   
   ],
   providers:[{provide:CustomAuthService}]
 })

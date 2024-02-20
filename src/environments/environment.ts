@@ -11,14 +11,10 @@
 export const environment = {
   production: false,
   auth_strategy_name: 'jwt',
-  //logout_strategy_name: 'jwt_logout',
-
-  client_id: 'a2934fa2-6f7e-4ac9-8210-681814ac86c4',
   favorisClient: 'pages/favoris',
-  //api_host:'http://192.168.143.99:51943',
+ 
   api_host:'http://localhost:3000',
-  // api_host:'http://192.168.210.103:50943',
-  //api_host:'http://192.168.210.104:61177',
+ 
   register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
   refresh_token_uri:'/api/auth/refreshtoken',
@@ -29,5 +25,6 @@ export const environment = {
   update_status:'/api/user/manager/update_status',
   upload_moneygram_facture: "/api/moneygram/recu/upload",
   getAllService_uri:"/api/service/manager/allService",
+  create_service_uri:"/api/service/manager/create",
   add_upload_abmform_uri:""
 };

@@ -9,6 +9,11 @@ import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
 import { ManagerService } from 'src/app/@core/services/manager.service';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
+import { ModalAjoutServiceComponent } from './modal-ajout-service/modal-ajout-service.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
+import { ServiceRequest } from 'src/app/@core/entity/request/serviceRequest';
+import { ModalDetailServiceComponent } from './modal-detail-service/modal-detail-service.component';
 
 @Component({
   selector: 'app-services',
@@ -33,11 +38,13 @@ export class ServicesComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+ 
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private managerService: ManagerService, private messageModalService: MessageModalService) { }
+  constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
 
   reloadAllService(page: number, limit: number) {
     const _page = page + 1;
@@ -83,5 +90,60 @@ export class ServicesComponent implements OnInit{
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
+  openDialogAjoutService(): Observable<ServiceRequest> {
+    const dialogRef = this.dialog.open(ModalAjoutServiceComponent, {
+
+      //data: {name: this.name, animal: this.animal},
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+    return  new Observable((observer)=>{
+      dialogRef.componentInstance.emitService.subscribe((result)=>{
+        observer.next(result);
+      })
+    })
+  }
+  openDialogDetailsService(id:string){
+    const dialogRef = this.dialog.open(ModalDetailServiceComponent, {
+      width: '800px',
+      data: {id:id,nom:"salohy"},
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+    
+    console.log(id);
+    
+  }
+
+  registerService(){
+    this.openDialogAjoutService().subscribe({
+      next:(data:ServiceRequest)=>{
+        this.managerService.createService(true,data).subscribe({
+          next:(data)=>{
+            console.log(data);
+            this.dialog.closeAll();
+          },
+          error:(err)=>{
+            console.log(err);
+            
+          },
+          complete: () => {
+            this.reloadAllService(this.pageIndex, this.pageSize);
+          },
+        })
+      },
+      error:(err)=>{
+
+      }
+    })
+    
+  }
+  
 }
 

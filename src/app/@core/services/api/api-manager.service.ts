@@ -17,6 +17,7 @@ import { ApiResponse } from './api-response';
 import { UserRequest } from '../../entity/request/userRequest';
 import { ManagerService } from '../manager.service';
 import { User } from '../../entity/user';
+import { ServiceRequest } from '../../entity/request/serviceRequest';
 
 @Injectable()
 export class ApiManagerService extends ManagerService {
@@ -97,4 +98,18 @@ export class ApiManagerService extends ManagerService {
     );
 
 }
+
+createService(showErrorNotif:boolean,serviceReq:ServiceRequest):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
+return this.apiService.post<ApiResponse<any>>(environment.create_service_uri, serviceReq).pipe(
+
+  map((x: HttpResponse<ApiResponse<any>>) => {
+
+    return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+  }),
+  catchError((error) => {
+    return this.catchError(showErrorNotif, error);
+  })
+);
+}
+
 }

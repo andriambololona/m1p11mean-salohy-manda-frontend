@@ -22,7 +22,7 @@
               </button>
           </div>
           <div class="example-button-row">
-            <button mat-fab extended color="primary">
+            <button mat-fab extended color="primary" (click)="registerService()">
               <mat-icon>add</mat-icon>
               Ajout de service
             </button>
@@ -66,7 +66,7 @@
 
                         <div class="example-button-container">
                           <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
-                            matTooltip="Détails">
+                            matTooltip="Détails" (click)="openDialogDetailsService(element._id)">
 
                             <mat-icon>details</mat-icon>
                           </button>
