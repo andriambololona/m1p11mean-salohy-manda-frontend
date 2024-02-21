@@ -7,8 +7,10 @@ import { ThemePalette } from '@angular/material/core';
 import * as moment from 'moment';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
 import { Rendezvous } from 'src/app/@core/entity/rendezvous';
+import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
 import { ClientService } from 'src/app/@core/services/client.service';
+import { ManagerService } from 'src/app/@core/services/manager.service';
 
 
 interface Animal {
@@ -25,8 +27,12 @@ interface Animal {
 export class FormulaireRendezVousComponent implements OnInit{
 
   @ViewChild('pickerCustomIcon ') pickerCustomIcon : any;
-
+  data_employe:Array<User>=[];
+  service:Array<Service>=[];
+  service2:Array<Service>=[];
+  service3:Array<Service>=[];
   rendez_vous=new Rendezvous();
+  isDisabledButtonValide:boolean=true;
 
   public date: moment.Moment;
   public disabled = false;
@@ -42,7 +48,7 @@ export class FormulaireRendezVousComponent implements OnInit{
   public color: ThemePalette = 'accent';
 
   dateControl=new FormControl("dateControl");
-  constructor(private clientService:ClientService){
+  constructor(private clientService:ClientService,private managerService:ManagerService){
     //super();
   }
 
@@ -54,15 +60,27 @@ export class FormulaireRendezVousComponent implements OnInit{
     {name: 'Cow', sound: 'Moo!'},
     {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
   ];
-  data_employe:Array<User>=[];
-
+  
   ngOnInit(): void {
     this.reloadPersonnel();
+    this.getAllServiceNotPaginate();
+  }
+  getAllServiceNotPaginate(){
+    this.managerService.getAllServiceNotPaginate(true).subscribe({
+      next:(data:HttpResponse<ApiResponse<any>>)=>{
+        //console.log(data.body.data);
+        this.service=data.body.data;
+      },
+      error:(err)=>{
+        console.log(err);
+        
+      }
+    })
   }
   reloadPersonnel(){
     this.clientService.getAllPersonnelEmploye(true).subscribe({
       next:(data:HttpResponse<ApiResponse<any>>)=>{
-        console.log(data.body.data);
+        //console.log(data.body.data);
         this.data_employe=data.body.data;
       },
       error:(err)=>{
@@ -71,11 +89,19 @@ export class FormulaireRendezVousComponent implements OnInit{
       }
     })
   }
-  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+ 
+  //todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Service[]>) {
+    //console.log(event.container.data);
+    //console.log(event.previousContainer.data);
+    //this.service3=event.previousContainer.data;
+    console.log(this.service3.length);
+    if(this.service3.length<=1){
+      this.isDisabledButtonValide=true;
+    }
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -87,9 +113,32 @@ export class FormulaireRendezVousComponent implements OnInit{
       );
     }
   }
+  drop2(event: CdkDragDrop<Service[]>) {
+    this.service3=event.container.data;
+    if(this.service3.length>=0){
+      this.isDisabledButtonValide=false;
+    }
+  
+    console.log(this.service3.length);
+    //console.log(event.previousContainer.data);
+    if (event.previousContainer === event.container) {
+      console.log("true1");
+      
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      console.log("false1");
+      
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
   valider_rendez_vous()
   {
-    console.log(this.rendez_vous.date);
+    console.log(this.service3);
     
   }
 }

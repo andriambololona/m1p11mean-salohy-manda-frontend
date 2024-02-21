@@ -19,6 +19,8 @@ import { ManagerService } from '../manager.service';
 import { User } from '../../entity/user';
 import { ServiceRequest } from '../../entity/request/serviceRequest';
 
+
+
 @Injectable()
 export class ApiManagerService extends ManagerService {
   constructor(
@@ -111,5 +113,42 @@ return this.apiService.post<ApiResponse<any>>(environment.create_service_uri, se
   })
 );
 }
+updateService(showErrorNotif: boolean, serviceReq: ServiceRequest): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+    return this.apiService.put<ApiResponse<any>>(environment.update_service_uri,serviceReq).pipe(
+      map((x:HttpResponse<ApiResponse<any>>)=>{
+        return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+      }),
+      catchError((error) => {
+        return this.catchError(showErrorNotif, error);
+      })
+    );
+}
+
+getAllServiceNotPaginate(showErrorNotif: boolean): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+  return this.apiService.get<ApiResponse<any>>(environment.getAllServiceNotPaginate_uri).pipe(
+    map((x: HttpResponse<ApiResponse<any>>) => {
+
+
+      return this.handleResponse<ApiResponse<any>>(
+        showErrorNotif,
+        x
+      );
+    }),
+    catchError((error) => {
+      return this.catchError(showErrorNotif, error);
+    })
+  );
+}
+
+/*deleteService(showErrorNotif: boolean, serviceReq: ServiceRequest): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+  return this.apiService.<ApiResponse<any>>(environment.update_service_uri,serviceReq).pipe(
+    map((x:HttpResponse<ApiResponse<any>>)=>{
+      return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+    }),
+    catchError((error) => {
+      return this.catchError(showErrorNotif, error);
+    })
+  );
+}*/
 
 }

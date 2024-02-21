@@ -13,4 +13,7 @@ export abstract class ManagerService {
   abstract updateStatusUser(showErrorNotif:boolean,user:UserRequest,status:boolean):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract getAllService(showErrorNotif:boolean,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract createService(showErrorNotif:boolean,serviceReq:ServiceRequest):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
+  abstract updateService(showErrorNotif:boolean,serviceReq:ServiceRequest):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
+  abstract getAllServiceNotPaginate(showErrorNotif:boolean):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
+  //abstract deleteService(showErrorNotif:boolean,serviceReq:ServiceRequest):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
 }

@@ -59,14 +59,14 @@
                       <div class="example-flex-container">
                         <div class="example-button-container">
                           <button mat-mini-fab color="secondary" aria-label="Example icon button with a menu icon"
-                            matTooltip="Editer">
+                            matTooltip="Editer" (click)="updateService(element)">
                             <mat-icon>edit</mat-icon>
                           </button>
                         </div>
 
                         <div class="example-button-container">
                           <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
-                            matTooltip="Détails" (click)="openDialogDetailsService(element._id)">
+                            matTooltip="Détails" (click)="openDialogDetailsService(element)">
 
                             <mat-icon>details</mat-icon>
                           </button>

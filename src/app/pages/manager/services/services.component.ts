@@ -14,6 +14,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { ServiceRequest } from 'src/app/@core/entity/request/serviceRequest';
 import { ModalDetailServiceComponent } from './modal-detail-service/modal-detail-service.component';
+import { ModalUpdateServiceComponent } from './modal-update-service/modal-update-service.component';
 
 @Component({
   selector: 'app-services',
@@ -72,11 +73,6 @@ export class ServicesComponent implements OnInit{
 
   }
 
-  updateService($event){
-    console.log("event");
-    
-  }
-
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.length = e.length;
@@ -106,10 +102,10 @@ export class ServicesComponent implements OnInit{
       })
     })
   }
-  openDialogDetailsService(id:string){
+  openDialogDetailsService(service:object){
     const dialogRef = this.dialog.open(ModalDetailServiceComponent, {
       width: '800px',
-      data: {id:id,nom:"salohy"},
+      //data: {id:id,nom:"salohy"},
     });
     
     dialogRef.afterClosed().subscribe(result => {
@@ -117,20 +113,65 @@ export class ServicesComponent implements OnInit{
       //this.animal = result;
     });
     
-    console.log(id);
+    //console.log(service);
     
   }
+
+  openDialogUpdateService(service:object): Observable<ServiceRequest>{
+    //console.log(service);
+    
+     const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
+      width: '800px',
+      data: {service:service},
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+    
+    return  new Observable((observer)=>{
+      dialogRef.componentInstance.emitService.subscribe((result)=>{
+        observer.next(result);
+      })
+    })
+    
+  }
+
+  updateService(service:object){
+    this.openDialogUpdateService(service).subscribe({
+      next:(data:ServiceRequest)=>{
+        this.managerService.updateService(true,data).subscribe({
+          next:(data)=>{
+            //console.log(data);
+            this.dialog.closeAll();
+          },
+          error:(err)=>{
+            console.error(err);
+               
+          },
+          complete: () => {
+            this.reloadAllService(this.pageIndex, this.pageSize);
+          },
+        })
+      },
+      error:(err)=>{
+
+      }
+    })
+  }
+
 
   registerService(){
     this.openDialogAjoutService().subscribe({
       next:(data:ServiceRequest)=>{
         this.managerService.createService(true,data).subscribe({
           next:(data)=>{
-            console.log(data);
+            //console.log(data);
             this.dialog.closeAll();
           },
           error:(err)=>{
-            console.log(err);
+            console.error(err);
             
           },
           complete: () => {

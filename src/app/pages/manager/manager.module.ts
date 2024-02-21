@@ -19,6 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ModalAjoutServiceComponent } from './services/modal-ajout-service/modal-ajout-service.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalDetailServiceComponent } from './services/modal-detail-service/modal-detail-service.component';
+import { ModalUpdateServiceComponent } from './services/modal-update-service/modal-update-service.component';
 
 
 
@@ -30,6 +31,7 @@ import { ModalDetailServiceComponent } from './services/modal-detail-service/mod
     ServicesComponent,
     ModalAjoutServiceComponent,
     ModalDetailServiceComponent,
+    ModalUpdateServiceComponent,
    
 
   ],
