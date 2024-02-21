@@ -59,7 +59,7 @@ export const NB_CORE_PROVIDERS = [
   ...HTTP_INTERCEPTOR,
   AnalyticsService,
 
-  { provide: AuthGuardService, useClass: AuthGuardService },
+  {provide: AuthGuardService, useClass: AuthGuardService },
   {provide:UserService,useClass:ApiUserService},
   {provide:ClientService,useClass:ApiClientService},
   {provide:ManagerService,useClass:ApiManagerService},
