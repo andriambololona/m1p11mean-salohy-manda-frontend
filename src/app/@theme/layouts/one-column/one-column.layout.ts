@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 import { ExampleFlatNode, FoodNode,TREE_DATA_CLIENT, TREE_DATA_EMPLOYE, TREE_DATA_MANAGER} from './tree.menu';
 import { TokenStorageService } from 'src/app/@core/services/token-storage.service';
+import { HttpResponse } from '@angular/common/http';
 
 
 
@@ -14,16 +15,18 @@ import { TokenStorageService } from 'src/app/@core/services/token-storage.servic
 })
 export class OneColumnLayoutComponent implements OnInit{
   showFiller = false;
-  currentAuth:any;
-
+  currentAuth:HttpResponse<any>;
   constructor(private tokenStorageService:TokenStorageService) {
-    let roles=tokenStorageService.getRole();
+  
+  }
+
+  dynamicTree(roles){
     if(roles){
       roles.forEach(element => {
         if(element=='GROUPE_CLIENT'){
           this.dataSource.data = TREE_DATA_CLIENT;
         }
-        if(element=='GROUPE_MANAGER'){
+        if(element=='GROUPE_ADMINISTRATEUR'){
           this.dataSource.data = TREE_DATA_MANAGER;
         }
         if(element=='GROUPE_EMPLOYE'){
@@ -31,17 +34,22 @@ export class OneColumnLayoutComponent implements OnInit{
         }
       });
     }
-
-
   }
 
   ngOnInit(): void {
-    this.currentAuth=this.tokenStorageService.geId();
+    let roles=this.tokenStorageService.getRole();
+    
+   this.dynamicTree(roles);
+    this.currentAuth=this.tokenStorageService.getId();
   }
 
-  getAuthUser(authUser:any){
+  
+  getAuthUser(authUser:HttpResponse<any>){
+    //console.log(this.currentAuth.body.roles);
     this.currentAuth=authUser;
-    //console.log(this.currentAuth);
+    if(this.currentAuth){
+      this.dynamicTree(this.currentAuth.body.roles)
+    }  
   }
 
   private _transformer = (node: FoodNode, level: number) => {

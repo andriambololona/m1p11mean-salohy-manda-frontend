@@ -20,12 +20,19 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   private formatErrors(error: any) {
+    console.log(error);
+
     return throwError(() => error.error);
   }
 
   post<T>(path: string, body: Object = {}): Observable<HttpResponse<T> | Observable<never>> {
 
     return this.http.post<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response'})
+      .pipe(catchError(this.formatErrors));
+  }
+  put<T>(path: string, body: Object = {}, params: HttpParams = new HttpParams()): Observable<HttpResponse<T> | Observable<never>> {
+
+    return this.http.put<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response',params})
       .pipe(catchError(this.formatErrors));
   }
 

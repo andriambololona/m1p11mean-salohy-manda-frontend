@@ -1,0 +1,102 @@
+<div class="container">
+  <div class="card text-center" id="card-search">
+    <div class="card-body" id="recherche">
+      <div class="example-container">
+        <mat-form-field hintLabel="Max 10 characters">
+          <mat-label>Enter some input</mat-label>
+          <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+          <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Select me</mat-label>
+          <mat-select>
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+          <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+        </mat-form-field>
+
+          <button mat-fab extended color="accent">
+                  <mat-icon>search</mat-icon>
+                  Rechercher
+          </button>
+      </div>
+     
+    </div>
+
+  </div>
+  <div class="card text-center">
+    <div class="card-header">
+      <h1 class="title">Liste des personels</h1>
+    </div>
+    <div class="card-body">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+
+          <!-- nom Column -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+          </ng-container>
+          <!-- prenom Column -->
+          <ng-container matColumnDef="prenom">
+            <th mat-header-cell *matHeaderCellDef> Prénom </th>
+            <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+          </ng-container>
+          <!-- email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+          </ng-container>
+          <ng-container matColumnDef="activation" >
+            <th mat-header-cell *matHeaderCellDef> Activation </th>
+            <td mat-cell *matCellDef="let element" >
+             <span *ngIf="element.estActif ;else desactiver"><mat-icon>how_to_reg</mat-icon></span>
+              <ng-template #desactiver><mat-icon>person_remove</mat-icon></ng-template>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <section>
+                <div class="example-button-row">
+                  <div class="example-flex-container">
+
+                    <div class="example-button-container">
+
+                      <mat-slide-toggle class="toogle-btn" (change)="updateStatus($event)"
+                        checked="{{element.estActif}}" id="{{element._id}}"><label>Status</label></mat-slide-toggle>
+
+                    </div>
+                    <div class="example-button-container">
+                      <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
+                        matTooltip="Détails">
+
+                        <mat-icon>details</mat-icon>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </section>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+          [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]"
+          [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
+
+        </mat-paginator>
+
+      </div>
+    </div>
+
+  </div>
+</div>

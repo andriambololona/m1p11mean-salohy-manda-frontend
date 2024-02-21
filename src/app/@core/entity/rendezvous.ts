@@ -3,6 +3,7 @@ import { User } from "./user";
 
 export class Rendezvous
 {
+  _id:string;
   client:User;
   montant:number;
   gestionnaire:User;

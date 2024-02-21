@@ -10,6 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { CustomAuthService } from '../../services/custom-auth-service';
+import { CustomAuthInterceptor } from 'src/app/interceptors/custom_auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 @NgModule({
   imports: [
@@ -29,6 +33,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
       AuthComponent
     // ... here goes our new components
   ],
+  providers:[{provide:CustomAuthService}]
   //providers:[{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }]
 })
 export class AuthModule {

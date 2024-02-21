@@ -3,8 +3,9 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { Observable, of } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { ApiService } from './api.service';
+
 import { HttpParams } from '@angular/common/http';
+import { ApiService } from './api/api.service';
 
 @Injectable()
 export class AuthGuardService //implements CanActivate

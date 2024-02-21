@@ -4,8 +4,8 @@ import { of as observableOf, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
-import { ApiService } from './api.service';
 import { HttpParams } from '@angular/common/http';
+import { ApiService } from './api/api.service';
 
 @Injectable()
 export class RoleProvider {

@@ -3,12 +3,10 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpParams, HttpH
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, filter, switchMap, take } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-import { NbAuthService, NbAuthToken, NbAuthOAuth2Token, NbAuthResult } from '@nebular/auth';
 import { Router } from '@angular/router';
 import { TokenStorageService } from '../@core/services/token-storage.service';
 import { CustomAuthService } from '../@core/services/custom-auth-service';
-import { HubService } from '../@core/services/hub.service';
-import { CommentService } from '../@core/services/comment.service';
+
 
 @Injectable()
 export class CustomAuthInterceptor implements HttpInterceptor {
@@ -16,9 +14,8 @@ export class CustomAuthInterceptor implements HttpInterceptor {
     //private authService: NbAuthService,
     private router: Router,
     private tokenStorage: TokenStorageService,
-    private customAuthService: CustomAuthService,
-    public commentService:CommentService,
-    private hubService:HubService) {
+    private customAuthService: CustomAuthService){
+
 
   }
   private isRefreshing = false;
@@ -39,7 +36,7 @@ export class CustomAuthInterceptor implements HttpInterceptor {
       return next.handle(req);
 
     }
-    if (req.url.endsWith(environment.add_contrat_uri) && method==='POST') {
+    if (req.url.endsWith(environment.register_uri) && method==='POST') {
       //console.log("interceptor3 ");
       //console.log(req.headers.keys);
       //return next.hvbfdsdfggfsandle(req);
@@ -132,7 +129,7 @@ export class CustomAuthInterceptor implements HttpInterceptor {
 
     }else{
       this.isRefreshing=true;
-      return this.customAuthService.refreshToken().pipe(
+/*       return this.customAuthService.refreshToken().pipe(
         switchMap((data: any) => {
           console.log("switchMap2: ");
           console.log(data);
@@ -158,17 +155,17 @@ export class CustomAuthInterceptor implements HttpInterceptor {
           this.tokenStorage.signOut();
           //this.hubService.stopConnection();
           //window.location.reload();
-          /*this.hubService.notificationNonLu=[];
+          this.hubService.notificationNonLu=[];
           this.hubService.lenNotificationNonLu=0;
           this.commentService.lenCommentaireNonLu=0;
-          this.commentService.commentaireNonLu=[];*/
+          this.commentService.commentaireNonLu=[];
           setTimeout(()=>{
             this.router.navigate(['/auth/login']);
           },0)
 
           return throwError(err);
         })
-      );
+      ); */
 
     }
   }

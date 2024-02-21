@@ -14,12 +14,16 @@ import { TokenStorageService } from 'src/app/@core/services/token-storage.servic
 export class HeaderComponent implements OnInit{
   showFiller = false;
   isVisibleButtonMenu:boolean=false;
+  isVisibleButtonSignin:boolean=true;
+  isVisibleButtonSignup:boolean=true;
   @Output() authUser=new EventEmitter<any>();
   constructor(public dialog: MatDialog,private tokenStorage:TokenStorageService,private route:Router) {}
 
-  ngOnInit(): void {
-    if(this.tokenStorage.geId()){
+  ngOnInit(): void {  
+    if(this.tokenStorage.getId()!=null){
       this.isVisibleButtonMenu=true;
+      this.isVisibleButtonSignin=false;
+      this.isVisibleButtonSignup=false;
     }
   }
 
@@ -55,6 +59,8 @@ export class HeaderComponent implements OnInit{
     this.openDialogConnexion().subscribe({
       next:(data:string)=>{
           this.isVisibleButtonMenu=true;
+          this.isVisibleButtonSignin=false;
+          this.isVisibleButtonSignup=false;
           this.authUser.emit(data);
       },
       error:(err)=> {
@@ -66,7 +72,9 @@ export class HeaderComponent implements OnInit{
   logout(){
     this.tokenStorage.signOut();
     this.isVisibleButtonMenu=false;
-    this.authUser.emit(null);
+    this.isVisibleButtonSignin=true;
+    this.isVisibleButtonSignup=true;
+    this.authUser.emit();
     this.route.navigateByUrl('/');
   }
 

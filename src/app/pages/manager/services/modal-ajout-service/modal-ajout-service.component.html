@@ -1,0 +1,66 @@
+<mat-dialog-content>
+    <div class="row">
+      <div class="col-11">
+        <h2><mat-icon>add</mat-icon> Ajout de service</h2>
+      </div>
+      <div class="col-1"> <button mat-icon-button class="btn_close"
+          (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
+    </div>
+    <form class="example-form" #myform="ngForm" novalidate>
+    
+          <mat-form-field class="example-full-width">
+            <mat-label>Nom</mat-label>
+            <input matInput #nom="ngModel" [(ngModel)]="service.nom"  id="nom"  name="nom" minlength="1"
+              required>
+              <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="error">
+                <div *ngIf="nom.errors?.['required']">
+                  <i class='bx bx-error-circle'></i> Champ Obligatoire.
+                </div>
+              </div>
+          </mat-form-field>
+          
+          <mat-form-field class="example-full-width">
+            <span matTextPrefix><mat-icon>payments</mat-icon> &nbsp;</span>     
+            <mat-label>Prix</mat-label>
+            <input matInput type="number" class="example-right-align" #prix="ngModel" [(ngModel)]="service.prix"  id="prix"  name="prix" minlength="1"  placeholder="0" required>
+            <span matTextSuffix>.00</span>
+            <div *ngIf="prix.invalid && (prix.dirty || prix.touched)" class="error">
+                <div *ngIf="prix.errors?.['required']">
+                  <i class='bx bx-error-circle'></i> Champ Obligatoire.
+                </div>
+              </div>
+          </mat-form-field>
+         
+          <mat-form-field class="example-full-width" floatLabel="always">
+            <span matTextPrefix><mat-icon>timer</mat-icon> &nbsp;</span>
+            <mat-label>Duree</mat-label>
+            <input matInput type="number" #dure="ngModel" [(ngModel)]="service.duree" id="dure"  name="dure" 
+              required>
+              <div *ngIf="dure.invalid && (dure.dirty || dure.touched)" class="error">
+                <div *ngIf="dure.errors?.['required']">
+                  <i class='bx bx-error-circle'></i> Champ Obligatoire.
+                </div>
+              </div>
+  
+          </mat-form-field>
+        
+       
+          <mat-form-field class="example-full-width">
+            <mat-label>Commission</mat-label>
+            <input matInput type="number" #commission="ngModel" [(ngModel)]="service.commission" name="commission" id="commission"   required>
+            <div *ngIf="commission.invalid && (commission.dirty || commission.touched)" class="error">
+                <div *ngIf="commission.errors?.['required']">
+                  <i class='bx bx-error-circle'></i> Champ Obligatoire.
+                </div>
+              </div>
+          </mat-form-field>
+        
+    
+      <mat-dialog-actions>
+        <button mat-fab extended id="btn_valider" [disabled]="!myform.form.valid" (click)="registerService()"
+          ><mat-icon>done</mat-icon> Valider</button>
+         
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+  

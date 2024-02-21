@@ -16,6 +16,7 @@ import { ApiResponse } from './api-response';
 
 
 import { UserRequest } from '../../entity/request/userRequest';
+import { User } from '../../entity/user';
 
 @Injectable()
 export class ApiUserService extends UserService {
@@ -72,6 +73,7 @@ export class ApiUserService extends UserService {
       })
     );
   }
+
   /*getAll(showErrorNotif:boolean, getTableDataParam: GetTableDataParam): Observable<HttpResponse<ApiResponse<Datatable<Array<Users>>>> | Observable<never>>{
         return this.apiService.post<ApiResponse<Datatable<Array<Users>>>>(environment.getAllUserUri, getTableDataParam).pipe(
             map((x: HttpResponse<ApiResponse<Datatable<Array<Users>>>>) => {

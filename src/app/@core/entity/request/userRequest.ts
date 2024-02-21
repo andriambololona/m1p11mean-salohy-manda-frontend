@@ -1,10 +1,12 @@
 export class UserRequest
 {
+  _id:string;
   nom:string;
   prenom:string;
   email:string;
   password:string;
   contacts:Array<Array<string>>;
+  estActif:boolean;
   //salt:string
   /*UserRequest(nom,prenom,email,password,contacts){
     var userRequest=new UserRequest();
