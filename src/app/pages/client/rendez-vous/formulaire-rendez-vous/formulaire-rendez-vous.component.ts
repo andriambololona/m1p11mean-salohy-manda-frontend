@@ -1,9 +1,9 @@
-import { NgxMatDateAdapter } from '@angular-material-components/datetime-picker';
+import { NgxMatDateAdapter, NgxMatDateFormats } from '@angular-material-components/datetime-picker';
 import { CdkDragDrop,CdkDropList, CdkDrag, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormControlName, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 import * as moment from 'moment';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
 import { Rendezvous } from 'src/app/@core/entity/rendezvous';
@@ -13,16 +13,27 @@ import { ClientService } from 'src/app/@core/services/client.service';
 import { ManagerService } from 'src/app/@core/services/manager.service';
 
 
-interface Animal {
-  name: string;
-  sound: string;
-}
-
+ export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'YYYY-MM-DD',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY',
+  },
+};
 
 @Component({
   selector: 'app-formulaire-rendez-vous',
   templateUrl: './formulaire-rendez-vous.component.html',
   styleUrls: ['./formulaire-rendez-vous.component.scss'],
+  providers: [
+   
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+
+  ]
 })
 export class FormulaireRendezVousComponent implements OnInit{
 
@@ -52,15 +63,7 @@ export class FormulaireRendezVousComponent implements OnInit{
     //super();
   }
 
-  animalControl = new FormControl<Animal | null>(null, Validators.required);
-  selectFormControl = new FormControl('', Validators.required);
-  animals: Animal[] = [
-    {name: 'Dog', sound: 'Woof!'},
-    {name: 'Cat', sound: 'Meow!'},
-    {name: 'Cow', sound: 'Moo!'},
-    {name: 'Fox', sound: 'Wa-pa-pa-pa-pa-pa-pow!'},
-  ];
-  
+
   ngOnInit(): void {
     this.reloadPersonnel();
     this.getAllServiceNotPaginate();
@@ -114,7 +117,7 @@ export class FormulaireRendezVousComponent implements OnInit{
     }
   }
   drop2(event: CdkDragDrop<Service[]>) {
-    this.service3=event.container.data;
+    this.rendez_vous.prestations=event.container.data;
     if(this.service3.length>=0){
       this.isDisabledButtonValide=false;
     }
@@ -138,7 +141,13 @@ export class FormulaireRendezVousComponent implements OnInit{
   }
   valider_rendez_vous()
   {
-    console.log(this.service3);
+    var theDate = new Date(this.rendez_vous.date);
+    var dataFormat=theDate.getFullYear()+"-"+theDate.getMonth()+"-"+theDate.getDay()+" "+theDate.getTime()
+    console.log(dataFormat);
+    
+    console.log(this.rendez_vous);
+    
+    //this.clientService(true,this)
     
   }
 }

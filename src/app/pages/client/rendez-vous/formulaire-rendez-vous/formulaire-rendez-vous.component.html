@@ -19,16 +19,16 @@
       <div class="select">
         <mat-form-field>
           <mat-label>Personnel</mat-label>
-          <mat-select [formControl]="animalControl"  required>
+          <mat-select  name="personnel" [(ngModel)]="rendez_vous.gestionnaire"  required>
             <mat-option>--</mat-option>
 
-            <mat-option *ngFor="let data of data_employe" [value]="data">{{data.prenom}}</mat-option>
+            <mat-option *ngFor="let data of data_employe" [value]="data._id">{{data.prenom}}</mat-option>
 
           </mat-select>
 
-          <mat-error *ngIf="animalControl.hasError('required')">Veuillez choisir un personnel</mat-error>
+          <mat-error >Veuillez choisir un personnel</mat-error>
 
-          <mat-hint>{{animalControl.value?.sound}}</mat-hint>
+          
         </mat-form-field>
       </div>
 

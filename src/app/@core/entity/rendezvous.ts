@@ -6,8 +6,8 @@ export class Rendezvous
   _id?:string;
   client:User;
   montant:number;
-  gestionnaire:User;
-  prestations:Array<Service|User>;
+  gestionnaire:string;
+  prestations:any;
   date:Date;
   dateFin:Date;
   estRealise:boolean;

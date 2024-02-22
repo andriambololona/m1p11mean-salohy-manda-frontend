@@ -17,6 +17,7 @@ import { ApiResponse } from './api-response';
 
 import { UserRequest } from '../../entity/request/userRequest';
 import { User } from '../../entity/user';
+import { RendezVousRequest } from '../../entity/request/rendezVousRequest';
 
 @Injectable()
 export class ApiUserService extends UserService {
@@ -70,6 +71,19 @@ export class ApiUserService extends UserService {
       }),
       catchError((error)=>{
         return this.catchError(showErrorNotif,error);
+      })
+    );
+  }
+
+  createRendezVous(showErrorNotif: boolean, rendezVousReq: RendezVousRequest): Observable<HttpResponse<any> | Observable<never>> {
+       return this.apiService.post<any>(environment.register_uri, rendezVousReq).pipe(
+
+      map((x: HttpResponse<boolean>) => {
+
+        return this.handleResponse<boolean>(showErrorNotif, x);
+      }),
+      catchError((error) => {
+        return this.catchError(showErrorNotif, error);
       })
     );
   }

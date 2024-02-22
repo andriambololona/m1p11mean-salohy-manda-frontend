@@ -29,5 +29,6 @@ export const environment = {
   create_service_uri:"/api/service/manager/create",
   update_service_uri:"/api/service/manager/updateService",
   delete_service_uri:"/api/service/manager/deleteService",
+  create_rendezVous_uri:"/api/rendezVous",
   add_upload_abmform_uri:""
 };
