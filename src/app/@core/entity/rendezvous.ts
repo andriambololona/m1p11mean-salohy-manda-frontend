@@ -3,7 +3,10 @@ import { User } from "./user";
 
 export class Rendezvous
 {
-  _id?:string;
+  constructor(){
+
+  }
+  _id:string;
   client:User;
   montant:number;
   gestionnaire:string;

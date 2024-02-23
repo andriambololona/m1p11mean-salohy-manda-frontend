@@ -2,7 +2,10 @@ import { Groupe } from "./groupe";
 import { Service } from "./service";
 
 export class User{
-  _id?:string;
+  constructor(){
+
+  }
+  _id:string;
   nom:string;
   prenom:string;
   email:string;

@@ -45,13 +45,13 @@ export class ApiClientService extends ClientService{
       })
       );
     }
-  /*createUser(
+  createRendezVous(
     showErrorNotif: boolean,
     rendezvous: RendezVousRequest
   ): Observable<HttpResponse<any> | Observable<never>> {
 
 
-    return this.apiService.post<boolean>(environment.register_uri, user).pipe(
+    return this.apiService.post<boolean>(environment.create_rendezVous_uri, rendezvous).pipe(
 
       map((x: HttpResponse<boolean>) => {
 
@@ -61,5 +61,5 @@ export class ApiClientService extends ClientService{
         return this.catchError(showErrorNotif, error);
       })
     );
-  }*/
+  }
 }

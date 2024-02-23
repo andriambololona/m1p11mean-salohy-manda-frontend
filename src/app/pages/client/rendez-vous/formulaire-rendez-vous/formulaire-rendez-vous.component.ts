@@ -7,10 +7,12 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ThemePalette } from '@a
 import * as moment from 'moment';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
 import { Rendezvous } from 'src/app/@core/entity/rendezvous';
+import { RendezVousRequest } from 'src/app/@core/entity/request/rendezVousRequest';
 import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
 import { ClientService } from 'src/app/@core/services/client.service';
 import { ManagerService } from 'src/app/@core/services/manager.service';
+import { TokenStorageService } from 'src/app/@core/services/token-storage.service';
 
 
  export const MY_FORMATS = {
@@ -30,7 +32,7 @@ import { ManagerService } from 'src/app/@core/services/manager.service';
   templateUrl: './formulaire-rendez-vous.component.html',
   styleUrls: ['./formulaire-rendez-vous.component.scss'],
   providers: [
-   
+
     {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
 
   ]
@@ -43,6 +45,7 @@ export class FormulaireRendezVousComponent implements OnInit{
   service2:Array<Service>=[];
   service3:Array<Service>=[];
   rendez_vous=new Rendezvous();
+  user=new User();
   isDisabledButtonValide:boolean=true;
 
   public date: moment.Moment;
@@ -59,7 +62,7 @@ export class FormulaireRendezVousComponent implements OnInit{
   public color: ThemePalette = 'accent';
 
   dateControl=new FormControl("dateControl");
-  constructor(private clientService:ClientService,private managerService:ManagerService){
+  constructor(private clientService:ClientService,private managerService:ManagerService,private tokenStorage:TokenStorageService){
     //super();
   }
 
@@ -71,12 +74,12 @@ export class FormulaireRendezVousComponent implements OnInit{
   getAllServiceNotPaginate(){
     this.managerService.getAllServiceNotPaginate(true).subscribe({
       next:(data:HttpResponse<ApiResponse<any>>)=>{
-        //console.log(data.body.data);
+        console.log(data.body.data);
         this.service=data.body.data;
       },
       error:(err)=>{
         console.log(err);
-        
+
       }
     })
   }
@@ -88,11 +91,11 @@ export class FormulaireRendezVousComponent implements OnInit{
       },
       error:(err)=>{
         console.log(err);
-        
+
       }
     })
   }
- 
+
   //todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
 
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
@@ -121,16 +124,16 @@ export class FormulaireRendezVousComponent implements OnInit{
     if(this.service3.length>=0){
       this.isDisabledButtonValide=false;
     }
-  
+
     console.log(this.service3.length);
     //console.log(event.previousContainer.data);
     if (event.previousContainer === event.container) {
       console.log("true1");
-      
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       console.log("false1");
-      
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -142,12 +145,34 @@ export class FormulaireRendezVousComponent implements OnInit{
   valider_rendez_vous()
   {
     var theDate = new Date(this.rendez_vous.date);
-    var dataFormat=theDate.getFullYear()+"-"+theDate.getMonth()+"-"+theDate.getDay()+" "+theDate.getTime()
+    var dataFormat=theDate.getFullYear()+"-"+theDate.getMonth()+"-"+theDate.getDay()+" "+theDate.getHours()+":"+theDate.getMinutes()+":"+theDate.getSeconds();
+    //this.rendez_vous.date=new Date(dataFormat);
     console.log(dataFormat);
-    
-    console.log(this.rendez_vous);
-    
+
+
+    var rendezVousReq:RendezVousRequest=new RendezVousRequest();
+    rendezVousReq.date=this.rendez_vous.date;
+    let prestations=this.rendez_vous.prestations.map((data)=>{
+      return {service:data._id};
+    })
+    rendezVousReq.prestations=prestations;
+    rendezVousReq.client=this.tokenStorage.getId();
+    rendezVousReq.gestionnaire=this.rendez_vous.gestionnaire
+    //rendezVousReq.gestionnaire._id=this.user._id;
+    console.log(rendezVousReq);
+    console.log(prestations);
+
+    this.clientService.createRendezVous(true,rendezVousReq).subscribe({
+      next:(data)=>{
+        console.log(data);
+
+      },
+      error:(err)=>{
+        console.log(err);
+
+      }
+    })
     //this.clientService(true,this)
-    
+
   }
 }
