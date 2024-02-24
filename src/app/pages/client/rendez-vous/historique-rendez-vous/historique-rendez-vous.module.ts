@@ -7,7 +7,7 @@ import { HistoriqueRendezVousRoutingModule } from './historique-rendez-vous-rout
 @NgModule({
   declarations: [],
   imports: [
-    //CommonModule,
+    CommonModule,
     HistoriqueRendezVousRoutingModule
   ]
 })

@@ -36,6 +36,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { User } from './entity/user';
 import { ApiUserService } from './services/api/api.user.service';
 import { UserService } from './services/user.service';
+import { ApiRendezvousService } from './services/api/api.rendezvous.service';
+import { RendezvousService } from './services/rendezvous.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ManagerService } from './services/manager.service';
 import { ApiManagerService } from './services/api/api-manager.service';
@@ -61,6 +63,7 @@ export const NB_CORE_PROVIDERS = [
 
   {provide: AuthGuardService, useClass: AuthGuardService },
   {provide:UserService,useClass:ApiUserService},
+  {provide:RendezvousService,useClass:ApiRendezvousService},
   {provide:ClientService,useClass:ApiClientService},
   {provide:ManagerService,useClass:ApiManagerService},
 ];
