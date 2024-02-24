@@ -13,6 +13,7 @@ import { RendezvousService } from 'src/app/@core/services/rendezvous.service';
 })
 export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
 
+  isLoading: boolean = false;
   page: number = 1;
   limit: number = 10;
   displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire'];
@@ -25,6 +26,7 @@ export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     this.GetData(true, this.page, this.limit);
   }
 
@@ -39,8 +41,9 @@ export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
           console.log(data.body.data);
           this.dataSource = new MatTableDataSource<RendezVous>(data.body.data);
         });
+        this.isLoading = false;
       },error:(err)=>{
-
+        this.isLoading = false;
       }
     });
   }
