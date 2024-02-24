@@ -2,6 +2,7 @@ export class Service
 {
   _id?:string;
   nom:string;
+  image:string;
   prix:number;
   duree:number;
   commission:number;
