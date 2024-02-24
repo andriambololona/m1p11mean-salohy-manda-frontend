@@ -13,7 +13,8 @@ export const environment = {
   auth_strategy_name: 'jwt',
   favorisClient: 'pages/favoris',
  
-  api_host:'http://localhost:3000',
+  // api_host:'https://salon-beaute-backend.onrender.com',
+  api_host:'http://localhost:8080',
  
   register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
@@ -29,6 +30,12 @@ export const environment = {
   create_service_uri:"/api/service/manager/create",
   update_service_uri:"/api/service/manager/updateService",
   delete_service_uri:"/api/service/manager/deleteService",
-  create_rendezVous_uri:"/api/rendezVous",
-  add_upload_abmform_uri:""
+  add_upload_abmform_uri:"",
+  /* Rendez-vous */
+  getRendezVous: "/api/rendezVous/",
+  deleteRendezVous: "/api/rendezVous/",
+  createRendezVous: "/api/rendezVous/",
+  updateRendezVous: "/api/rendezVous/",
+  createPrestationFromRendezVous: "/api/rendezVous/create-prestation",
+  /* ----------- */
 };
