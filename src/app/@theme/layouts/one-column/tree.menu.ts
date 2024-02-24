@@ -69,16 +69,17 @@ export const TREE_DATA_MANAGER: FoodNode[] = [
   {
     name: 'Statistiques',
     icon:'query_stats',
-    children: [
-      {
-        name: 'stat1',
-        children: [{name: 'Broccoli',link:'/pages/manager'}, {name: 'Brussels sprouts',link:'/pages/manager'}],
-      },
-      {
-        name: 'stat2',
-        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
-      },
-    ],
+    link: '/pages/manager/statistique'
+    // children: [
+    //   {
+    //     name: 'stat1',
+    //     children: [{name: 'Broccoli',link:'/pages/manager'}, {name: 'Brussels sprouts',link:'/pages/manager'}],
+    //   },
+    //   {
+    //     name: 'stat2',
+    //     children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
+    //   },
+    // ],
   },
 
 ];
