@@ -14,7 +14,7 @@ export const environment = {
   favorisClient: 'pages/favoris',
  
   // api_host:'https://salon-beaute-backend.onrender.com',
-  api_host:'http://localhost:8080',
+  api_host:'http://localhost:3000',
  
   register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
@@ -34,7 +34,7 @@ export const environment = {
   /* Rendez-vous */
   getRendezVous: "/api/rendezVous/",
   deleteRendezVous: "/api/rendezVous/",
-  createRendezVous: "/api/rendezVous/",
+  create_rendezVous_uri: "/api/rendezVous/",
   updateRendezVous: "/api/rendezVous/",
   createPrestationFromRendezVous: "/api/rendezVous/create-prestation",
   /* ----------- */
