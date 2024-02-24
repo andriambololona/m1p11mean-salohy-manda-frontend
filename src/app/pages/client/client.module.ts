@@ -22,6 +22,7 @@ import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -56,7 +57,8 @@ import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
       MatDividerModule,
       DragDropModule,
       MatTableModule,
-      MatPaginatorModule
+      MatPaginatorModule,
+      MatProgressSpinnerModule
       //FormulaireRendezVousModule,
   ],
   providers: [
