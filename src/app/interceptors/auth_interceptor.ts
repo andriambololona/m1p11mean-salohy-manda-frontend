@@ -69,14 +69,18 @@ export class AuthInterceptor implements HttpInterceptor
       console.log(req.headers);
 
       return next.handle(req);
-    } else {
+    }
+    if(req.url.endsWith(environment.create_service_uri)&& method==='POST'){
+      return this.handleRequest(req,next,this.tokenStorage.getToken());
+    }
+     else {
       console.log("interceptor2")
-      /*req = req.clone({
+      req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-      });*/
+      });
       return this.handleRequest(req,next,this.tokenStorage.getToken());
     }
 
