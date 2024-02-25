@@ -3,4 +3,5 @@ export class ServiceRequest{
     prix:number;
     duree:number;
     commission:number;
+    image:File;
 }

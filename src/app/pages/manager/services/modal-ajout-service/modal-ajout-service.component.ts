@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ServiceRequest } from 'src/app/@core/entity/request/serviceRequest';
 import { Service } from 'src/app/@core/entity/service';
 import { RegisterComponent } from 'src/app/@core/module/register/register.component';
 import { ManagerService } from 'src/app/@core/services/manager.service';
@@ -12,6 +13,8 @@ import { MessageModalService } from 'src/app/@core/services/message-modal.servic
 })
 export class ModalAjoutServiceComponent implements OnInit{
   service:Service=new Service();
+  serviceReq:ServiceRequest=new ServiceRequest();
+  selectedFile?:File;
   @Output() emitService=new EventEmitter();
   constructor(private messageModalService: MessageModalService,public dialogRef: MatDialogRef<ModalAjoutServiceComponent>,private managerService:ManagerService){
 
@@ -23,8 +26,13 @@ export class ModalAjoutServiceComponent implements OnInit{
   registerService(){
     this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
       if(confirm){
+        this.serviceReq.commission=this.service.commission;
+        this.serviceReq.duree=this.service.duree;
+        this.serviceReq.nom=this.service.nom;
+        this.serviceReq.prix=this.service.prix;
+        
         console.log(this.service);
-        this.emitService.emit(this.service);
+        this.emitService.emit(this.serviceReq);
        }
        else{
        
@@ -32,6 +40,9 @@ export class ModalAjoutServiceComponent implements OnInit{
 
       
     })
+  }
+  selectFile(event:any){
+    this.serviceReq.image=event.target.files[0];
   }
 
   closeDialog() {

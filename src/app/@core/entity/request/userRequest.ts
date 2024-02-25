@@ -7,6 +7,8 @@ export class UserRequest
   password:string;
   contacts:Array<Array<string>>;
   estActif:boolean;
+  passwordConfirmation:string;
+  
   //salt:string
   /*UserRequest(nom,prenom,email,password,contacts){
     var userRequest=new UserRequest();

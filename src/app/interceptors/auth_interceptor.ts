@@ -36,13 +36,13 @@ export class AuthInterceptor implements HttpInterceptor
     let { url, method, headers, body } = req;
     //return this.handleRequest(req, next, null);
      if (url.endsWith(environment.register_uri) && method === 'POST') {
-      req = req.clone({
+      /*req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         //body: body += '&client_id=' + environment.client_id
-      });
+      });*/
       console.log("interceptor ");
       return next.handle(req);
     }
@@ -71,12 +71,12 @@ export class AuthInterceptor implements HttpInterceptor
       return next.handle(req);
     } else {
       console.log("interceptor2")
-      req = req.clone({
+      /*req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-      });
+      });*/
       return this.handleRequest(req,next,this.tokenStorage.getToken());
     }
 

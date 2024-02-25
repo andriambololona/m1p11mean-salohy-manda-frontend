@@ -33,8 +33,8 @@ export class ApiClientService extends ClientService{
     return response;
   }
 
-  getAllPersonnelEmploye(showErrorNotif: boolean):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
-    return this.apiService.get<ApiResponse<any>>(environment.getAllersonnelEmploye_uri).pipe(
+  getAllPersonnelEmploye(showErrorNotif: boolean,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
+    return this.apiService.get<ApiResponse<any>>(environment.getAllersonnelEmploye_uri+"?page="+page+"&limit="+limit).pipe(
 
       map((x: HttpResponse<ApiResponse<any>>) => {
 

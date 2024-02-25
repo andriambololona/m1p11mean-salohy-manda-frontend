@@ -10,7 +10,7 @@ export const environment = {
   favorisClient: 'pages/favoris',
 
   // api_host:'https://salon-beaute-backend.onrender.com',
-  api_host:'http://localhost:8080',
+  api_host:'http://localhost:3000',
 
   generate_token_uri: '/api/user/token',
   refresh_token_uri:'/api/auth/refreshtoken',

@@ -10,7 +10,7 @@ import { ApiResponse } from './api/api-response';
 export abstract class ClientService {
 
   constructor() { }
-  abstract getAllPersonnelEmploye(showErrorNotif:boolean):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
+  abstract getAllPersonnelEmploye(showErrorNotif:boolean,page?:number,limit?:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract createRendezVous(showErrorNotif:boolean,rendezVousReq:RendezVousRequest):Observable<HttpResponse<boolean>|Observable<never>>
   //abstract findByIdRendezVous(showErrorNotif:boolean,id:string):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
 }

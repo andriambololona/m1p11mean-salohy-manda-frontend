@@ -1,0 +1,23 @@
+<div class="row">
+    <h1 class="title">Selectionnez votre personnel préféré</h1>
+    <div class="col-12 col-md-4 my-2 px-5  card_employe" *ngFor="let data of dataUsers">
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" alt="...">
+            <div class="card-body">
+                <p class="card-text">{{data.nom}}</p>
+            </div>
+            <div class="card-footer bg-transparent border-success">
+                <span class="material-symbols-outlined" (click)="addPreference(data._id)" *ngIf="!isChangeIconFavoris">
+                    favorite
+                </span>
+                <mat-icon *ngIf="isChangeIconFavoris" (click)="removePreference(data._id)">favorite</mat-icon>
+            </div>
+        </div>
+    </div>
+
+</div>
+<mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize" [disabled]="false"
+    [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]" [hidePageSize]="hidePageSize"
+    [pageIndex]="pageIndex" aria-label="Select page">
+
+</mat-paginator>

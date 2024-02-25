@@ -36,7 +36,8 @@ export class PersonnelComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    if(this.dataSource!=undefined)
+      this.dataSource.paginator = this.paginator;
   }
 
   constructor(private managerService: ManagerService, private messageModalService: MessageModalService) { }
