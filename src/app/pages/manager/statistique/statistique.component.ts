@@ -1,6 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { PrestationService } from 'src/app/@core/services/prestation.service';
+import { UserService } from 'src/app/@core/services/user.service';
 
 @Component({
   selector: 'app-statistique',
@@ -19,9 +21,12 @@ export class StatistiqueComponent implements OnInit {
   beneficeMoisAvant: number = 0;
   rapportBeneficeMois: number = 0;
 
+  dataSource = new MatTableDataSource<any>([]);
+  displayedColumns: string[] = ['employe', 'tempsTravailMoyen'];
+
   // historiqueCaJournaliere: 
 
-  constructor(private prestationService: PrestationService){}
+  constructor(private prestationService: PrestationService, private userService: UserService){}
 
   ngOnInit(): void {
       this.getCaJour();
@@ -30,6 +35,18 @@ export class StatistiqueComponent implements OnInit {
       this.getCaMoisAvant();
       this.getBeneficeMois();
       this.getBeneficeMoisAvant();
+      this.getTempsTravailMoyenEmploye();
+  }
+
+  getTempsTravailMoyenEmploye() {
+    this.userService.getTempsTravailMoyen(true).subscribe({
+      next: (data: HttpResponse<any>) => {
+        this.dataSource = new MatTableDataSource<any>(data.body);
+      },
+      error: (err) => {
+
+      }
+    })
   }
 
   onCaJourChange(){
@@ -84,7 +101,7 @@ export class StatistiqueComponent implements OnInit {
 
   getCaMois() {
     const date = new Date();
-    this.prestationService.getChiffreAffaireMois(true, date.getFullYear(), date.getMonth()).subscribe({
+    this.prestationService.getChiffreAffaireMois(true, date.getFullYear(), date.getMonth() + 1).subscribe({
       next: (data: HttpResponse<any>) => {
         this.caMois = data.body.chiffreAffaire;
         this.onCaMoisChange();
@@ -97,8 +114,8 @@ export class StatistiqueComponent implements OnInit {
 
   getCaMoisAvant() {
     const date = new Date();
-    date.setMonth(date.getMonth() - 1);
-    this.prestationService.getChiffreAffaireMois(true, date.getFullYear(), date.getMonth()).subscribe({
+    date.setMonth(date.getMonth() - 2);
+    this.prestationService.getChiffreAffaireMois(true, date.getFullYear(), date.getMonth() + 1).subscribe({
       next: (data: HttpResponse<any>) => {
         this.caMoisAvant = data.body.chiffreAffaire;
         this.onCaMoisChange();
@@ -111,7 +128,7 @@ export class StatistiqueComponent implements OnInit {
 
   getBeneficeMois() {
     const date = new Date();
-    this.prestationService.getBenefice(true, date.getFullYear(), date.getMonth()).subscribe({
+    this.prestationService.getBenefice(true, date.getFullYear(), date.getMonth() + 1).subscribe({
       next: (data: HttpResponse<any>) => {
         this.caMois = data.body.benefice;
         this.onBeneficeMoisChange();
@@ -125,7 +142,7 @@ export class StatistiqueComponent implements OnInit {
   getBeneficeMoisAvant() {
     const date = new Date();
     date.setMonth(date.getMonth() - 1);
-    this.prestationService.getBenefice(true, date.getFullYear(), date.getMonth()).subscribe({
+    this.prestationService.getBenefice(true, date.getFullYear(), date.getMonth() + 1).subscribe({
       next: (data: HttpResponse<any>) => {
         this.caMoisAvant = data.body.benefice;
         this.onBeneficeMoisChange();

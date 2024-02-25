@@ -23,15 +23,15 @@
             <div class="col-12 col-md-6 text-end">
               <div class="row text-end">
                 <div class="col">
-                  <span *ngIf="rapportCaJour >= 0" >+</span>
-                  <span *ngIf="rapportCaJour < 0" >-</span>
+                  <span *ngIf="rapportCaJour >= 0">+</span>
+                  <span *ngIf="rapportCaJour < 0">-</span>
                   {{ rapportCaJour }} %
-                  <span *ngIf="rapportCaJour >= 0" >
+                  <span *ngIf="rapportCaJour >= 0">
                     <span class="icon material-symbols-outlined" style="color: green;">
                       trending_up
                     </span>
                   </span>
-                  <span *ngIf="rapportCaJour < 0" >
+                  <span *ngIf="rapportCaJour < 0">
                     <span class="icon material-symbols-outlined" style="color: red;">
                       trending_down
                     </span>
@@ -58,15 +58,15 @@
             </div>
             <div class="col-12 col-md-6 text-end">
               <div class="col">
-                <span *ngIf="rapportCaMois >= 0" >+</span>
-                <span *ngIf="rapportCaMois < 0" >-</span>
+                <span *ngIf="rapportCaMois >= 0">+</span>
+                <span *ngIf="rapportCaMois < 0">-</span>
                 {{ rapportCaMois }} %
-                <span *ngIf="rapportCaMois >= 0" >
+                <span *ngIf="rapportCaMois >= 0">
                   <span class="icon material-symbols-outlined" style="color: green;">
                     trending_up
                   </span>
                 </span>
-                <span *ngIf="rapportCaMois < 0" >
+                <span *ngIf="rapportCaMois < 0">
                   <span class="icon material-symbols-outlined" style="color: red;">
                     trending_down
                   </span>
@@ -93,32 +93,61 @@
             <div class="col-12 col-md-6 text-end">
               <div class="row text-end">
                 <div class="col">
-                  <span *ngIf="rapportBeneficeMois >= 0" >+</span>
-                  <span *ngIf="rapportBeneficeMois < 0" >-</span>
+                  <span *ngIf="rapportBeneficeMois >= 0">+</span>
+                  <span *ngIf="rapportBeneficeMois < 0">-</span>
                   {{ rapportBeneficeMois }} %
-                  <span *ngIf="rapportBeneficeMois >= 0" >
+                  <span *ngIf="rapportBeneficeMois >= 0">
                     <span class="icon material-symbols-outlined" style="color: green;">
                       trending_up
                     </span>
                   </span>
-                  <span *ngIf="rapportBeneficeMois < 0" >
+                  <span *ngIf="rapportBeneficeMois < 0">
                     <span class="icon material-symbols-outlined" style="color: red;">
                       trending_down
                     </span>
                   </span>
                 </div>
-              Par rapport mois dernier
+                Par rapport mois dernier
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <br class="my-2" />
+
+    <div class="row justify-content-center my-4">
+      <div class="col-12 col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h2>Temps de travail moyen des employés</h2>
+          </div>
+          <div class="card-body">
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+                <!-- Employe Column -->
+                <ng-container matColumnDef="employe">
+                  <th mat-header-cell *matHeaderCellDef> Employe </th>
+                  <td mat-cell *matCellDef="let element">{{ element.employe.nom }} {{ element.employe.prenom }}</td>
+                </ng-container>
+                <!-- Temps de travail moyen Column -->
+                <ng-container matColumnDef="tempsTravailMoyen">
+                  <th mat-header-cell *matHeaderCellDef> Temps de travail moyen </th>
+                  <td mat-cell *matCellDef="let element" class="text-end"> {{ element. tempsTravailMoyen}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-  </div>
-
-  <br class="my-2" />
-
-  <div class="row">
+    <!-- <div class="row">
 
     <div class="col-12 col-md-4 p-4">
       <table class="table">
@@ -160,10 +189,6 @@
     </div>
 
 
-  </div>
-
-  <div class="row">
+  </div> -->
 
   </div>
-
-</div>

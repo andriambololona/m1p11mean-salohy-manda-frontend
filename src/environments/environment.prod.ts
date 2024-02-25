@@ -17,6 +17,7 @@ export const environment = {
   register_uri:'/api/user/test/addUser',
   logout_uri: "/api/user/logout",
   login_uri: '/api/auth/signin',
+  getTempsTravailMoyen : '/api/user/tempsTravail',
   getAllPersonnel_uri:'/api/user/manager/allPersonnel',
   getAllersonnelEmploye_uri:'/api/user/client/allPersonnelEmploye',
   update_status:'/api/user/manager/update_status',
