@@ -27,8 +27,9 @@ export class AuthComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.user.email="salohy@gmail.com";
-    this.user.password="password";
+    //this.user.email="salohy@gmail.com";
+    this.user.password="Mdpprom13!";
+    this.user.email="andriamitantsoamanda@gmail.com"
   }
 
   Login(){

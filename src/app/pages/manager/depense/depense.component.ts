@@ -18,7 +18,7 @@ import { ApiResponse } from 'src/app/@core/entity/api-response';
 })
 export class DepenseComponent {
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['motif', 'montant','action'];
+  displayedColumns: string[] = ['motif', 'montant','date','action'];
   dataSource: MatTableDataSource<any>;
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial

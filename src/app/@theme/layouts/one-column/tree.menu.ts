@@ -65,7 +65,7 @@ export const TREE_DATA_MANAGER: FoodNode[] = [
     icon:'schedule',
     children: [{name: 'Personnels',link:'/pages/manager/personnel',icon:'manage_accounts'},
      {name: 'Services',link:'/pages/manager/service',icon:'shop'},
-     {name: 'Depenses',link:'/pages/manager/depense',icon:'shop'}
+     {name: 'Depenses',link:'/pages/manager/depense',icon:'payments'}
     ],
      
   },

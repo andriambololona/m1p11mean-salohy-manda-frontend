@@ -8,6 +8,8 @@ import { UserRequest } from 'src/app/@core/entity/request/userRequest';
 import { User } from 'src/app/@core/entity/user';
 import { ManagerService } from 'src/app/@core/services/manager.service';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
+import { ModalDetailsPersonnelComponent } from './modal-details-personnel/modal-details-personnel.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 @Component({
@@ -40,7 +42,7 @@ export class PersonnelComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private managerService: ManagerService, private messageModalService: MessageModalService) { }
+  constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
 
   reloadAllPersonnel(page: number, limit: number) {
     const _page = page + 1;
@@ -62,6 +64,18 @@ export class PersonnelComponent implements OnInit {
 
       }
     })
+  }
+
+  openModalDetailPersonnel(data:any){
+    const dialogRef = this.dialog.open(ModalDetailsPersonnelComponent, {
+
+      data: {personnel: data},
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
   }
   ngOnInit(): void {
     this.reloadAllPersonnel(this.pageIndex, this.pageSize);
