@@ -36,22 +36,22 @@ export class RegisterComponent implements OnInit{
   selectFile(event:any){
     this.userReq.image=event.target.files[0];
     console.log(this.userReq);
-    
+
   }
 
   register(){
     //this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
       //if(confirm){
         const formData:FormData=new FormData();
-        
+
         this.isSpinner=true;
-        
+
         this.userReq.nom=this.user.nom;
         this.userReq.prenom=this.user.prenom;
         this.userReq.email=this.user.email;
         this.userReq.password=this.user.password;
         this.userReq.passwordConfirmation=this.user.passwordConfirmation;
-       
+
         let map=new Map<string,string>();
         map.set("num1","0355555555");
         map.set("num2","03222222");
@@ -69,13 +69,13 @@ export class RegisterComponent implements OnInit{
         formData.append('user',JSON.stringify(obj));
         formData.append('image',this.userReq.image);
         //formData.append("file",this.selectedFile);
-        
-        
+
+
        if(this.user.password==this.user.passwordConfirmation){
         this.userService.createUser(true,formData).subscribe({
           next:(data)=>{
             this.isSpinner=false;
-            //this.dialogRef.close();
+            this.dialogRef.close();
           },
           error:(err)=>{
             console.log(err);
