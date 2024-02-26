@@ -1,7 +1,9 @@
 import { HttpResponse } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { ThemePalette } from '@angular/material/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ApiResponse } from 'src/app/@core/entity/api-response';
 import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
 import { RendezvousService } from 'src/app/@core/services/rendezvous.service';
@@ -13,11 +15,17 @@ import { RendezvousService } from 'src/app/@core/services/rendezvous.service';
 })
 export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
 
+  pageEvent: PageEvent;
   isLoading: boolean = false;
-  page: number = 1;
+  page: number = 0;
   limit: number = 10;
   displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire'];
   dataSource = new MatTableDataSource<RendezVous>([]);
+  length: number;//colonne total sans pagination
+  pageSize: number=10;//nombre row initial
+  pageIndex: number=0;//page
+  hidePageSize = false;
+  colorToogle: ThemePalette = 'accent';
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -35,18 +43,30 @@ export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
   }
 
   GetData(showErrorNotif: boolean, page: number, limit: number) {
-    this.rendezVousService.get(showErrorNotif, page, limit).subscribe({
-      next:(data:HttpResponse<any>)=>{
-        data.body.data.forEach((rendezVous: RendezVous) => {
+    const _page = page+1;
+    this.rendezVousService.get(showErrorNotif,_page, limit).subscribe({
+      next:(data:HttpResponse<ApiResponse<any>>)=>{
+       
           console.log(data.body.data);
-          this.dataSource = new MatTableDataSource<RendezVous>(data.body.data);
-        });
+          this.dataSource = new MatTableDataSource<any>(data.body.data);
+          this.length = data.body.paginator.dataCount; 
+          this.pageIndex = page;
+          this.pageSize = limit;
         this.isLoading = false;
       },error:(err)=>{
         this.isLoading = false;
       }
     });
   }
+
+  handlePageEvent(e: PageEvent) {
+    this.pageEvent = e;
+    this.length = e.length;
+    this.pageSize = e.pageSize;
+    this.pageIndex = e.pageIndex;
+    this.GetData(true,this.pageIndex, this.pageSize)
+  }
+
 
 }
 

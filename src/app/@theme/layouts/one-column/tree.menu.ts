@@ -24,12 +24,12 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
     icon:'refresh',
     children: [
       {
-        name: 'Green',
-        children: [{name: 'Broccoli',link:'/pages/manager'}, {name: 'Brussels sprouts',link:'/pages/manager'}],
+        name: 'Service',
+        link:'/pages/client/preference_service',icon:'assignment_add'
       },
       {
-        name: 'Orange',
-        children: [{name: 'Pumpkins'}, {name: 'Carrots'}],
+        name: 'Employe',
+        link:'/pages/client/preference_employe',icon:'history'
       },
     ],
   },
@@ -39,7 +39,7 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
   {
     name: 'Rendez-vous',
     icon:'schedule',
-    children: [{name: 'Listes',link:'/pages/client',icon:'assignment_add'}]
+    children: [{name: 'Listes',link:'/pages/employe/liste_rendez_vous',icon:'assignment_add'}]
   },
   {
     name: 'Gestion',

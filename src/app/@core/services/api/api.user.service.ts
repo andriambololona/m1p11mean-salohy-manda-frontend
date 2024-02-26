@@ -59,11 +59,10 @@ export class ApiUserService extends UserService {
 
   createUser(
     showErrorNotif: boolean,
-    user: UserRequest
+    user: FormData
   ): Observable<HttpResponse<any> | Observable<never>> {
-
-
-    return this.apiService.post<boolean>(environment.register_uri, user).pipe(
+    
+    return this.apiService.postMultipart<boolean>(environment.register_uri, user).pipe(
 
       map((x: HttpResponse<boolean>) => {
 

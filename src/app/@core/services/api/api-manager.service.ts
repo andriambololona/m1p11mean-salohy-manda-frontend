@@ -101,12 +101,12 @@ export class ApiManagerService extends ManagerService {
 
 }
 
-createService(showErrorNotif:boolean,serviceReq:ServiceRequest):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
-return this.apiService.post<ApiResponse<any>>(environment.create_service_uri, serviceReq).pipe(
+createService(showErrorNotif:boolean,serviceReq:FormData):Observable<HttpResponse<boolean>|Observable<never>>{
+return this.apiService.postMultipart<boolean>(environment.create_service_uri, serviceReq).pipe(
 
-  map((x: HttpResponse<ApiResponse<any>>) => {
+  map((x: HttpResponse<boolean>) => {
 
-    return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+    return this.handleResponse<boolean>(showErrorNotif, x);
   }),
   catchError((error) => {
     return this.catchError(showErrorNotif, error);

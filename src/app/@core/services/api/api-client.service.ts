@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { ClientService } from '../client.service';
 import { Observable } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { RendezVousRequest } from '../../entity/request/rendezVousRequest';
 import { ApiResponse } from '../../entity/api-response';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
+import { UserRequest } from '../../entity/request/userRequest';
 
 @Injectable()
 export class ApiClientService extends ClientService{
@@ -33,8 +34,8 @@ export class ApiClientService extends ClientService{
     return response;
   }
 
-  getAllPersonnelEmploye(showErrorNotif: boolean):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
-    return this.apiService.get<ApiResponse<any>>(environment.getAllersonnelEmploye_uri).pipe(
+  getAllPersonnelEmploye(showErrorNotif: boolean,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
+    return this.apiService.get<ApiResponse<any>>(environment.getAllersonnelEmploye_uri+"?page="+page+"&limit="+limit).pipe(
 
       map((x: HttpResponse<ApiResponse<any>>) => {
 
@@ -61,5 +62,16 @@ export class ApiClientService extends ClientService{
         return this.catchError(showErrorNotif, error);
       })
     );
+  }
+
+  addPreference(showErrorNotif: boolean,userRequest:any): Observable<HttpResponse<boolean> | Observable<never>> {
+    return this.apiService.patch<boolean>(environment.update_preference_uri,userRequest).pipe(
+      map((x:HttpResponse<boolean>)=>{
+        return this.handleResponse<boolean>(showErrorNotif,x);
+      }),
+      catchError((error)=>{
+        return this.catchError(showErrorNotif,error);
+      })
+    )
   }
 }

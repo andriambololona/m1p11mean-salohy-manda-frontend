@@ -1,5 +1,5 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
@@ -21,12 +21,12 @@ import { ModalUpdateServiceComponent } from './modal-update-service/modal-update
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss']
 })
-export class ServicesComponent implements OnInit{
+export class ServicesComponent implements OnInit,AfterViewInit{
   pageEvent: PageEvent;
   displayedColumns: string[] = ['nom', 'prix','action'];
   dataSource: MatTableDataSource<any>;
   length: number;//colonne total sans pagination
-  pageSize: number=5;//nombre row initial
+  pageSize: number=10;//nombre row initial
   pageIndex: number=0;//page
   pageSizeOptions = [5, 10, 25, 100];
   hidePageSize = false;
@@ -42,7 +42,8 @@ export class ServicesComponent implements OnInit{
  
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    if(this.dataSource!=undefined)
+      this.dataSource.paginator = this.paginator;
   }
 
   constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
@@ -165,9 +166,20 @@ export class ServicesComponent implements OnInit{
   registerService(){
     this.openDialogAjoutService().subscribe({
       next:(data:ServiceRequest)=>{
-        this.managerService.createService(true,data).subscribe({
+        const formData:FormData=new FormData();
+        formData.append("image",data.image);
+        let obj={
+          nom:data.nom,
+          prix:data.prix,
+          duree:data.duree,
+          commission:data.commission
+        }
+        formData.append("service",JSON.stringify(obj));
+        //formData.append("service",JSON.stringify(this.serviceReq));
+        console.log(formData.get("image"));
+        this.managerService.createService(true,formData).subscribe({
           next:(data)=>{
-            //console.log(data);
+            
             this.dialog.closeAll();
           },
           error:(err)=>{

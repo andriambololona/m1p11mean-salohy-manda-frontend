@@ -10,6 +10,7 @@ export class User{
   prenom:string;
   email:string;
   password:string;
+  passwordConfirmation:string;
   estVerifie:boolean;
   estActif:boolean;
   salt:string;

@@ -36,16 +36,17 @@ export class AuthInterceptor implements HttpInterceptor
     let { url, method, headers, body } = req;
     //return this.handleRequest(req, next, null);
      if (url.endsWith(environment.register_uri) && method === 'POST') {
-      req = req.clone({
+      /*req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         //body: body += '&client_id=' + environment.client_id
-      });
+      });*/
       console.log("interceptor ");
       return next.handle(req);
     }
+
     if (url.endsWith(environment.login_uri) && method === 'POST') {
       req = req.clone({
         setHeaders: {
@@ -69,7 +70,11 @@ export class AuthInterceptor implements HttpInterceptor
       console.log(req.headers);
 
       return next.handle(req);
-    } else {
+    }
+    if(req.url.endsWith(environment.create_service_uri)&& method==='POST'){
+      return this.handleRequest(req,next,this.tokenStorage.getToken());
+    }
+     else {
       console.log("interceptor2")
       req = req.clone({
         setHeaders: {
@@ -95,7 +100,7 @@ export class AuthInterceptor implements HttpInterceptor
       }
       if(error instanceof HttpErrorResponse && error.status === 403){
         console.log("403");
-        
+
         this.tokenStorage.signOut();
         setTimeout(()=>{
           this.router.navigate(['/']);
@@ -125,14 +130,14 @@ export class AuthInterceptor implements HttpInterceptor
       this.isRefreshing=true;
       let refreshToken:RefreshTokenRequest=new RefreshTokenRequest();
       refreshToken.refreshToken=this.tokenStorage.getRefreshToken();
-      
+
       return this.customAuthService.refreshToken(refreshToken).pipe(
         switchMap((data: any) => {
           console.log("switchMap2: ");
           //console.log(data);
           //console.log(data.body.accessToken);
           //console.log(data.body.refreshToken);
-          
+
           this.tokenStorage.saveToken(data.body.accessToken)
           this.tokenStorage.saveRefreshToken(data.body.refreshToken)
           //const JWT = `Bearer ${this.tokenStorage.getToken()}`;

@@ -147,7 +147,7 @@ export class FormulaireRendezVousComponent implements OnInit{
     var theDate = new Date(this.rendez_vous.date);
     var dataFormat=theDate.getFullYear()+"-"+theDate.getMonth()+"-"+theDate.getDay()+" "+theDate.getHours()+":"+theDate.getMinutes()+":"+theDate.getSeconds();
     //this.rendez_vous.date=new Date(dataFormat);
-    console.log(dataFormat);
+    console.log(this.rendez_vous.date);
 
 
     var rendezVousReq:RendezVousRequest=new RendezVousRequest();

@@ -23,6 +23,9 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PreferenceServiceComponent } from './preference/preference-service/preference-service.component';
+import { PreferenceEmployeComponent } from './preference/preference-employe/preference-employe.component';
+import { MatIconModule } from '@angular/material/icon';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -38,7 +41,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @NgModule({
   declarations: [
     FormulaireRendezVousComponent,
-    HistoriqueRendezVousComponent
+    HistoriqueRendezVousComponent,
+    PreferenceServiceComponent,
+    PreferenceEmployeComponent
   ],
   imports: [
       CommonModule,
@@ -58,7 +63,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
       DragDropModule,
       MatTableModule,
       MatPaginatorModule,
-      MatProgressSpinnerModule
+      MatProgressSpinnerModule,
+      MatIconModule,
+
       //FormulaireRendezVousModule,
   ],
   providers: [
