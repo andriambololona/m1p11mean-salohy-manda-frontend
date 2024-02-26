@@ -1,29 +1,24 @@
 import { HttpResponse } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ApiResponse } from 'src/app/@core/entity/api-response';
-import { UserRequest } from 'src/app/@core/entity/request/userRequest';
-import { Service } from 'src/app/@core/entity/service';
-import { User } from 'src/app/@core/entity/user';
+import { Depense } from 'src/app/@core/entity/depense';
+import { DepenseRequest } from 'src/app/@core/entity/request/depenseRequest';
 import { ManagerService } from 'src/app/@core/services/manager.service';
-import { MessageModalService } from 'src/app/@core/services/message-modal.service';
-import { ModalAjoutServiceComponent } from './modal-ajout-service/modal-ajout-service.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ModalAjoutDepenseComponent } from './modal-ajout-depense/modal-ajout-depense.component';
 import { Observable } from 'rxjs';
-import { ServiceRequest } from 'src/app/@core/entity/request/serviceRequest';
-import { ModalDetailServiceComponent } from './modal-detail-service/modal-detail-service.component';
-import { ModalUpdateServiceComponent } from './modal-update-service/modal-update-service.component';
+import { ApiResponse } from 'src/app/@core/entity/api-response';
 
 @Component({
-  selector: 'app-services',
-  templateUrl: './services.component.html',
-  styleUrls: ['./services.component.scss']
+  selector: 'app-depense',
+  templateUrl: './depense.component.html',
+  styleUrls: ['./depense.component.scss']
 })
-export class ServicesComponent implements OnInit,AfterViewInit{
+export class DepenseComponent {
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['nom', 'prix','action'];
+  displayedColumns: string[] = ['motif', 'montant','action'];
   dataSource: MatTableDataSource<any>;
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
@@ -46,16 +41,16 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
+  constructor(private managerService: ManagerService,public dialog: MatDialog) { }
 
-  reloadAllService(page: number, limit: number) {
+  reloadAllDepense(page: number, limit: number) {
     const _page = page + 1;
-    this.managerService.getAllService(true, _page, limit).subscribe({
-      next: (data: HttpResponse<ApiResponse<Service[]>>) => {
+    this.managerService.getAllDepense(true, _page, limit).subscribe({
+      next: (data: HttpResponse<ApiResponse<any>>) => {
         console.log(data.body);
         
         this.dataSource = new MatTableDataSource<any>(data.body.data);
-        this.length = data.body.totalItems;
+        this.length = data.body.paginator.dataCount;
         this.pageIndex = page;
         this.pageSize = limit;
         //this.isCheckedToogle=data.body.data;
@@ -71,7 +66,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
     })
   }
   ngOnInit(): void {
-    this.reloadAllService(this.pageIndex, this.pageSize);
+    this.reloadAllDepense(this.pageIndex, this.pageSize);
 
   }
 
@@ -80,7 +75,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.reloadAllService(this.pageIndex, this.pageSize)
+    this.reloadAllDepense(this.pageIndex, this.pageSize)
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
@@ -88,8 +83,8 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
-  openDialogAjoutService(): Observable<ServiceRequest> {
-    const dialogRef = this.dialog.open(ModalAjoutServiceComponent, {
+  openDialogAjoutDepense(): Observable<DepenseRequest> {
+    const dialogRef = this.dialog.open(ModalAjoutDepenseComponent, {
 
       //data: {name: this.name, animal: this.animal},
     });
@@ -99,12 +94,12 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       //this.animal = result;
     });
     return  new Observable((observer)=>{
-      dialogRef.componentInstance.emitService.subscribe((result)=>{
+      dialogRef.componentInstance.emitDepense.subscribe((result)=>{
         observer.next(result);
       })
     })
   }
-  openDialogDetailsService(service:object){
+  /*openDialogDetailsService(service:object){
     const dialogRef = this.dialog.open(ModalDetailServiceComponent, {
       width: '800px',
       //data: {id:id,nom:"salohy"},
@@ -117,9 +112,9 @@ export class ServicesComponent implements OnInit,AfterViewInit{
     
     //console.log(service);
     
-  }
+  }*/
 
-  openDialogUpdateService(service:object): Observable<ServiceRequest>{
+  /*openDialogUpdateDepense(service:object): Observable<ServiceRequest>{
     //console.log(service);
     
      const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
@@ -140,8 +135,8 @@ export class ServicesComponent implements OnInit,AfterViewInit{
     
   }
 
-  updateService(service:object){
-    this.openDialogUpdateService(service).subscribe({
+  updateDepense(service:object){
+    this.openDialogUpdateDepense(service).subscribe({
       next:(data:ServiceRequest)=>{
         this.managerService.updateService(true,data).subscribe({
           next:(data)=>{
@@ -161,26 +156,19 @@ export class ServicesComponent implements OnInit,AfterViewInit{
 
       }
     })
-  }
+  }*/
 
 
-  registerService(){
-    this.openDialogAjoutService().subscribe({
-      next:(data:ServiceRequest)=>{
-        const formData:FormData=new FormData();
-        formData.append("image",data.image);
-        let obj={
-          nom:data.nom,
-          prix:data.prix,
-          duree:data.duree,
-          commission:data.commission
-        }
-        formData.append("service",JSON.stringify(obj));
-        //formData.append("service",JSON.stringify(this.serviceReq));
-        console.log(formData.get("image"));
-        this.managerService.createService(true,formData).subscribe({
+  registerDepense(){
+    this.openDialogAjoutDepense().subscribe({
+      next:(data:DepenseRequest)=>{
+       console.log(data);
+       
+        
+        
+        this.managerService.addDepense(true,data).subscribe({
           next:(data)=>{
-            
+            this.reloadAllDepense(this.pageIndex, this.pageSize);
             this.dialog.closeAll();
           },
           error:(err)=>{
@@ -188,7 +176,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
             
           },
           complete: () => {
-            this.reloadAllService(this.pageIndex, this.pageSize);
+            //this.reloadAllService(this.pageIndex, this.pageSize);
           },
         })
       },
@@ -198,6 +186,4 @@ export class ServicesComponent implements OnInit,AfterViewInit{
     })
     
   }
-  
 }
-

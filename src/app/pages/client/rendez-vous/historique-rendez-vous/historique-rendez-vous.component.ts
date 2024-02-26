@@ -47,7 +47,7 @@ export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
     this.rendezVousService.get(showErrorNotif,_page, limit).subscribe({
       next:(data:HttpResponse<ApiResponse<any>>)=>{
        
-          console.log(data.body.data);
+          console.log(data.body);
           this.dataSource = new MatTableDataSource<any>(data.body.data);
           this.length = data.body.paginator.dataCount; 
           this.pageIndex = page;

@@ -18,6 +18,8 @@ import { UserRequest } from '../../entity/request/userRequest';
 import { ManagerService } from '../manager.service';
 import { User } from '../../entity/user';
 import { ServiceRequest } from '../../entity/request/serviceRequest';
+import { DepenseRequest } from '../../entity/request/depenseRequest';
+
 
 
 
@@ -140,6 +142,35 @@ getAllServiceNotPaginate(showErrorNotif: boolean): Observable<HttpResponse<ApiRe
   );
 }
 
+
+addDepense(showErrorNotif: boolean, depenseRequest: DepenseRequest): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+  return this.apiService.post<ApiResponse<any>>(environment.addDepense_uri, depenseRequest).pipe(
+
+    map((x: HttpResponse<ApiResponse<any>> ) => {
+  
+      return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+    }),
+    catchError((error) => {
+      return this.catchError(showErrorNotif, error);
+    })
+  );
+}
+
+getAllDepense(showErrorNotif: boolean): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+  return this.apiService.get<ApiResponse<any>>(environment.getAllDepense_uri).pipe(
+    map((x: HttpResponse<ApiResponse<any>>) => {
+
+
+      return this.handleResponse<ApiResponse<any>>(
+        showErrorNotif,
+        x
+      );
+    }),
+    catchError((error) => {
+      return this.catchError(showErrorNotif, error);
+    })
+  );
+}
 /*deleteService(showErrorNotif: boolean, serviceReq: ServiceRequest): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
   return this.apiService.<ApiResponse<any>>(environment.update_service_uri,serviceReq).pipe(
     map((x:HttpResponse<ApiResponse<any>>)=>{

@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { RendezVousRequest } from '../entity/request/rendezVousRequest';
 import { Observable } from 'rxjs';
 import { HttpResponse } from '@angular/common/http';
-import { ApiResponse } from './api/api-response';
+
 import { UserRequest } from '../entity/request/userRequest';
+import { ApiResponse } from '../entity/api-response';
 
 @Injectable({
   providedIn: 'root'

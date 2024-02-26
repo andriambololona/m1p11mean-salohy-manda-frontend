@@ -1,0 +1,44 @@
+<mat-dialog-content>
+    <div class="row">
+      <div class="col-11">
+        <h2><mat-icon>add</mat-icon> Ajout de depense</h2>
+      </div>
+      <div class="col-1"> <button mat-icon-button class="btn_close"
+          (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
+    </div>
+    <form class="example-form" #myform="ngForm" novalidate>
+    
+          <mat-form-field class="example-full-width">
+            <mat-label>Motif</mat-label>
+            <input matInput #motif="ngModel" [(ngModel)]="depense.motif"  id="motif"  name="motif" minlength="1"
+              required>
+              <div *ngIf="motif.invalid && (motif.dirty || motif.touched)" class="error">
+                <div *ngIf="motif.errors?.['required']">
+                  <i class='bx bx-error-circle'></i> Champ Obligatoire.
+                </div>
+              </div>
+          </mat-form-field>
+          
+          <mat-form-field class="example-full-width">
+            <span matTextPrefix><mat-icon>payments</mat-icon> &nbsp;</span>     
+            <mat-label>Montant</mat-label>
+            <input matInput type="number" class="example-right-align" #montant="ngModel" [(ngModel)]="depense.montant"  id="montant"  name="montant" minlength="1"  placeholder="0" required>
+            <span matTextSuffix>.00</span>
+            <div *ngIf="montant.invalid && (montant.dirty || montant.touched)" class="error">
+                <div *ngIf="montant.errors?.['required']">
+                  <i class='bx bx-error-circle'></i> Champ Obligatoire.
+                </div>
+              </div>
+          </mat-form-field>
+         
+          
+    
+      <mat-dialog-actions>
+        <button mat-fab extended id="btn_valider" [disabled]="!myform.form.valid" (click)="registerDepense()"
+          ><mat-icon>done</mat-icon> Valider</button>
+         
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+  
+

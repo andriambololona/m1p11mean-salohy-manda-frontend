@@ -1,6 +1,6 @@
-export class Depense
+export class DepenseRequest
 {
-  _id:string;
+ 
   motif:string;
   montant:number;
 }

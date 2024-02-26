@@ -12,11 +12,12 @@ import { map, catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { environment } from 'src/environments/environment';
 import { RendezvousService } from '../rendezvous.service';
-import { ApiResponse } from './api-response';
+
 
 
 import { RendezVousRequest } from '../../entity/request/rendezVousRequest';
 import { Rendezvous } from '../../entity/rendezvous';
+import { ApiResponse } from '../../entity/api-response';
 
 @Injectable()
 export class ApiRendezvousService extends RendezvousService {
