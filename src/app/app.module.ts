@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,10 +17,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CoreModule } from './@core/core.module';
 import { ApiUserService } from './@core/services/api/api.user.service';
 import { UserService } from './@core/services/user.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { ClientModule } from './pages/client/client.module';
 import { CustomAuthInterceptor } from './interceptors/custom_auth.interceptor';
 import { CustomAuthService } from './@core/services/custom-auth-service';
+import localeFr from '@angular/common/locales/fr';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -45,7 +47,11 @@ import { CustomAuthService } from './@core/services/custom-auth-service';
     //PagesModule,
     ReactiveFormsModule,
   ],
-  providers: [{provide:UserService,useClass:ApiUserService},CustomAuthService],
+  providers: [
+    {provide:UserService,useClass:ApiUserService},
+    CustomAuthService,
+    { provide: LOCALE_ID, useValue: 'fr' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

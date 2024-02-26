@@ -21,6 +21,7 @@ export const environment = {
   refresh_token_uri:'/api/auth/refreshtoken',
   logout_uri: "/api/user/logout",
   login_uri: '/api/auth/signin',
+  getTempsTravailMoyen : '/api/user/tempsTravail',
   getAllPersonnel_uri:'/api/user/manager/allPersonnel',
   getAllersonnelEmploye_uri:'/api/user/client/allPersonnelEmploye',
   update_status:'/api/user/manager/update_status',
@@ -39,4 +40,10 @@ export const environment = {
   updateRendezVous: "/api/rendezVous/",
   createPrestationFromRendezVous: "/api/rendezVous/create-prestation",
   /* ----------- */
+  /* Prestation */
+  chiffreAffaireJour_uri: "/api/prestation/chiffre_affaire",
+  chiffreAffaireMois_uri: "/api/prestation/chiffre_affaire",
+  benefice_uri: "/api/prestation/benefice",
+  /* ----------- */
+
 };

@@ -20,6 +20,10 @@ import { ModalAjoutServiceComponent } from './services/modal-ajout-service/modal
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalDetailServiceComponent } from './services/modal-detail-service/modal-detail-service.component';
 import { ModalUpdateServiceComponent } from './services/modal-update-service/modal-update-service.component';
+import { StatistiqueComponent } from './statistique/statistique.component';
+import { MatCardModule } from '@angular/material/card';
+import { PrestationService } from 'src/app/@core/services/prestation.service';
+import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.service';
 
 
 
@@ -32,6 +36,7 @@ import { ModalUpdateServiceComponent } from './services/modal-update-service/mod
     ModalAjoutServiceComponent,
     ModalDetailServiceComponent,
     ModalUpdateServiceComponent,
+    StatistiqueComponent,
    
 
   ],
@@ -49,8 +54,12 @@ import { ModalUpdateServiceComponent } from './services/modal-update-service/mod
     MatInputModule,
     MatSelectModule,
     MatDialogModule,
+    MatCardModule,
    
   ],
-  providers:[{provide:CustomAuthService}]
+  providers:[
+    {provide:CustomAuthService},
+    {provide: PrestationService, useClass: ApiPrestationService}
+  ]
 })
 export class ManagerModule { }
