@@ -5,7 +5,6 @@ import { ClientRoutingModule } from './client-routing.module';
 import { FormulaireRendezVousComponent } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous.component';
 import { HistoriqueRendezVousComponent } from './rendez-vous/historique-rendez-vous/historique-rendez-vous.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { NGX_MAT_DATE_FORMATS, NgxMatDateFormats, NgxMatDatetimePickerModule, NgxMatNativeDateModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
@@ -51,9 +50,9 @@ import { MatIconModule } from '@angular/material/icon';
       HttpClientModule,
       MatDatepickerModule,
       MatInputModule,
-      NgxMatDatetimePickerModule,
+      /*NgxMatDatetimePickerModule,
       NgxMatNativeDateModule,
-      NgxMatTimepickerModule,
+      NgxMatTimepickerModule,*/
       FormsModule,
       ReactiveFormsModule,
       MatButtonModule,
