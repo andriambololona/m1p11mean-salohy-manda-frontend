@@ -14,15 +14,27 @@ export class ApiService {
         'Access-Control-Allow-Origin': '*'
     })
 };
+
+
    headerss= new HttpHeaders()
   .set('Access-Control-Allow-Origin', '*');
 
   constructor(private http: HttpClient) { }
 
   private formatErrors(error: any) {
-    console.log(error);
+    console.log(error.message);
 
     return throwError(() => error.error);
+  }
+
+  patch<T>(path:string,body:Object={}, params: HttpParams = new HttpParams()):Observable<HttpResponse<T>|Observable<never>>{
+    /*const httpOptions = {
+      headers: new HttpHeaders({'Content-Type': 'application/json-patch+json'}),
+      observe: 'response' as const,
+      responseType: 'text' as const,
+    }*/
+    return this.http.patch<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response',params})
+    .pipe(catchError(this.formatErrors));
   }
 
   post<T>(path: string, body: Object = {}): Observable<HttpResponse<T> | Observable<never>> {
