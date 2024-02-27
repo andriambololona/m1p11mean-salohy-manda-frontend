@@ -44,8 +44,9 @@ export class AccueilComponent implements OnInit{
       }
     })
   }
-
-  detailsService(){
+ 
+  detailsService(id_service:string){
+    console.log(id_service);
 
   }
 

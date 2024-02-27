@@ -13,9 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccueilComponent } from './accueil.component';
+import { ModalDescriptionServiceComponent } from './modal-description-service/modal-description-service.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ModalDescriptionServiceComponent
+  ],
   imports: [
     CommonModule,
     AccueilRoutingModule,
