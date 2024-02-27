@@ -48,7 +48,28 @@
             <!-- prenom Column -->
             <ng-container matColumnDef="prix">
               <th mat-header-cell *matHeaderCellDef> Prix(Ariary) </th>
-              <td mat-cell *matCellDef="let element" class="text-end"> {{element.prix | currency: 'Ar' }} </td>
+              <td mat-cell *matCellDef="let element" class="text-end"> 
+                <span *ngIf="element.estEnPromotion == true" >
+                  <span class="text-decoration-line-through text-danger px-2">{{ element.prix | currency: 'Ar' }}</span>
+                  <span>{{ element.prixPromotion | currency: 'Ar' }}</span>
+                </span>
+                <span *ngIf="element.estEnPromotion == false" >
+                  {{element.prix | currency: 'Ar' }} 
+                </span>
+              </td>
+            </ng-container>
+            
+            <!-- Promotion Column -->
+            <ng-container matColumnDef="promotion">
+              <th mat-header-cell *matHeaderCellDef> Promotion </th>
+              <td mat-cell *matCellDef="let element" class="text-end">
+                <span *ngIf="element.estEnPromotion == true" >
+                  <span>{{ element.promotionActuelle.dateDebut | date: 'd MMM yyyy' }} - {{ element.promotionActuelle.dateFin | date: 'd MMM yyyy' }}</span>
+                </span>
+                <span *ngIf="element.estEnPromotion == false" >
+                  -
+                </span>
+              </td>
             </ng-container>
 
             <ng-container matColumnDef="action">

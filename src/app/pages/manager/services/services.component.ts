@@ -23,7 +23,7 @@ import { ModalUpdateServiceComponent } from './modal-update-service/modal-update
 })
 export class ServicesComponent implements OnInit,AfterViewInit{
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['nom', 'prix','action'];
+  displayedColumns: string[] = ['nom', 'prix', 'promotion','action'];
   dataSource: MatTableDataSource<any>;
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
@@ -54,6 +54,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       next: (data: HttpResponse<ApiResponse<Service[]>>) => {
 
         this.dataSource = new MatTableDataSource<any>(data.body.data);
+        console.log(data.body.data);
         this.length = data.body.totalItems;
         this.pageIndex = page;
         this.pageSize = limit;
