@@ -81,7 +81,9 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
-
+          <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+          </div>
           <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
             [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]"
             [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">

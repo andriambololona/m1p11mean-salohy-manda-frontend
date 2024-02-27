@@ -47,8 +47,8 @@ export class ApiRendezvousService extends RendezvousService {
   }
 
 
-  get(showErrorNotif : boolean, page : number, limit : number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
-    return this.apiService.get<ApiResponse<any>>(environment.getRendezVous + `?page=${page}&limit=${limit}`).pipe(
+  get(showErrorNotif : boolean, page : number, limit : number,q:string=""):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
+    return this.apiService.get<ApiResponse<any>>(environment.getRendezVous + `?page=${page}&limit=${limit}&q=${q}`).pipe(
       map((x:HttpResponse<ApiResponse<any>>)=>{
         return this.handleResponse<any>(showErrorNotif,x)
       }),

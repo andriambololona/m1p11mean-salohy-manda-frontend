@@ -31,10 +31,11 @@ export class DepenseComponent {
   colorToogle: ThemePalette = 'accent';
   checkedToogle = false;
   disabledToogle = false;
+  isLoading:boolean=true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
- 
+
 
   ngAfterViewInit() {
     if(this.dataSource!=undefined)
@@ -48,11 +49,12 @@ export class DepenseComponent {
     this.managerService.getAllDepense(true, _page, limit).subscribe({
       next: (data: HttpResponse<ApiResponse<any>>) => {
         console.log(data.body);
-        
+
         this.dataSource = new MatTableDataSource<any>(data.body.data);
         this.length = data.body.paginator.dataCount;
         this.pageIndex = page;
         this.pageSize = limit;
+        this.isLoading=false;
         //this.isCheckedToogle=data.body.data;
         /*data.body.data.forEach(element => {
           this.user.estActif = element.estActif;
@@ -88,7 +90,7 @@ export class DepenseComponent {
 
       //data: {name: this.name, animal: this.animal},
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
@@ -104,35 +106,35 @@ export class DepenseComponent {
       width: '800px',
       //data: {id:id,nom:"salohy"},
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-    
+
     //console.log(service);
-    
+
   }*/
 
   /*openDialogUpdateDepense(service:object): Observable<ServiceRequest>{
     //console.log(service);
-    
+
      const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
       width: '800px',
       data: {service:service},
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-    
+
     return  new Observable((observer)=>{
       dialogRef.componentInstance.emitService.subscribe((result)=>{
         observer.next(result);
       })
     })
-    
+
   }
 
   updateDepense(service:object){
@@ -145,7 +147,7 @@ export class DepenseComponent {
           },
           error:(err)=>{
             console.error(err);
-               
+
           },
           complete: () => {
             this.reloadAllService(this.pageIndex, this.pageSize);
@@ -163,9 +165,9 @@ export class DepenseComponent {
     this.openDialogAjoutDepense().subscribe({
       next:(data:DepenseRequest)=>{
        console.log(data);
-       
-        
-        
+
+
+
         this.managerService.addDepense(true,data).subscribe({
           next:(data)=>{
             this.reloadAllDepense(this.pageIndex, this.pageSize);
@@ -173,7 +175,7 @@ export class DepenseComponent {
           },
           error:(err)=>{
             console.error(err);
-            
+
           },
           complete: () => {
             //this.reloadAllService(this.pageIndex, this.pageSize);
@@ -184,6 +186,6 @@ export class DepenseComponent {
 
       }
     })
-    
+
   }
 }

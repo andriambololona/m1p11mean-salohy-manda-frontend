@@ -7,6 +7,6 @@ import { ApiResponse } from './api/api-response';
 
 @Injectable()
 export abstract class RendezvousService {
-  abstract get(showErrorNotif : boolean, page : number, limit : number) :Observable<HttpResponse<ApiResponse<any>>|Observable<never>>;
- 
+  abstract get(showErrorNotif : boolean, page : number, limit : number,q:string) :Observable<HttpResponse<ApiResponse<any>>|Observable<never>>;
+
 }

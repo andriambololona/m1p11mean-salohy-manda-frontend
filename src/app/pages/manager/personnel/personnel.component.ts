@@ -34,6 +34,7 @@ export class PersonnelComponent implements OnInit {
   colorToogle: ThemePalette = 'accent';
   checkedToogle = false;
   disabledToogle = false;
+  isLoading:boolean=true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -58,6 +59,7 @@ export class PersonnelComponent implements OnInit {
           this.user.estActif = element.estActif;
         });*/
         //console.log(data.body.data);
+        this.isLoading=false;
 
       },
       error: (err) => {
@@ -71,7 +73,7 @@ export class PersonnelComponent implements OnInit {
 
       data: {personnel: data},
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
@@ -85,10 +87,10 @@ export class PersonnelComponent implements OnInit {
   updateStatus(event) {
     //console.log(event);
     console.log(event.source);
-    
+
     this.messageModalService.confirm("Confirmation", "Etes-vous sûr de vouloir changer de status?").then(confirm => {
       if (confirm) {
-       
+
         let user = new UserRequest();
         user._id = event.source.id;
         this.managerService.updateStatusUser(true, user, event.checked).subscribe({

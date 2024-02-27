@@ -36,10 +36,11 @@ export class ServicesComponent implements OnInit,AfterViewInit{
   colorToogle: ThemePalette = 'accent';
   checkedToogle = false;
   disabledToogle = false;
+  isLoading:boolean=true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
- 
+
 
   ngAfterViewInit() {
     if(this.dataSource!=undefined)
@@ -53,11 +54,12 @@ export class ServicesComponent implements OnInit,AfterViewInit{
     this.managerService.getAllService(true, _page, limit).subscribe({
       next: (data: HttpResponse<ApiResponse<Service[]>>) => {
         console.log(data.body);
-        
+
         this.dataSource = new MatTableDataSource<any>(data.body.data);
         this.length = data.body.totalItems;
         this.pageIndex = page;
         this.pageSize = limit;
+        this.isLoading=false;
         //this.isCheckedToogle=data.body.data;
         /*data.body.data.forEach(element => {
           this.user.estActif = element.estActif;
@@ -93,7 +95,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
 
       //data: {name: this.name, animal: this.animal},
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
@@ -109,35 +111,35 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       width: '800px',
       //data: {id:id,nom:"salohy"},
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-    
+
     //console.log(service);
-    
+
   }
 
   openDialogUpdateService(service:object): Observable<ServiceRequest>{
     //console.log(service);
-    
+
      const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
       width: '800px',
       data: {service:service},
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-    
+
     return  new Observable((observer)=>{
       dialogRef.componentInstance.emitService.subscribe((result)=>{
         observer.next(result);
       })
     })
-    
+
   }
 
   updateService(service:object){
@@ -150,7 +152,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
           },
           error:(err)=>{
             console.error(err);
-               
+
           },
           complete: () => {
             this.reloadAllService(this.pageIndex, this.pageSize);
@@ -180,12 +182,12 @@ export class ServicesComponent implements OnInit,AfterViewInit{
         console.log(formData.get("image"));
         this.managerService.createService(true,formData).subscribe({
           next:(data)=>{
-            
+
             this.dialog.closeAll();
           },
           error:(err)=>{
             console.error(err);
-            
+
           },
           complete: () => {
             this.reloadAllService(this.pageIndex, this.pageSize);
@@ -196,8 +198,8 @@ export class ServicesComponent implements OnInit,AfterViewInit{
 
       }
     })
-    
+
   }
-  
+
 }
 

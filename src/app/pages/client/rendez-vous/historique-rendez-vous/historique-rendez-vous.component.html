@@ -1,5 +1,22 @@
 <div class="container">
-  
+  <div class="card text-center" id="card-search">
+    <div class="card-body" id="recherche">
+      <div class="example-container">
+        <mat-form-field >
+          <mat-label>(gestionnaire,service)</mat-label>
+          <input matInput #input name="recherche" id="recherche" [(ngModel)]="filtre_recherche">
+        </mat-form-field>
+
+
+
+          <button mat-fab extended color="accent"  (click)="filter()">
+                  <mat-icon>search</mat-icon>
+                  Rechercher
+          </button>
+      </div>
+
+
+  </div>
   <div class="card text-center">
     <div class="card-header">
       <h1 class="title">Liste de vos rendez-vous à venir</h1>

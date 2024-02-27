@@ -28,7 +28,7 @@ export class AuthComponent implements OnInit {
   }
   ngOnInit() {
     //this.user.email="salohy@gmail.com";
-    this.user.password="Mdpprom13!";
+    this.user.password="MdpProm13!";
     this.user.email="andriamitantsoamanda@gmail.com"
   }
 
@@ -44,7 +44,7 @@ export class AuthComponent implements OnInit {
         console.log(data);
         this.tokenStorageService.saveRole(data.body.roles);
         this.tokenStorageService.saveId(data.body.id);
-        this.tokenStorageService.saveEmail(data.body.email);
+        this.tokenStorageService.saveEmail(data.body.data.email);
         this.tokenStorageService.saveToken(data.body.accessToken);
         this.tokenStorageService.saveRefreshToken(data.body.refreshToken)
         this.authUser.emit(data);
