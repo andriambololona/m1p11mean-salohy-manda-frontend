@@ -86,10 +86,17 @@
                         </div>
 
                         <div class="example-button-container">
+                          <button mat-mini-fab aria-label="Example icon button with a menu icon"
+                            matTooltip="Promotion" (click)="addPromotion(element)">
+                            <mat-icon>price_change</mat-icon>
+                          </button>
+                        </div>
+
+                        <div class="example-button-container">
                           <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
                             matTooltip="Détails" (click)="openDialogDetailsService(element)">
 
-                            <mat-icon>details</mat-icon>
+                            <mat-icon>live_help</mat-icon>
                           </button>
                         </div>
 

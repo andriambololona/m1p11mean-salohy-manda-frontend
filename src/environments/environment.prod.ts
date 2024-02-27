@@ -37,4 +37,7 @@ export const environment = {
   updateRendezVous: "/api/rendezVous/",
   createPrestationFromRendezVous: "/api/rendezVous/create-prestation",
   /* ----------- */
+  /* Service */
+  add_promotion_uri: "/api/service/promotion",
+  /* ----------- */
 };

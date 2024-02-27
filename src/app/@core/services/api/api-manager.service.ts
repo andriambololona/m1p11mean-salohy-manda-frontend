@@ -18,6 +18,7 @@ import { UserRequest } from '../../entity/request/userRequest';
 import { ManagerService } from '../manager.service';
 import { User } from '../../entity/user';
 import { ServiceRequest } from '../../entity/request/serviceRequest';
+import { PromotionServiceRequest } from '../../entity/request/promotionServiceRequest';
 
 
 
@@ -46,6 +47,17 @@ export class ApiManagerService extends ManagerService {
       throw new Error(response.body.toString());
     }
     return response;
+  }
+
+  addPromotion(showErrorNotif: boolean, promotionServiceRquest: PromotionServiceRequest): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+    return this.apiService.post<ApiResponse<any>>(environment.add_promotion_uri, promotionServiceRquest).pipe(
+      map((x:HttpResponse<ApiResponse<any>>)=>{
+        return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+      }),
+      catchError((error) => {
+        return this.catchError(showErrorNotif, error);
+      })
+    );
   }
 
   getAllPersonnel(showErrorNotif: boolean,page:number,limit:number): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {

@@ -24,6 +24,7 @@ import { StatistiqueComponent } from './statistique/statistique.component';
 import { MatCardModule } from '@angular/material/card';
 import { PrestationService } from 'src/app/@core/services/prestation.service';
 import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.service';
+import { ModalAjoutPromotionComponent } from './services/modal-ajout-promotion/modal-ajout-promotion.component';
 
 
 
@@ -37,6 +38,7 @@ import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.
     ModalDetailServiceComponent,
     ModalUpdateServiceComponent,
     StatistiqueComponent,
+    ModalAjoutPromotionComponent,
    
 
   ],
