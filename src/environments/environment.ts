@@ -44,6 +44,8 @@ export const environment = {
   chiffreAffaireJour_uri: "/api/prestation/chiffre_affaire",
   chiffreAffaireMois_uri: "/api/prestation/chiffre_affaire",
   benefice_uri: "/api/prestation/benefice",
+  paiement_uri:"/api/prestation/paiement",
+  finAllPrestation_uri:"/api/prestation",
   /* ----------- */
   /* Depense */
   addDepense_uri:"/api/depense",

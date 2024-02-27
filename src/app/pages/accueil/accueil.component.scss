@@ -29,9 +29,19 @@ mat-grid-list
 .nos_service{
   text-align: center;
   font-family: Georgia;
+  text-align: center;
+  color:#c69294 ;
+  text-decoration: underline;
 }
 
 mat-paginator
 {
   margin-bottom: 300px;
+  
+}
+strong{
+  text-align: center;
+  color:#c69294 ;
+  font-family:cursive;
+  font-size: 15px;
 }

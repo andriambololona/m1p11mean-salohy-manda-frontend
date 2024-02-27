@@ -12,6 +12,7 @@ import { map, catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { environment } from 'src/environments/environment';
 import { PrestationService } from '../prestation.service';
+import { ApiResponse } from '../../entity/api-response';
 
 @Injectable()
 export class ApiPrestationService extends PrestationService {
@@ -73,6 +74,41 @@ export class ApiPrestationService extends PrestationService {
         return this.catchError(showErrorNotif,error);
       })
     );
+  }
+
+  paiement(showErrorNotif: boolean, body: any): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+      return this.apiService.post<ApiResponse<any>>(environment.paiement_uri,body).pipe(
+        map((x:HttpResponse<ApiResponse<any>>)=>{
+          return this.handleResponse<any>(showErrorNotif,x);
+      }),
+      catchError((error)=>{
+        return this.catchError(showErrorNotif,error);
+      })
+      );
+  }
+
+  getAllPrestation(showErrorNotif: boolean, page: number, limit: number, dateDebut?: string, dateFin?: string): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+    if(dateDebut!=null && dateFin!=null){
+      return this.apiService.get<ApiResponse<any>>(environment.finAllPrestation_uri + `?page=${page}&limit=${limit}&dateDebut=${dateDebut}&dateFin=${dateFin}`).pipe(
+        map((x:HttpResponse<ApiResponse<any>>)=>{
+          return this.handleResponse<any>(showErrorNotif,x)
+        }),
+        catchError((error)=>{
+          return this.catchError(showErrorNotif,error);
+        })
+      );
+    }
+    else{
+      return this.apiService.get<ApiResponse<any>>(environment.finAllPrestation_uri + `?page=${page}&limit=${limit}`).pipe(
+        map((x:HttpResponse<ApiResponse<any>>)=>{
+          return this.handleResponse<any>(showErrorNotif,x)
+        }),
+        catchError((error)=>{
+          return this.catchError(showErrorNotif,error);
+        })
+      );
+    }
+    
   }
 
 }

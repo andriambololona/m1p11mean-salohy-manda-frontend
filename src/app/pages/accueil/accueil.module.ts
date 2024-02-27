@@ -14,6 +14,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccueilComponent } from './accueil.component';
 import { ModalDescriptionServiceComponent } from './modal-description-service/modal-description-service.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -23,8 +27,12 @@ import { ModalDescriptionServiceComponent } from './modal-description-service/mo
     CommonModule,
     AccueilRoutingModule,
     MatIconModule,
-
+    MatDialogModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatButtonModule
     
   ],
   providers: [

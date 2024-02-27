@@ -20,6 +20,13 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
       {name: 'Historiques',link:'/pages/client/historique_rendez_vous',icon:'history'}],
   },
   {
+    name: 'Paiement',
+    icon:'payments',
+    children: [
+      {name: 'Prestations',link:'/pages/client/prestation',icon:'assignment_add'},
+    ]
+  },
+  {
     name: 'Gestions des preferences',
     icon:'refresh',
     children: [

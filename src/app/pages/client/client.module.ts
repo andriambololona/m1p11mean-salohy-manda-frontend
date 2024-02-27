@@ -25,6 +25,11 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PreferenceServiceComponent } from './preference/preference-service/preference-service.component';
 import { PreferenceEmployeComponent } from './preference/preference-employe/preference-employe.component';
 import { MatIconModule } from '@angular/material/icon';
+import { PrestationComponent } from './prestation/prestation.component';
+import { PrestationService } from 'src/app/@core/services/prestation.service';
+import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.service';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { ModalPaiementComponent } from './prestation/modal-paiement/modal-paiement.component';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -42,13 +47,14 @@ import { MatIconModule } from '@angular/material/icon';
     FormulaireRendezVousComponent,
     HistoriqueRendezVousComponent,
     PreferenceServiceComponent,
-    PreferenceEmployeComponent
+    PreferenceEmployeComponent,
+    PrestationComponent,
+    ModalPaiementComponent
   ],
   imports: [
       CommonModule,
       ClientRoutingModule,
       HttpClientModule,
-      MatDatepickerModule,
       MatInputModule,
       /*NgxMatDatetimePickerModule,
       NgxMatNativeDateModule,
@@ -64,13 +70,19 @@ import { MatIconModule } from '@angular/material/icon';
       MatPaginatorModule,
       MatProgressSpinnerModule,
       MatIconModule,
+      MatDatepickerModule,
+      MatFormFieldModule,
+      MatNativeDateModule,
+      
       
 
       //FormulaireRendezVousModule,
   ],
   providers: [
    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
-   {provide:CustomAuthService}
+   {provide:CustomAuthService},
+   {provide:PrestationService,useClass:ApiPrestationService},
+  
   ]
 })
 export class ClientModule { }

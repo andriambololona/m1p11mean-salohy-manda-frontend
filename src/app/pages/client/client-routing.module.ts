@@ -5,13 +5,15 @@ import { FormulaireRendezVousComponent } from './rendez-vous/formulaire-rendez-v
 import { HistoriqueRendezVousComponent } from './rendez-vous/historique-rendez-vous/historique-rendez-vous.component';
 import { PreferenceEmployeComponent } from './preference/preference-employe/preference-employe.component';
 import { PreferenceServiceComponent } from './preference/preference-service/preference-service.component';
+import { PrestationComponent } from './prestation/prestation.component';
 
 const routes: Routes = [
   {path:'',component:ClientComponent},
   {path:'prise_rendez_vous',component:FormulaireRendezVousComponent},
   {path:'preference_employe',component:PreferenceEmployeComponent},
   {path:'preference_service',component:PreferenceServiceComponent},
-  {path:'historique_rendez_vous',component:HistoriqueRendezVousComponent}
+  {path:'historique_rendez_vous',component:HistoriqueRendezVousComponent},
+  {path:'prestation',component:PrestationComponent}
 ];
 
 @NgModule({
