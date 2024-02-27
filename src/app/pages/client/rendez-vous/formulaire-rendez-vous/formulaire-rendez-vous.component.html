@@ -16,17 +16,21 @@
         </mat-form-field>
 
       </div>-->
+      <div class="position-relative col-md-2 top-100 start-50 my-2 px-5">
+        <input class="form-control" type="datetime-local" [(ngModel)]="rendez_vous.date" id="date" name="date">
+      </div>
       <div class="select">
+
         <mat-form-field>
           <mat-label>Personnel</mat-label>
-          <mat-select  name="personnel" [(ngModel)]="rendez_vous.gestionnaire"  required>
+          <mat-select name="personnel" [(ngModel)]="rendez_vous.gestionnaire" required>
             <mat-option>--</mat-option>
 
             <mat-option *ngFor="let data of data_employe" [value]="data._id">{{data.prenom}}</mat-option>
 
           </mat-select>
 
-          <mat-error >Veuillez choisir un personnel</mat-error>
+          <mat-error>Veuillez choisir un personnel</mat-error>
 
 
         </mat-form-field>
@@ -42,10 +46,16 @@
   <div class="drag-and-drop">
     <div class="example-container">
       <h2>To do</h2>
-      <div cdkDropList [cdkDropListData]="service" id="service" [cdkDropListConnectedTo]="['service2']" class="example-list"  (cdkDropListDropped)="drop($event)"
-       >
+      <div cdkDropList [cdkDropListData]="service" id="service" [cdkDropListConnectedTo]="['service2']"
+        class="example-list" (cdkDropListDropped)="drop($event)">
+        <div *ngIf="isLoadingService"
+        style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+      </div>
+        <div *ngFor="let todo of service" class="example-box" cdkDrag>
 
-        <div *ngFor="let todo of service" class="example-box" cdkDrag>{{todo.nom}}</div>
+          {{todo.nom}}
+        </div>
 
       </div>
     </div>
@@ -53,16 +63,20 @@
     <div class="example-container">
       <h2>Done</h2>
 
-      <div cdkDropList [cdkDropListData]="service2"  id="service2" [cdkDropListConnectedTo]="['service']" class="example-list"
-      (cdkDropListDropped)="drop2($event)">
+      <div cdkDropList [cdkDropListData]="service2" id="service2" [cdkDropListConnectedTo]="['service']"
+        class="example-list" (cdkDropListDropped)="drop2($event)">
 
-      <div *ngFor="let done of service2" class="example-box" cdkDrag>{{done.nom}}</div>
+        <div *ngFor="let done of service2" class="example-box" cdkDrag>{{done.nom}}</div>
 
 
       </div>
     </div>
     <div>
-      <button class="btn-enregistrer" mat-fab extended (click)="valider_rendez_vous()" [disabled]="isDisabledButtonValide">Enregistrer</button>
+      <button class="btn-enregistrer" mat-fab extended (click)="valider_rendez_vous()"
+        [disabled]="isDisabledButtonValide">Enregistrer</button>
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+      </div>
     </div>
 
   </div>

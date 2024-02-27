@@ -4,8 +4,10 @@ import { ThemePalette } from '@angular/material/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
+import { Rendezvous } from 'src/app/@core/entity/rendezvous';
 import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
+import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 import { RendezvousService } from 'src/app/@core/services/rendezvous.service';
 
 @Component({
@@ -18,7 +20,7 @@ export class RendezVousComponent {
   isLoading: boolean = false;
   page: number = 0;
   limit: number = 10;
-  displayedColumns: string[] = ['date', 'prestations', 'montant', 'client'];
+  displayedColumns: string[] = ['date', 'prestations', 'montant', 'client','statut','action'];
   dataSource = new MatTableDataSource<RendezVous>([]);
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
@@ -29,7 +31,7 @@ export class RendezVousComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private rendezVousService:RendezvousService){
+  constructor(private rendezVousService:RendezvousService,private messageModalService:MessageModalService){
 
   }
 
@@ -62,6 +64,39 @@ export class RendezVousComponent {
   filter(){
     this.isLoading=true;
     this.GetData(true,this.page,this.limit,this.filtre_recherche);
+  }
+
+  deleteRendezVous(id_rendezVous:string){
+
+      console.log(id_rendezVous);
+
+  }
+
+  createRendezVous(id_rendezVous:string){
+
+    var body={
+      id:id_rendezVous
+    }
+    this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
+      this.isLoading=true;
+      if(confirm){
+        this.rendezVousService.createPrestationRendezVous(true,body).subscribe({
+          next:(data)=>{
+
+            this.GetData(true, this.page, this.limit);
+          },
+          error:(err)=>{
+
+          }
+        })
+      }
+      else{
+
+      }
+    });
+    //bodyRendezVous._id=id_rendezVous;
+      console.log(id_rendezVous);
+
   }
 
   handlePageEvent(e: PageEvent) {

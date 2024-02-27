@@ -19,7 +19,7 @@ export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
   isLoading: boolean = false;
   page: number = 0;
   limit: number = 10;
-  displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire'];
+  displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire','statut'];
   dataSource = new MatTableDataSource<RendezVous>([]);
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
@@ -70,6 +70,7 @@ export class HistoriqueRendezVousComponent implements OnInit, AfterViewInit {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
+    this.isLoading=true;
     this.GetData(true,this.pageIndex, this.pageSize,this.filtre_recherche)
   }
 

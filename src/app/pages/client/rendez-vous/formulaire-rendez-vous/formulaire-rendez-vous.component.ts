@@ -4,6 +4,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormControlName, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
+import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
 import { Rendezvous } from 'src/app/@core/entity/rendezvous';
@@ -12,6 +13,7 @@ import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
 import { ClientService } from 'src/app/@core/services/client.service';
 import { ManagerService } from 'src/app/@core/services/manager.service';
+import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 import { TokenStorageService } from 'src/app/@core/services/token-storage.service';
 
 
@@ -47,7 +49,8 @@ export class FormulaireRendezVousComponent implements OnInit{
   rendez_vous=new Rendezvous();
   user=new User();
   isDisabledButtonValide:boolean=true;
-
+  isLoadingService:boolean=false;
+  isLoading:boolean=false;
   public date: moment.Moment;
   public disabled = false;
   public showSpinners = true;
@@ -62,7 +65,8 @@ export class FormulaireRendezVousComponent implements OnInit{
   public color: ThemePalette = 'accent';
 
   dateControl=new FormControl("dateControl");
-  constructor(private clientService:ClientService,private managerService:ManagerService,private tokenStorage:TokenStorageService){
+  constructor(private clientService:ClientService,private managerService:ManagerService
+    ,private tokenStorage:TokenStorageService,private messageModalService:MessageModalService,private router:Router){
     //super();
   }
 
@@ -72,10 +76,12 @@ export class FormulaireRendezVousComponent implements OnInit{
     this.getAllServiceNotPaginate();
   }
   getAllServiceNotPaginate(){
+    this.isLoadingService=true;
     this.managerService.getAllServiceNotPaginate(true).subscribe({
       next:(data:HttpResponse<ApiResponse<any>>)=>{
         console.log(data.body.data);
         this.service=data.body.data;
+        this.isLoadingService=false;
       },
       error:(err)=>{
         console.log(err);
@@ -148,8 +154,6 @@ export class FormulaireRendezVousComponent implements OnInit{
     var dataFormat=theDate.getFullYear()+"-"+theDate.getMonth()+"-"+theDate.getDay()+" "+theDate.getHours()+":"+theDate.getMinutes()+":"+theDate.getSeconds();
     //this.rendez_vous.date=new Date(dataFormat);
     console.log(this.rendez_vous.date);
-
-
     var rendezVousReq:RendezVousRequest=new RendezVousRequest();
     rendezVousReq.date=this.rendez_vous.date;
     let prestations=this.rendez_vous.prestations.map((data)=>{
@@ -162,17 +166,24 @@ export class FormulaireRendezVousComponent implements OnInit{
     console.log(rendezVousReq);
     console.log(prestations);
 
-    this.clientService.createRendezVous(true,rendezVousReq).subscribe({
-      next:(data)=>{
-        console.log(data);
+    this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
+      this.isLoading=true;
+      if(confirm){
+        this.clientService.createRendezVous(true,rendezVousReq).subscribe({
+          next:(data)=>{
+            console.log(data);
+            this.isLoading=false;
+            this.router.navigateByUrl('/pages/client/historique_rendez_vous');
 
-      },
-      error:(err)=>{
-        console.log(err);
+          },
+          error:(err)=>{
+            console.log(err);
+
+          }
+        })
+      }else{
 
       }
     })
-    //this.clientService(true,this)
-
   }
 }

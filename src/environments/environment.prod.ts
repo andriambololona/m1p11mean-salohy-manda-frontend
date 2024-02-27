@@ -37,4 +37,12 @@ export const environment = {
   updateRendezVous: "/api/rendezVous/",
   createPrestationFromRendezVous: "/api/rendezVous/create-prestation",
   /* ----------- */
+   /* Prestation */
+   chiffreAffaireJour_uri: "/api/prestation/chiffre_affaire",
+   chiffreAffaireMois_uri: "/api/prestation/chiffre_affaire",
+   benefice_uri: "/api/prestation/benefice",
+   /* ----------- */
+   /* Depense */
+   addDepense_uri:"/api/depense",
+   getAllDepense_uri:"/api/depense"
 };

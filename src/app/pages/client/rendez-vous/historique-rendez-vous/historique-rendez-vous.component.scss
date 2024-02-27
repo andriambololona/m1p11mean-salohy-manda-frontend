@@ -4,7 +4,7 @@
   text-decoration: underline;
 }
 .container{
-  margin-bottom: 200px;
+  margin-bottom: 800px;
 }
 
 section {
@@ -53,4 +53,10 @@ section {
 .example-container mat-form-field + mat-form-field {
   margin-left: 8px;
   padding: 10px;
+}
+.material-symbols-outlined.waiting{
+  color: orange;
+}
+.material-symbols-outlined.done{
+  color: rgb(27, 190, 63);
 }

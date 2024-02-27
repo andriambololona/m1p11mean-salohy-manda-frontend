@@ -3,9 +3,7 @@ import { User } from "./user";
 
 export class Rendezvous
 {
-  constructor(){
 
-  }
   _id:string;
   client:User;
   montant:number;

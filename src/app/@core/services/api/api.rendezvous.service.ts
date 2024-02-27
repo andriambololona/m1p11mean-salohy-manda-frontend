@@ -12,9 +12,6 @@ import { map, catchError } from 'rxjs/operators';
 import { ApiService } from './api.service';
 import { environment } from 'src/environments/environment';
 import { RendezvousService } from '../rendezvous.service';
-
-
-
 import { RendezVousRequest } from '../../entity/request/rendezVousRequest';
 import { Rendezvous } from '../../entity/rendezvous';
 import { ApiResponse } from '../../entity/api-response';
@@ -56,6 +53,17 @@ export class ApiRendezvousService extends RendezvousService {
         return this.catchError(showErrorNotif,error);
       })
     );
+  }
+
+  createPrestationRendezVous(showErrorNotif: boolean, rendezvous: any): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+      return this.apiService.post<ApiResponse<any>>(environment.createPrestationFromRendezVous,rendezvous).pipe(
+        map((x:HttpResponse<ApiResponse<any>>)=>{
+            return this.handleResponse<any>(showErrorNotif,x);
+        }),
+        catchError((error)=>{
+          return this.catchError(showErrorNotif,error);
+        })
+      )
   }
 
 }
