@@ -29,6 +29,7 @@ export const environment = {
   delete_service_uri:"/api/service/manager/deleteService",
   add_upload_abmform_uri:"",
   update_preference_uri:"/api/user/preference",
+  createCompte_uri:"/api/user/compte",
   /* Rendez-vous */
   getRendezVous: "/api/rendezVous/",
   deleteRendezVous: "/api/rendezVous/",

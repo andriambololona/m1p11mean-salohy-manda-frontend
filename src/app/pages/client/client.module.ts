@@ -1,3 +1,5 @@
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -5,7 +7,7 @@ import { ClientRoutingModule } from './client-routing.module';
 import { FormulaireRendezVousComponent } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous.component';
 import { HistoriqueRendezVousComponent } from './rendez-vous/historique-rendez-vous/historique-rendez-vous.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
@@ -14,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormulaireRendezVousRoutingModule } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous-routing.module';
-import {MatCardModule} from '@angular/material/card';
+import {MatCardHeader, MatCardModule} from '@angular/material/card';
 import {MatDividerModule } from '@angular/material/divider';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FormulaireRendezVousModule } from './rendez-vous/formulaire-rendez-vous/formulaire-rendez-vous.module';
@@ -28,8 +30,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { PrestationComponent } from './prestation/prestation.component';
 import { PrestationService } from 'src/app/@core/services/prestation.service';
 import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.service';
-import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule, MatPseudoCheckbox, MatPseudoCheckboxModule } from '@angular/material/core';
 import { ModalPaiementComponent } from './prestation/modal-paiement/modal-paiement.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalAjoutCompteComponent } from './prestation/modal-ajout-compte/modal-ajout-compte.component';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
     dateInput: "l, LTS"
@@ -49,18 +53,21 @@ import { ModalPaiementComponent } from './prestation/modal-paiement/modal-paieme
     PreferenceServiceComponent,
     PreferenceEmployeComponent,
     PrestationComponent,
-    ModalPaiementComponent
+    ModalPaiementComponent,
+    ModalAjoutCompteComponent
   ],
   imports: [
       CommonModule,
       ClientRoutingModule,
       HttpClientModule,
-      MatInputModule,
+
       /*NgxMatDatetimePickerModule,
       NgxMatNativeDateModule,
       NgxMatTimepickerModule,*/
       FormsModule,
       ReactiveFormsModule,
+      MatRadioModule,
+      MatCheckboxModule,
       MatButtonModule,
       MatSelectModule,
       MatCardModule,
@@ -73,8 +80,9 @@ import { ModalPaiementComponent } from './prestation/modal-paiement/modal-paieme
       MatDatepickerModule,
       MatFormFieldModule,
       MatNativeDateModule,
-      
-      
+      MatDialogModule,
+      MatInputModule,
+     ReactiveFormsModule
 
       //FormulaireRendezVousModule,
   ],
@@ -82,7 +90,7 @@ import { ModalPaiementComponent } from './prestation/modal-paiement/modal-paieme
    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
    {provide:CustomAuthService},
    {provide:PrestationService,useClass:ApiPrestationService},
-  
+
   ]
 })
 export class ClientModule { }

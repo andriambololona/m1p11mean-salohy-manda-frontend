@@ -53,7 +53,7 @@ export class ApiPrestationService extends PrestationService {
       })
     );
   }
-  
+
   getChiffreAffaireMois(showErrorNotif: boolean, annee: number, mois: number): Observable<Observable<never> | HttpResponse<any>> {
     return this.apiService.get<any>(environment.chiffreAffaireMois_uri + `/${annee}/${mois}`).pipe(
       map((x:HttpResponse<any>)=>{
@@ -108,7 +108,18 @@ export class ApiPrestationService extends PrestationService {
         })
       );
     }
-    
+
+  }
+
+  createCompte(showErrorNotif: boolean, body: any): Observable<HttpResponse<ApiResponse<any>> | Observable<never>> {
+    return this.apiService.put<ApiResponse<any>>(environment.createCompte_uri,body).pipe(
+      map((x:HttpResponse<ApiResponse<any>>)=>{
+        return this.handleResponse<any>(showErrorNotif,x)
+      }),
+      catchError((error)=>{
+        return this.catchError(showErrorNotif,error);
+      })
+    );
   }
 
 }

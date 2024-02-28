@@ -2,11 +2,14 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
 import { Prestation } from 'src/app/@core/entity/prestation';
 import { PrestationService } from 'src/app/@core/services/prestation.service';
+import { ModalPaiementComponent } from './modal-paiement/modal-paiement.component';
+import { ModalAjoutCompteComponent } from './modal-ajout-compte/modal-ajout-compte.component';
 
 @Component({
   selector: 'app-prestation',
@@ -31,7 +34,7 @@ export class PrestationComponent {
   dateFin=new FormControl<Date | null>(null);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private prestatiohnService:PrestationService){
+  constructor(private prestatiohnService:PrestationService,private dialog:MatDialog){
 
   }
 
@@ -69,6 +72,29 @@ export class PrestationComponent {
   }
 
 
+  OpenDialogPaiement(data:any){
+    const dialogRef = this.dialog.open(ModalPaiementComponent, {
+
+      data: {data_prestation: data},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+  }
+
+  OpenDialogAjoutCompte(data:any){
+    const dialogRef = this.dialog.open(ModalAjoutCompteComponent, {
+
+      //data: {data_prestation: data},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+  }
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.length = e.length;

@@ -1,117 +1,122 @@
 <div class="container">
-    <div class="card text-center" id="card-search">
-      <div class="card-body" id="recherche">
-        <div class="example-container">
-            <mat-form-field>
-                <mat-label>Date debut</mat-label>
-                <input matInput [matDatepicker]="pickerDebut" [formControl]="dateDebut">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="pickerDebut"></mat-datepicker-toggle>
-                <mat-datepicker #pickerDebut></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label>Date fin</mat-label>
-                <input matInput [matDatepicker]="pickerFin" [formControl]="dateFin">
-                <mat-hint>MM/DD/YYYY</mat-hint>
-                <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
-                <mat-datepicker #pickerFin></mat-datepicker>
-              </mat-form-field>
-  
-  
-          <button mat-fab extended color="accent" (click)="filter()">
-            <mat-icon>search</mat-icon>
-            Rechercher
-          </button>
-        </div>
-  
-  
+  <div class="card text-center" id="card-search">
+    <div class="card-body" id="recherche">
+      <div class="example-container">
+        <mat-form-field>
+          <mat-label>Date debut</mat-label>
+          <input matInput [matDatepicker]="pickerDebut" [formControl]="dateDebut">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDebut></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Date fin</mat-label>
+          <input matInput [matDatepicker]="pickerFin" [formControl]="dateFin">
+          <mat-hint>MM/DD/YYYY</mat-hint>
+          <mat-datepicker-toggle matIconSuffix [for]="pickerFin"></mat-datepicker-toggle>
+          <mat-datepicker #pickerFin></mat-datepicker>
+        </mat-form-field>
+
+
+        <button mat-fab extended color="accent" (click)="filter()">
+          <mat-icon>search</mat-icon>
+          Rechercher
+        </button>
       </div>
-      <div class="card text-center">
-        <div class="card-header">
-          <h1 class="title">Liste de vos prestations</h1>
-        </div>
-        <div class="card-body">
-          <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
-              <!-- Date Column -->
-              <ng-container matColumnDef="date">
-                <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let element"> {{ element.createdAt | date : 'medium' }} </td>
-              </ng-container>
-              <!-- Prestation Column -->
-              <ng-container matColumnDef="prestations">
-                <th mat-header-cell *matHeaderCellDef> Prestations </th>
-                <td mat-cell *matCellDef="let element">
-                  <ul>
-                    <li *ngFor="let prestation of element.details">
-                      <span>{{ prestation.service }}</span>
-                    </li>
-                  </ul>
-                </td>
-              </ng-container>
-              <!-- Montant Column -->
-              <ng-container matColumnDef="montant">
-                <th mat-header-cell *matHeaderCellDef> Montant total (Ariary)</th>
-                <td mat-cell *matCellDef="let element"> {{element.montantTotal}} </td>
-              </ng-container>
-              <!-- Gestionnaire Column -->
-              <ng-container matColumnDef="gestionnaire">
-                <th mat-header-cell *matHeaderCellDef> Gestionnaire </th>
-                <td mat-cell *matCellDef="let element"> {{element.gestionnaire.nom}} {{ element.gestionnaire.prenom }}
-                </td>
-              </ng-container>
-  
-              <ng-container matColumnDef="statut">
-                <th mat-header-cell *matHeaderCellDef> Satut de paiement </th>
-                <td mat-cell *matCellDef="let element">
-                  <span *ngIf="element.estPaye==undefined" class="material-symbols-outlined waiting">
-                    hourglass_bottom
-                  </span>
-                  <span *ngIf="element.estPaye==true" class="material-symbols-outlined done">
-                    task_alt
-                  </span>
-  
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef> Action </th>
-                <td mat-cell *matCellDef="let element">
-                    <section>
-                        <div class="example-button-row">
-                          <div class="example-flex-container">
-                           
-                            <div *ngIf="element.estPaye==undefined" class="example-button-container">
-                                <button mat-fab extended color="accent">
-                                   Payer
-                                  </button>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-  
-                </td>
-              </ng-container>
-  
-  
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-  
-            <div *ngIf="isLoading"
-              style="display: flex; justify-content: center; align-items: center; background: white;">
-              <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
-            </div>
-  
-            <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
-              [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]"
-              [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
-            </mat-paginator>
+
+
+    </div>
+    <div class="card text-center">
+      <div class="card-header">
+        <h1 class="title">Liste de vos prestations</h1>
+      </div>
+      <div class="card-body">
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Date Column -->
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef> Date </th>
+              <td mat-cell *matCellDef="let element"> {{ element.createdAt | date : 'medium' }} </td>
+            </ng-container>
+            <!-- Prestation Column -->
+            <ng-container matColumnDef="prestations">
+              <th mat-header-cell *matHeaderCellDef> Prestations </th>
+              <td mat-cell *matCellDef="let element">
+                <ul>
+                  <li *ngFor="let prestation of element.details">
+                    <span>{{ prestation.service }}</span>
+                  </li>
+                </ul>
+              </td>
+            </ng-container>
+            <!-- Montant Column -->
+            <ng-container matColumnDef="montant">
+              <th mat-header-cell *matHeaderCellDef> Montant total (Ariary)</th>
+              <td mat-cell *matCellDef="let element"> {{element.montantTotal}} </td>
+            </ng-container>
+            <!-- Gestionnaire Column -->
+            <ng-container matColumnDef="gestionnaire">
+              <th mat-header-cell *matHeaderCellDef> Gestionnaire </th>
+              <td mat-cell *matCellDef="let element"> {{element.gestionnaire.nom}} {{ element.gestionnaire.prenom }}
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="statut">
+              <th mat-header-cell *matHeaderCellDef> Satut de paiement </th>
+              <td mat-cell *matCellDef="let element">
+                <span *ngIf="element.estPaye==undefined" class="material-symbols-outlined waiting">
+                  hourglass_bottom
+                </span>
+                <span *ngIf="element.estPaye==true" class="material-symbols-outlined done">
+                  task_alt
+                </span>
+
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> Action </th>
+              <td mat-cell *matCellDef="let element">
+                <section>
+                  <div class="example-button-row">
+                    <div class="example-flex-container">
+                      <div class="example-button-container">
+
+                        <button mat-fab extended color="primary" (click)="OpenDialogAjoutCompte(element)">
+                          Ajout compte
+                        </button>
+                      </div>
+                      <div class="example-button-container">
+
+                        <button mat-fab extended color="accent" (click)="OpenDialogPaiement(element)">
+                          Payer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+              </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+
+          <div *ngIf="isLoading"
+            style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
           </div>
+
+          <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+            [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]"
+            [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
+          </mat-paginator>
         </div>
-        <div class="card-footer text-muted">
-          2 days ago
-        </div>
+      </div>
+      <div class="card-footer text-muted">
+        2 days ago
       </div>
     </div>
   </div>
-  
+</div>

@@ -33,6 +33,7 @@ export const environment = {
   delete_service_uri:"/api/service/manager/deleteService",
   add_upload_abmform_uri:"",
   update_preference_uri:"/api/user/preference",
+  createCompte_uri:"/api/user/compte",
   /* Rendez-vous */
   getRendezVous: "/api/rendezVous/",
   deleteRendezVous: "/api/rendezVous/",
@@ -46,6 +47,7 @@ export const environment = {
   benefice_uri: "/api/prestation/benefice",
   paiement_uri:"/api/prestation/paiement",
   finAllPrestation_uri:"/api/prestation",
+
   /* ----------- */
   /* Depense */
   addDepense_uri:"/api/depense",

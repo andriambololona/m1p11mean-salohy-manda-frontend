@@ -10,4 +10,5 @@ export abstract class PrestationService {
   abstract getBenefice(showErrorNotif:boolean, annee: number, mois: number):Observable<HttpResponse<any>|Observable<never>>;
   abstract paiement(showErrorNotif:boolean,body:any):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract getAllPrestation(showErrorNotif:boolean,page:number,limit:number,dateDebut?:string,dateFin?:string):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
+  abstract createCompte(showErrorNotif:boolean,body:any):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
 }
