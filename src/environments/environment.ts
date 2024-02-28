@@ -51,6 +51,9 @@ export const environment = {
   /* ----------- */
   /* Depense */
   addDepense_uri:"/api/depense",
-  getAllDepense_uri:"/api/depense"
+  getAllDepense_uri:"/api/depense",
+  /* Service */
+  add_promotion_uri: "/api/service/promotion",
+  /* ----------- */
 
 };

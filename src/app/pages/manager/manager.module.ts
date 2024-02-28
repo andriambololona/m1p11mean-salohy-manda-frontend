@@ -27,6 +27,7 @@ import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.
 import { DepenseComponent } from './depense/depense.component';
 import { ModalAjoutDepenseComponent } from './depense/modal-ajout-depense/modal-ajout-depense.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ModalAjoutPromotionComponent } from './services/modal-ajout-promotion/modal-ajout-promotion.component';
 
 
 
@@ -42,8 +43,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     StatistiqueComponent,
     DepenseComponent,
     ModalAjoutDepenseComponent,
-
-
+    ModalAjoutPromotionComponent,
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,12 @@
+section {
+  float: right;
+}
+
 .title {
     color: #c69294;
     text-decoration: underline;
     font-family:cursive;
+    font-size: xx-large;
   }
 
   .container {
@@ -37,7 +42,7 @@
   .example-button-container {
     display: flex;
     justify-content: center;
-    width: 100px;
+    width: 75px;
   }
   .toogle-btn{
     margin-top: 20px;

@@ -20,6 +20,7 @@ export class StatistiqueComponent implements OnInit {
   beneficeMois: number = 0;
   beneficeMoisAvant: number = 0;
   rapportBeneficeMois: number = 0;
+  dateToday: Date = new Date();
 
   dataSource = new MatTableDataSource<any>([]);
   displayedColumns: string[] = ['employe', 'tempsTravailMoyen'];

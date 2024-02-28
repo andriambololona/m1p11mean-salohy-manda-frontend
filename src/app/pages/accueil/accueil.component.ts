@@ -13,58 +13,29 @@ import { ModalDescriptionServiceComponent } from './modal-description-service/mo
   templateUrl: './accueil.component.html',
   styleUrls: ['./accueil.component.scss']
 })
-export class AccueilComponent implements OnInit{
+export class AccueilComponent implements OnInit {
 
-  length: number;//colonne total sans pagination
-  pageSize: number=3;//nombre row initial
-  pageIndex: number=0;//page
-  pageEvent: PageEvent;
-  hidePageSize = false;
-  data_service:Array<Service>=[];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  isLoading:boolean=false;
-  constructor(private managerService:ManagerService,public dialog :MatDialog){}
+  services: any[];
+  isLoading: boolean = false;
+
+  constructor(private managerService: ManagerService) { }
 
   ngOnInit(): void {
-    this.reloadService(this.pageIndex,this.pageSize);
+    this.isLoading = true;
+    this.reloadAllService();
   }
 
-  reloadService(page:number,limit:number){
-    this.isLoading=true;
-    let _page=page+1;
-    this.managerService.getAllService(true,_page,limit).subscribe({
-      next:(data:HttpResponse<ApiResponse<any>>)=>{
-        this.data_service=data.body.data
-        this.length=data.body.totalItems;
-        this.pageIndex = page;
-        this.pageSize = limit;
-        this.isLoading=false;
-        console.log(data.body);
+  reloadAllService() {
+    this.managerService.getAllService(true, 1, 50).subscribe({
+      next: (data: HttpResponse<ApiResponse<any[]>>) => {
+        this.services = data.body.data;
+      },
+      error: (err) => {
 
       },
-      error:(err)=>{
-
+      complete: () => {
+        this.isLoading = false;
       }
     })
-  }
- 
-  detailsService(data:any){
-    const dialogRef = this.dialog.open(ModalDescriptionServiceComponent, {
-
-      data: {data_service: data},
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      //this.animal = result;
-    });
-  }
-
-  handlePageEvent(e: PageEvent) {
-    this.pageEvent = e;
-    this.length = e.length;
-    this.pageSize = e.pageSize;
-    this.pageIndex = e.pageIndex;
-    this.reloadService(this.pageIndex, this.pageSize);
   }
 }

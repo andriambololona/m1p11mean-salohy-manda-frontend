@@ -15,6 +15,8 @@ import { Observable } from 'rxjs';
 import { ServiceRequest } from 'src/app/@core/entity/request/serviceRequest';
 import { ModalDetailServiceComponent } from './modal-detail-service/modal-detail-service.component';
 import { ModalUpdateServiceComponent } from './modal-update-service/modal-update-service.component';
+import { PromotionServiceRequest } from 'src/app/@core/entity/request/promotionServiceRequest';
+import { ModalAjoutPromotionComponent } from './modal-ajout-promotion/modal-ajout-promotion.component';
 
 @Component({
   selector: 'app-services',
@@ -23,7 +25,7 @@ import { ModalUpdateServiceComponent } from './modal-update-service/modal-update
 })
 export class ServicesComponent implements OnInit,AfterViewInit{
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['nom', 'prix','action'];
+  displayedColumns: string[] = ['image', 'nom', 'prix', 'promotion','action'];
   dataSource: MatTableDataSource<any>;
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
@@ -56,6 +58,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
         console.log(data.body);
 
         this.dataSource = new MatTableDataSource<any>(data.body.data);
+        console.log(data.body.data);
         this.length = data.body.totalItems;
         this.pageIndex = page;
         this.pageSize = limit;
@@ -90,6 +93,25 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
     }
   }
+
+  openDialogAddPromotionService(service: object): Observable<PromotionServiceRequest> {
+    const dialogRef = this.dialog.open(ModalAjoutPromotionComponent, {
+      width: '800px',
+      data: {service:service},
+    });
+    
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //this.animal = result;
+    });
+    
+    return  new Observable((observer)=>{
+      dialogRef.componentInstance.emitService.subscribe((result)=>{
+        observer.next(result);
+      })
+    })
+  }
+
   openDialogAjoutService(): Observable<ServiceRequest> {
     const dialogRef = this.dialog.open(ModalAjoutServiceComponent, {
 
@@ -122,9 +144,13 @@ export class ServicesComponent implements OnInit,AfterViewInit{
   }
 
   openDialogUpdateService(service:object): Observable<ServiceRequest>{
+<<<<<<< HEAD
     //console.log(service);
 
      const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
+=======
+    const dialogRef = this.dialog.open(ModalAjoutPromotionComponent, {
+>>>>>>> dev-manda
       width: '800px',
       data: {service:service},
     });
@@ -138,8 +164,33 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       dialogRef.componentInstance.emitService.subscribe((result)=>{
         observer.next(result);
       })
-    })
+    });
+  }
 
+  addPromotion(promotion: object) {
+    this.openDialogAddPromotionService(promotion).subscribe({
+      next: (data: PromotionServiceRequest) => {
+        this.managerService.addPromotion(true, data).subscribe({
+          next: (data) => {
+            this.dialog.closeAll();
+          },
+          error: (err)=>{
+            console.error(err);
+               
+          },
+          complete: () => {
+            this.reloadAllService(this.pageIndex, this.pageSize);
+          },
+        })
+      },
+      error:(err)=>{
+
+      }
+    })
+<<<<<<< HEAD
+
+=======
+>>>>>>> dev-manda
   }
 
   updateService(service:object){

@@ -26,7 +26,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientModule } from './client/client.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CustomAuthService } from '../@core/services/custom-auth-service';
+<<<<<<< HEAD
 import { MatPaginatorModule } from '@angular/material/paginator';
+=======
+>>>>>>> dev-manda
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 

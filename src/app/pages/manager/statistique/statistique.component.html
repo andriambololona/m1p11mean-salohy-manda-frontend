@@ -3,7 +3,6 @@
   <div class="row">
     <div class="col text-center">
       <h1>Statistiques</h1>
-      <p>24 février 2024</p>
     </div>
   </div>
 
@@ -14,10 +13,10 @@
         <div class="card-body">
           <h2>
             <span class="me-2 icon material-symbols-outlined">euro</span>
-            <span>Chiffre d'affaire du jour</span>
+            <span>Chiffre d'affaire du jour <small>({{ dateToday | date: "MM/d/yyyy" }})</small></span>
           </h2>
           <div class="row px-4">
-            <div class="col-12 col-md-6 pt-4">
+            <div class="col-12 col-md-6 pt-3">
               <b>{{ caJour | currency: "Ar": 'symbol': '0.2-2' : 'fr' }}</b>
             </div>
             <div class="col-12 col-md-6 text-end">
@@ -50,27 +49,29 @@
         <div class="card-body">
           <h2>
             <span class="me-2 icon material-symbols-outlined">euro</span>
-            <span>Chiffre d'affaire du jour</span>
+            <span>Chiffre d'affaire du mois <small>({{ dateToday | date: "MMMM yyyy" }})</small></span>
           </h2>
           <div class="row px-4">
-            <div class="col-12 col-md-6 pt-4">
+            <div class="col-12 col-md-6 pt-3">
               <b>{{ caMois | currency: "Ar": 'symbol': '0.2-2' : 'fr' }}</b>
             </div>
             <div class="col-12 col-md-6 text-end">
-              <div class="col">
-                <span *ngIf="rapportCaMois >= 0">+</span>
-                <span *ngIf="rapportCaMois < 0">-</span>
-                {{ rapportCaMois }} %
-                <span *ngIf="rapportCaMois >= 0">
-                  <span class="icon material-symbols-outlined" style="color: green;">
-                    trending_up
+              <div class="row text-end">
+                <div class="col">
+                  <span *ngIf="rapportCaMois >= 0">+</span>
+                  <span *ngIf="rapportCaMois < 0">-</span>
+                  {{ rapportCaMois }} %
+                  <span *ngIf="rapportCaMois >= 0">
+                    <span class="icon material-symbols-outlined" style="color: green;">
+                      trending_up
+                    </span>
                   </span>
-                </span>
-                <span *ngIf="rapportCaMois < 0">
-                  <span class="icon material-symbols-outlined" style="color: red;">
-                    trending_down
+                  <span *ngIf="rapportCaMois < 0">
+                    <span class="icon material-symbols-outlined" style="color: red;">
+                      trending_down
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
               Par rapport mois dernier
             </div>
@@ -83,11 +84,13 @@
       <div class="card">
         <div class="card-body">
           <h2>
-            <span class="me-2 icon material-symbols-outlined">euro</span>
-            <span>Chiffre d'affaire du mois</span>
+            <span class="me-2 icon material-symbols-outlined"><span class="material-symbols-outlined">
+                account_balance
+              </span></span>
+            <span>Bénéfice du mois <small>({{ dateToday | date: "MMMM yyyy" }})</small></span>
           </h2>
           <div class="row px-4">
-            <div class="col-12 col-md-6 pt-4">
+            <div class="col-12 col-md-6 pt-3">
               <b>{{ beneficeMois | currency: "Ar": 'symbol': '0.2-2' : 'fr' }}</b>
             </div>
             <div class="col-12 col-md-6 text-end">
@@ -107,8 +110,8 @@
                     </span>
                   </span>
                 </div>
-                Par rapport mois dernier
               </div>
+              Par rapport mois dernier
             </div>
           </div>
         </div>

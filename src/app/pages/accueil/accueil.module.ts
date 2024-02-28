@@ -32,7 +32,9 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     FormsModule,
     MatFormFieldModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule,
+    MatProgressSpinnerModule
     
   ],
   providers: [
