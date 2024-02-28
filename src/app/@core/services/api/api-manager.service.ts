@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpParamsOptions, HttpResponse } from '@angular/common/http';
 //import { Datatable } from '../@core/entity/data-table';
-
 import { map, catchError } from 'rxjs/operators';
 //import { Picklist } from '../@core/entity/picklist';
 //import { ChangeStatusUser } from '../@core/entity/change-status-user';
@@ -12,19 +11,12 @@ import { ApiService } from './api.service';
 import { environment } from 'src/environments/environment';
 import { UserService } from '../user.service';
 import { ApiResponse } from './api-response';
-
-
 import { UserRequest } from '../../entity/request/userRequest';
 import { ManagerService } from '../manager.service';
 import { User } from '../../entity/user';
 import { ServiceRequest } from '../../entity/request/serviceRequest';
-<<<<<<< HEAD
 import { DepenseRequest } from '../../entity/request/depenseRequest';
-
-=======
 import { PromotionServiceRequest } from '../../entity/request/promotionServiceRequest';
->>>>>>> dev-manda
-
 
 
 @Injectable()

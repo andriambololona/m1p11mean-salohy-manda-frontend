@@ -144,13 +144,9 @@ export class ServicesComponent implements OnInit,AfterViewInit{
   }
 
   openDialogUpdateService(service:object): Observable<ServiceRequest>{
-<<<<<<< HEAD
     //console.log(service);
 
      const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
-=======
-    const dialogRef = this.dialog.open(ModalAjoutPromotionComponent, {
->>>>>>> dev-manda
       width: '800px',
       data: {service:service},
     });
@@ -187,10 +183,6 @@ export class ServicesComponent implements OnInit,AfterViewInit{
 
       }
     })
-<<<<<<< HEAD
-
-=======
->>>>>>> dev-manda
   }
 
   updateService(service:object){
