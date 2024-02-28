@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { OnSameUrlNavigation } from '@angular/router';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
@@ -12,6 +12,7 @@ import { PrestationService } from 'src/app/@core/services/prestation.service';
 export class ModalPaiementComponent implements OnInit{
   compte:string;
   data_prestation:any;
+  @Output() emitDataPaiement=new EventEmitter();
   constructor(
     public dialogRef: MatDialogRef<ModalPaiementComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,private prestationService:PrestationService,private messageModalService:MessageModalService
@@ -27,23 +28,8 @@ export class ModalPaiementComponent implements OnInit{
       id:id_prestation,
       compte:this.compte
     }
-    this.messageModalService.confirm("Confirmation","Ete vous").then(confirm=>{
-      if(confirm){
-        this.prestationService.paiement(true,obj).subscribe({
-          next:(data)=>{
-            console.log(data);
-            this.onNoClick();
-          },
-          error:(err)=>{
-            console.log(err);
+    this.emitDataPaiement.emit(obj);
 
-          }
-        })
-      }
-      else{
-
-      }
-    })
   }
 
   onNoClick(): void {

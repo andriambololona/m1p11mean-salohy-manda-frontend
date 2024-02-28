@@ -10,6 +10,8 @@ import { Prestation } from 'src/app/@core/entity/prestation';
 import { PrestationService } from 'src/app/@core/services/prestation.service';
 import { ModalPaiementComponent } from './modal-paiement/modal-paiement.component';
 import { ModalAjoutCompteComponent } from './modal-ajout-compte/modal-ajout-compte.component';
+import { Observable } from 'rxjs';
+import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 
 @Component({
   selector: 'app-prestation',
@@ -34,7 +36,7 @@ export class PrestationComponent {
   dateFin=new FormControl<Date | null>(null);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private prestatiohnService:PrestationService,private dialog:MatDialog){
+  constructor(private prestatiohnService:PrestationService,private dialog:MatDialog,private messageModalService:MessageModalService,private prestationService:PrestationService){
 
   }
 
@@ -72,7 +74,7 @@ export class PrestationComponent {
   }
 
 
-  OpenDialogPaiement(data:any){
+  OpenDialogPaiement(data:any):Observable<any>{
     const dialogRef = this.dialog.open(ModalPaiementComponent, {
 
       data: {data_prestation: data},
@@ -82,9 +84,14 @@ export class PrestationComponent {
       console.log('The dialog was closed');
       //this.animal = result;
     });
+    return new Observable((observer)=>{
+      dialogRef.componentInstance.emitDataPaiement.subscribe((result)=>{
+        observer.next(result);
+      })
+    })
   }
 
-  OpenDialogAjoutCompte(data:any){
+  OpenDialogAjoutCompte(data:any):Observable<any>{
     const dialogRef = this.dialog.open(ModalAjoutCompteComponent, {
 
       //data: {data_prestation: data},
@@ -94,7 +101,66 @@ export class PrestationComponent {
       console.log('The dialog was closed');
       //this.animal = result;
     });
+    return new Observable((observer)=>{
+      dialogRef.componentInstance.emitcompteUser.subscribe((result)=>{
+        observer.next(result);
+      })
+    })
   }
+
+  validatePaiement(data_prestation:any){
+    this.OpenDialogPaiement(data_prestation).subscribe({
+      next:(data_emiter:any)=>{
+        this.messageModalService.confirm("Confirmation","Ete vous").then(confirm=>{
+          if(confirm){
+            this.prestationService.paiement(true,data_emiter).subscribe({
+              next:(data)=>{
+                console.log(data);
+                this.GetDataPrestation(true, this.page, this.limit,null,null);
+              },
+              error:(err)=>{
+                console.log(err);
+
+              }
+            })
+          }
+
+        })
+
+      },
+      error:(err)=>{
+        console.log(err);
+
+      }
+    })
+  }
+
+  ajoutCompte(data_prestation:any){
+    this.OpenDialogAjoutCompte(data_prestation).subscribe({
+      next:(data_emiter)=>{
+        this.messageModalService.confirm("Confirmation","Ete vous").then(confirm=>{
+          if(confirm){
+            this.prestationService.createCompte(true,data_emiter).subscribe({
+              next:(data)=>{
+                console.log(data);
+                this.GetDataPrestation(true, this.page, this.limit,null,null);
+              },
+              error:(data)=>{
+                console.log(data);
+
+              }
+            })
+          }
+
+        })
+      },
+      error:(err)=>{
+        console.log(err);
+
+      }
+    })
+  }
+
   handlePageEvent(e: PageEvent) {
     this.pageEvent = e;
     this.length = e.length;

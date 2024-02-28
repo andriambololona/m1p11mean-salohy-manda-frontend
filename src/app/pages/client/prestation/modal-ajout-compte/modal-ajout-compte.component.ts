@@ -41,23 +41,12 @@ export class ModalAjoutCompteComponent implements OnInit{
       compte:this.compte,
       montant:this.montant
     }
-    this.messageModalService.confirm("Confirmation","Ete vous").then(confirm=>{
-      if(confirm){
-        this.prestationService.createCompte(true,obj).subscribe({
-          next:(data)=>{
-            console.log(data);
-
-          },
-          error:(data)=>{
-            console.log(data);
-
-          }
-        })
-      }
-      else{
-
-      }
-    })
+    this.emitcompteUser.emit(obj);
+    /*let obj={
+      compte:this.compte,
+      montant:this.montant
+    }
+    */
 
   }
 
