@@ -1,123 +1,129 @@
 <div class="container">
-    <div class="card text-center" id="card-search">
-        <div class="card-body" id="recherche">
-          <div class="example-container">
-            <mat-form-field hintLabel="Max 10 characters">
-              <mat-label>Enter some input</mat-label>
-              <input matInput #input maxlength="10" placeholder="Ex. Nougat">
-              <mat-hint align="end">{{input.value.length}}/10</mat-hint>
-            </mat-form-field>
+  <div class="card text-center" id="card-search">
+    <div class="card-body" id="recherche">
+      <div class="example-container">
+        <mat-form-field hintLabel="Max 10 characters">
+          <mat-label>Enter some input</mat-label>
+          <input matInput #input maxlength="10" placeholder="Ex. Nougat">
+          <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+        </mat-form-field>
 
-            <mat-form-field>
-              <mat-label>Select me</mat-label>
-              <mat-select>
-                <mat-option value="option">Option</mat-option>
-              </mat-select>
-              <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
-            </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select me</mat-label>
+          <mat-select>
+            <mat-option value="option">Option</mat-option>
+          </mat-select>
+          <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+        </mat-form-field>
 
-              <button mat-fab extended color="accent">
-                      <mat-icon>search</mat-icon>
-                      Rechercher
-              </button>
-          </div>
-          <div class="example-button-row">
-            <button mat-fab extended color="primary" (click)="registerService()">
-              <mat-icon>add</mat-icon>
-              Ajout de service
-            </button>
-          </div>
-        </div>
-
+        <button mat-fab extended color="accent">
+          <mat-icon>search</mat-icon>
+          Rechercher
+        </button>
       </div>
-
-    <div class="card text-center">
-      <div class="card-header">
-        <h1 class="title">Liste des services</h1>
+      <div class="example-button-row">
+        <button mat-fab extended color="primary" (click)="registerService()">
+          <mat-icon>add</mat-icon>
+          Ajout de service
+        </button>
       </div>
-      <div class="card-body">
-        <div class="mat-elevation-z8">
-          <table mat-table [dataSource]="dataSource">
+    </div>
 
+  </div>
 
-            <!-- nom Column -->
-            <ng-container matColumnDef="nom">
-              <th mat-header-cell *matHeaderCellDef> Nom </th>
-              <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
-            </ng-container>
-            <!-- prenom Column -->
-            <ng-container matColumnDef="prix">
-              <th mat-header-cell *matHeaderCellDef> Prix(Ariary) </th>
-              <td mat-cell *matCellDef="let element" class="text-end"> 
-                <span *ngIf="element.estEnPromotion == true" >
-                  <span class="text-decoration-line-through text-danger px-2">{{ element.prix | currency: 'Ar' }}</span>
-                  <span>{{ element.prixPromotion | currency: 'Ar' }}</span>
-                </span>
-                <span *ngIf="element.estEnPromotion == false" >
-                  {{element.prix | currency: 'Ar' }} 
-                </span>
-              </td>
-            </ng-container>
-            
-            <!-- Promotion Column -->
-            <ng-container matColumnDef="promotion">
-              <th mat-header-cell *matHeaderCellDef> Promotion </th>
-              <td mat-cell *matCellDef="let element" class="text-end">
-                <span *ngIf="element.estEnPromotion == true" >
-                  <span>{{ element.promotionActuelle.dateDebut | date: 'd MMM yyyy' }} - {{ element.promotionActuelle.dateFin | date: 'd MMM yyyy' }}</span>
-                </span>
-                <span *ngIf="element.estEnPromotion == false" >
-                  -
-                </span>
-              </td>
-            </ng-container>
+  <div class="card text-center">
+    <div class="card-header">
+      <h1 class="title">Liste des services</h1>
+    </div>
+    <div class="card-body">
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
 
-            <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef class="text-end pe-5" > Actions </th>
-                <td mat-cell *matCellDef="let element">
-                  <section>
-                    <div class="example-button-row">
-                      <div class="example-flex-container">
-                        <div class="example-button-container">
-                          <button mat-mini-fab color="secondary" aria-label="Example icon button with a menu icon"
-                            matTooltip="Editer" (click)="updateService(element)">
-                            <mat-icon>edit</mat-icon>
-                          </button>
-                        </div>
+          <!-- Image Column -->
+          <ng-container matColumnDef="image">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element"> <img src="{{element.image}}" alt="" height="40" width="40" /> </td>
+          </ng-container>
 
-                        <div class="example-button-container">
-                          <button mat-mini-fab aria-label="Example icon button with a menu icon"
-                            matTooltip="Promotion" (click)="addPromotion(element)">
-                            <mat-icon>price_change</mat-icon>
-                          </button>
-                        </div>
+          <!-- nom Column -->
+          <ng-container matColumnDef="nom">
+            <th mat-header-cell *matHeaderCellDef> Nom </th>
+            <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+          </ng-container>
+          <!-- prenom Column -->
+          <ng-container matColumnDef="prix">
+            <th mat-header-cell *matHeaderCellDef> Prix(Ariary) </th>
+            <td mat-cell *matCellDef="let element" class="text-end">
+              <span *ngIf="element.estEnPromotion == true">
+                <span class="text-decoration-line-through text-danger px-2">{{ element.prix | currency: 'Ar' }}</span>
+                <span>{{ element.prixPromotion | currency: 'Ar' }}</span>
+              </span>
+              <span *ngIf="element.estEnPromotion == false">
+                {{element.prix | currency: 'Ar' }}
+              </span>
+            </td>
+          </ng-container>
 
-                        <div class="example-button-container">
+          <!-- Promotion Column -->
+          <ng-container matColumnDef="promotion">
+            <th mat-header-cell *matHeaderCellDef> Promotion </th>
+            <td mat-cell *matCellDef="let element" class="text-end">
+              <span *ngIf="element.estEnPromotion == true">
+                <span>{{ element.promotionActuelle.dateDebut | date: 'd MMM yyyy' }} - {{
+                  element.promotionActuelle.dateFin | date: 'd MMM yyyy' }}</span>
+              </span>
+              <span *ngIf="element.estEnPromotion == false">
+                -
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="text-end pe-5"> Actions </th>
+            <td mat-cell *matCellDef="let element">
+              <section>
+                <div class="example-button-row">
+                  <div class="example-flex-container">
+                    <div class="example-button-container">
+                      <button mat-mini-fab color="secondary" aria-label="Example icon button with a menu icon"
+                        matTooltip="Editer" (click)="updateService(element)">
+                        <mat-icon>edit</mat-icon>
+                      </button>
+                    </div>
+
+                    <div class="example-button-container">
+                      <button mat-mini-fab aria-label="Example icon button with a menu icon" matTooltip="Promotion"
+                        (click)="addPromotion(element)">
+                        <mat-icon>price_change</mat-icon>
+                      </button>
+                    </div>
+
+                    <!-- <div class="example-button-container">
                           <button mat-mini-fab color="primary" aria-label="Example icon button with a filter list icon"
                             matTooltip="Détails" (click)="openDialogDetailsService(element)">
 
                             <mat-icon>live_help</mat-icon>
                           </button>
-                        </div>
+                        </div> -->
 
-                      </div>
-                    </div>
-                  </section>
-                </td>
-              </ng-container>
+                  </div>
+                </div>
+              </section>
+            </td>
+          </ng-container>
 
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          </table>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
 
-          <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
-            [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]"
-            [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
+        <mat-paginator #paginator (page)="handlePageEvent($event)" [length]="length" [pageSize]="pageSize"
+          [disabled]="false" [showFirstLastButtons]="true" [pageSizeOptions]="[5,10,25,100]"
+          [hidePageSize]="hidePageSize" [pageIndex]="pageIndex" aria-label="Select page">
 
-          </mat-paginator>
+        </mat-paginator>
 
-        </div>
       </div>
-
     </div>
+
   </div>
+</div>

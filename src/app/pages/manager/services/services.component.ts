@@ -25,7 +25,7 @@ import { ModalAjoutPromotionComponent } from './modal-ajout-promotion/modal-ajou
 })
 export class ServicesComponent implements OnInit,AfterViewInit{
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['nom', 'prix', 'promotion','action'];
+  displayedColumns: string[] = ['image', 'nom', 'prix', 'promotion','action'];
   dataSource: MatTableDataSource<any>;
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
