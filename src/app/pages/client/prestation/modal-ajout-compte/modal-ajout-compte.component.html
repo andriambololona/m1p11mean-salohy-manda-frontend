@@ -1,7 +1,7 @@
 <mat-dialog-content>
   <div class="row">
     <div class="col-11">
-      <h2><mat-icon>add</mat-icon> Ajout un compte pour le paiement</h2>
+      <h2><mat-icon>add</mat-icon> Ajout de compte pour les paiements</h2>
     </div>
     <div class="col-1"> <button mat-icon-button class="btn_close"
         (click)="closeDialog()"><mat-icon>close</mat-icon></button></div>
@@ -10,37 +10,22 @@
 
 
     <section class="example-section">
-      <mat-checkbox class="example-margin" [(ngModel)]="mvola" name="mvola" (change)="checkMvola($event)">MVola</mat-checkbox>
-      <mat-checkbox class="example-margin" [(ngModel)]="orange" name="orange" (change)="checkOrange($event)">Orange monney</mat-checkbox>
-      <mat-checkbox class="example-margin" [(ngModel)]="airtel" name="airtel" (change)="checkAirtel($event)">Airtel monney</mat-checkbox>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="compte" name="compte" (change)="checkVerif($event)">
+        <mat-radio-button value="mvola" >Mvola</mat-radio-button>
+        <mat-radio-button value="orange" >Orange monney</mat-radio-button>
+        <mat-radio-button value="airtel" >Airtel monney</mat-radio-button>
+      </mat-radio-group>
     </section>
 
 
-      <mat-form-field class="example-full-width" *ngIf="isVisibleMvola">
+      <mat-form-field class="example-full-width" *ngIf="isVisibleMontant">
         <span matTextPrefix><mat-icon>payments</mat-icon> &nbsp;</span>
-        <mat-label>Solde Mvola</mat-label>
-        <input matInput type="number" class="example-right-align" [(ngModel)]="montantMvola" id="montant1" name="montant1" minlength="1"
+        <mat-label>Montant</mat-label>
+        <input matInput type="number" class="example-right-align" [(ngModel)]="montant" id="montant" name="montant" minlength="1"
           placeholder="0" required>
         <span matTextSuffix>.00</span>
 
       </mat-form-field>
-      <mat-form-field class="example-full-width" *ngIf="isVisibleOrange">
-        <span matTextPrefix><mat-icon>payments</mat-icon> &nbsp;</span>
-        <mat-label>Solde Orange monney</mat-label>
-        <input matInput type="number" class="example-right-align" [(ngModel)]="montantOrange"  id="montant2" name="montant2" minlength="1"
-          placeholder="0" required>
-        <span matTextSuffix>.00</span>
-
-      </mat-form-field>
-      <mat-form-field class="example-full-width" *ngIf="isVisibleAirtel">
-        <span matTextPrefix><mat-icon>payments</mat-icon> &nbsp;</span>
-        <mat-label>Solde airtel monney</mat-label>
-        <input matInput type="number" class="example-right-align" [(ngModel)]="montantAirtel"  id="montant3" name="montant3" minlength="1"
-          placeholder="0" required>
-        <span matTextSuffix>.00</span>
-
-      </mat-form-field>
-
 
 
     <mat-dialog-actions>
