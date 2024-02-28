@@ -26,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientModule } from './client/client.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { CustomAuthService } from '../@core/services/custom-auth-service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -55,6 +56,7 @@ import { CustomAuthService } from '../@core/services/custom-auth-service';
     FormsModule,
     AccueilModule,
     ReactiveFormsModule,
+    MatProgressSpinnerModule
     //ClientModule
   ],
   providers: [{provide:UserService,useClass:ApiUserService}]

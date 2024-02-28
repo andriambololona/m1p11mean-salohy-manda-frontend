@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiManagerService } from 'src/app/@core/services/api/api-manager.service';
 import { ManagerService } from 'src/app/@core/services/manager.service';
 import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CustomAuthService } from 'src/app/@core/services/custom-auth-service';
   imports: [
     CommonModule,
     AccueilRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressSpinnerModule
   ],
   providers:[{provide:UserService,useClass:ApiUserService},
     {provide:ManagerService,useClass:ApiManagerService},
