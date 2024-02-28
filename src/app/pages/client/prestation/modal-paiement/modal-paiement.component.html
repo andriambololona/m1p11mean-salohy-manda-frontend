@@ -1,9 +1,18 @@
 <h2 mat-dialog-title>Proceder au paiement</h2>
 <mat-dialog-content>
+  {{data_prestation._id}}
+  <section class="example-section">
+    <mat-radio-group aria-label="Select an option" [(ngModel)]="compte" name="compte">
 
+      <mat-radio-button *ngIf="data_prestation.client.compte.mvola" value="mvola" >Mvola</mat-radio-button>
+      <mat-radio-button *ngIf="data_prestation.client.compte.orange" value="orange" >Orange monney</mat-radio-button>
+      <mat-radio-button *ngIf="data_prestation.client.compte.airtel" value="airtel" >Airtel monney</mat-radio-button>
+    </mat-radio-group>
+  </section>
 
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button (click)="validerPaiement(data_prestation._id)">Valider</button>
 
 </mat-dialog-actions>

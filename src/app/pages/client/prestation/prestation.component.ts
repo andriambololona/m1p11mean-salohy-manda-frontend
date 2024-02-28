@@ -22,7 +22,7 @@ export class PrestationComponent {
   isLoading: boolean = false;
   page: number = 0;
   limit: number = 10;
-  displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire','statut','action'];
+  displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire','statut','solde','action'];
   dataSource = new MatTableDataSource<Prestation[]>([]);
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
