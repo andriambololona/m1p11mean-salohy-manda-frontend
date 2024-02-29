@@ -10,19 +10,21 @@ import { ManagerService } from 'src/app/@core/services/manager.service';
 import { ModalAjoutDepenseComponent } from './modal-ajout-depense/modal-ajout-depense.component';
 import { Observable } from 'rxjs';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
+import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
+import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 
 @Component({
   selector: 'app-depense',
   templateUrl: './depense.component.html',
-  styleUrls: ['./depense.component.scss']
+  styleUrls: ['./depense.component.scss'],
 })
 export class DepenseComponent {
   pageEvent: PageEvent;
-  displayedColumns: string[] = ['motif', 'montant','date','action'];
+  displayedColumns: string[] = ['motif', 'montant', 'date', 'action'];
   dataSource: MatTableDataSource<any>;
-  length: number;//colonne total sans pagination
-  pageSize: number=10;//nombre row initial
-  pageIndex: number=0;//page
+  length: number; //colonne total sans pagination
+  pageSize: number = 10; //nombre row initial
+  pageIndex: number = 0; //page
   pageSizeOptions = [5, 10, 25, 100];
   hidePageSize = false;
   showPageSizeOptions = true;
@@ -31,18 +33,21 @@ export class DepenseComponent {
   colorToogle: ThemePalette = 'accent';
   checkedToogle = false;
   disabledToogle = false;
-  isLoading:boolean=true;
+  isLoading: boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
-
   ngAfterViewInit() {
-    if(this.dataSource!=undefined)
+    if (this.dataSource != undefined)
       this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private managerService: ManagerService,public dialog: MatDialog) { }
+  constructor(
+    private managerService: ManagerService,
+    public dialog: MatDialog,
+    private snackBar: SnackBarService,
+    private messageModalService: MessageModalService
+  ) {}
 
   reloadAllDepense(page: number, limit: number) {
     const _page = page + 1;
@@ -54,22 +59,18 @@ export class DepenseComponent {
         this.length = data.body.paginator.dataCount;
         this.pageIndex = page;
         this.pageSize = limit;
-        this.isLoading=false;
+        this.isLoading = false;
         //this.isCheckedToogle=data.body.data;
         /*data.body.data.forEach(element => {
           this.user.estActif = element.estActif;
         });*/
         //console.log(data.body.data);
-
       },
-      error: (err) => {
-
-      }
-    })
+      error: (err) => {},
+    });
   }
   ngOnInit(): void {
     this.reloadAllDepense(this.pageIndex, this.pageSize);
-
   }
 
   handlePageEvent(e: PageEvent) {
@@ -77,29 +78,30 @@ export class DepenseComponent {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.reloadAllDepense(this.pageIndex, this.pageSize)
+    this.reloadAllDepense(this.pageIndex, this.pageSize);
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {
     if (setPageSizeOptionsInput) {
-      this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+      this.pageSizeOptions = setPageSizeOptionsInput
+        .split(',')
+        .map((str) => +str);
     }
   }
   openDialogAjoutDepense(): Observable<DepenseRequest> {
     const dialogRef = this.dialog.open(ModalAjoutDepenseComponent, {
-
       //data: {name: this.name, animal: this.animal},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-    return  new Observable((observer)=>{
-      dialogRef.componentInstance.emitDepense.subscribe((result)=>{
+    return new Observable((observer) => {
+      dialogRef.componentInstance.emitDepense.subscribe((result) => {
         observer.next(result);
-      })
-    })
+      });
+    });
   }
   /*openDialogDetailsService(service:object){
     const dialogRef = this.dialog.open(ModalDetailServiceComponent, {
@@ -160,32 +162,33 @@ export class DepenseComponent {
     })
   }*/
 
-
-  registerDepense(){
+  registerDepense() {
     this.openDialogAjoutDepense().subscribe({
-      next:(data:DepenseRequest)=>{
-       console.log(data);
-
-
-
-        this.managerService.addDepense(true,data).subscribe({
-          next:(data)=>{
-            this.reloadAllDepense(this.pageIndex, this.pageSize);
-            this.dialog.closeAll();
-          },
-          error:(err)=>{
-            console.error(err);
-
-          },
-          complete: () => {
-            //this.reloadAllService(this.pageIndex, this.pageSize);
-          },
-        })
+      next: (data: DepenseRequest) => {
+        console.log(data);
+        this.messageModalService
+          .confirm('Confirmation', 'Etes-vous sûr de vouloir continuer ?')
+          .then((confirm) => {
+            if (confirm) {
+              this.managerService.addDepense(true, data).subscribe({
+                next: (data) => {
+                  this.snackBar.openSnackBarSuccess('Ajout de dépense réussie');
+                  this.reloadAllDepense(this.pageIndex, this.pageSize);
+                  this.dialog.closeAll();
+                },
+                error: (err) => {
+                  console.error(err);
+                  this.snackBar.openSnackBarSuccess("Echec d'ajout de dépense");
+                },
+                complete: () => {
+                  //this.reloadAllService(this.pageIndex, this.pageSize);
+                },
+              });
+            } else {
+            }
+          });
       },
-      error:(err)=>{
-
-      }
-    })
-
+      error: (err) => {},
+    });
   }
 }

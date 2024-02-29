@@ -2,10 +2,10 @@
   <div class="card text-center" id="card-search">
     <div class="card-body" id="recherche">
       <div class="example-container">
-        <mat-form-field hintLabel="Max 10 characters" class="mx-2" >
+        <mat-form-field  class="mx-2" >
           <mat-label>Recherche ... </mat-label>
-          <input matInput #input maxlength="10" [(ngModel)]="recherche" placeholder="Ex. Nougat">
-          <mat-hint align="end">{{input.value.length}}/10</mat-hint>
+          <input matInput #input  [(ngModel)]="recherche" placeholder="--">
+
         </mat-form-field>
 
         <!-- <mat-form-field>

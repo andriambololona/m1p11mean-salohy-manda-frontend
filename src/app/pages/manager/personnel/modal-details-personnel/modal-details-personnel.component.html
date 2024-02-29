@@ -14,10 +14,13 @@
     </div>
     <div class="card-body">
       <h2 class="card-title">{{data_personnel.nom | titlecase }} {{data_personnel.prenom | titlecase }}</h2>
+      <p> <span class="text">Email:{{data_personnel.email}}</span></p>
+      <p> <span class="text">Horaire de travail:{{data_personnel.horaireTravail.heureDebut}}:{{data_personnel.horaireTravail.minuteDebut}} -> {{data_personnel.horaireTravail.heureFin}}:{{data_personnel.horaireTravail.minuteFin}}</span></p>
+
     </div>
     <hr class="mx-4 mx-2" />
     <div class="card-body">
-      <h2>Horaire de travail</h2>
+      <h2> Modifier l'horaire de travail</h2>
       <p>Début: </p>
       <div class="row">
         <div class="col-6">
@@ -117,6 +120,9 @@
       <div class="row justify-content-center p-2">
         <button mat-fab extended id="btn_valider" (click)="modifierHeureTravail()"
           ><mat-icon>done</mat-icon> Modifier horaire de travail</button>
+          <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+            <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+          </div>
       </div>
     </div>
   </div>

@@ -46,7 +46,7 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
   {
     name: 'Rendez-vous',
     icon:'schedule',
-    children: [{name: 'Suivi des taches',link:'/pages/employe/liste_rendez_vous',icon:'assignment_add'}]
+    children: [{name: 'Liste des rendez-vous',link:'/pages/employe/liste_rendez_vous',icon:'assignment_add'}]
   },
   {
     name: 'Profil',

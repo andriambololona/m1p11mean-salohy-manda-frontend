@@ -10,6 +10,7 @@ import { User } from 'src/app/@core/entity/user';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 import { RendezvousService } from 'src/app/@core/services/rendezvous.service';
 import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
+import { UserService } from 'src/app/@core/services/user.service';
 
 @Component({
   selector: 'app-rendez-vous',
@@ -32,7 +33,7 @@ export class RendezVousComponent {
   filter_statut:string="";
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private rendezVousService:RendezvousService,private messageModalService:MessageModalService,private snackBarService:SnackBarService){
+  constructor(private rendezVousService:RendezvousService,private messageModalService:MessageModalService,private snackBarService:SnackBarService,private userService:UserService){
 
   }
 
@@ -76,6 +77,19 @@ export class RendezVousComponent {
   }
 
   deleteRendezVous(id_rendezVous:string){
+    this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
+      if(confirm){
+        this.userService.deleteRendezVous(true,id_rendezVous).subscribe({
+          next:(data)=>{
+            this.isLoading = true;
+            this.GetData(true, this.page, this.limit);
+          },
+          error:(err)=>{
+
+          }
+        })
+      }
+    })
 
       console.log(id_rendezVous);
 

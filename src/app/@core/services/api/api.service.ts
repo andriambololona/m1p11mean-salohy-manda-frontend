@@ -42,6 +42,13 @@ export class ApiService {
     return this.http.post<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response'})
       .pipe(catchError(this.formatErrors));
   }
+
+  delete<T>(path: string): Observable<HttpResponse<T> | Observable<never>> {
+
+    return this.http.delete<T>(`${environment.api_host}${path}`, { observe: 'response'})
+      .pipe(catchError(this.formatErrors));
+  }
+
   put<T>(path: string, body: Object = {}, params: HttpParams = new HttpParams()): Observable<HttpResponse<T> | Observable<never>> {
 
     return this.http.put<T>(`${environment.api_host}${path}`, JSON.stringify(body), { observe: 'response',params})

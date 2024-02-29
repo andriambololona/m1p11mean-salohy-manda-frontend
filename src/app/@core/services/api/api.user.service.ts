@@ -124,6 +124,18 @@ export class ApiUserService extends UserService {
     );
   }
 
+  deleteRendezVous(showErrorNotif: boolean, id: string): Observable<HttpResponse<any> | Observable<never>> {
+    return this.apiService.delete<any>(environment.deleteRendezVous+"?id="+id).pipe(
+
+      map((x: HttpResponse<boolean>) => {
+
+        return this.handleResponse<boolean>(showErrorNotif, x);
+      }),
+      catchError((error) => {
+        return this.catchError(showErrorNotif, error);
+      })
+    );
+  }
   /*getAll(showErrorNotif:boolean, getTableDataParam: GetTableDataParam): Observable<HttpResponse<ApiResponse<Datatable<Array<Users>>>> | Observable<never>>{
         return this.apiService.post<ApiResponse<Datatable<Array<Users>>>>(environment.getAllUserUri, getTableDataParam).pipe(
             map((x: HttpResponse<ApiResponse<Datatable<Array<Users>>>>) => {

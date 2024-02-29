@@ -80,7 +80,7 @@
                   <div class="example-button-row">
                     <div class="example-flex-container">
                       <div  *ngIf="element.estRealise==false" class="example-button-container">
-                        <button  mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+                        <button  mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon" (click)="deleteRendezVous(element._id)">
                           <mat-icon>delete</mat-icon>
                         </button>
                       </div>

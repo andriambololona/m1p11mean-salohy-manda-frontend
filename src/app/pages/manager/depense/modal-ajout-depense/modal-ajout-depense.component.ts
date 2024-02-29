@@ -12,18 +12,20 @@ import { MessageModalService } from 'src/app/@core/services/message-modal.servic
 export class ModalAjoutDepenseComponent implements OnInit {
   depense:Depense=new Depense();
   depenseReq:DepenseRequest=new DepenseRequest();
+  isLoading:boolean=false;
   @Output() emitDepense=new EventEmitter();
   constructor(private messageModalService:MessageModalService,public dialogRef:MatDialogRef<ModalAjoutDepenseComponent>){
 
   }
 
   ngOnInit(): void {
-      
+
   }
 
   registerDepense(){
     this.depenseReq.montant=this.depense.montant;
     this.depenseReq.motif=this.depense.motif;
+    this.isLoading=true;
     this.emitDepense.emit(this.depenseReq);
   }
 

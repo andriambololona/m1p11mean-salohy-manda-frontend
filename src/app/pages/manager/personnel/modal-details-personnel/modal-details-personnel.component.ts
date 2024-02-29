@@ -20,6 +20,7 @@ export class ModalDetailsPersonnelComponent implements OnInit {
   minuteDebutTravail: number;
   heureFinTravail: number;
   minuteFinTravail: number;
+  isLoading:boolean=false;
   @Output() emitHoraireTravail=new EventEmitter();
 
   constructor(private messageModalService: MessageModalService, public dialogRef: MatDialogRef<ModalDetailsPersonnelComponent>,
@@ -45,6 +46,7 @@ export class ModalDetailsPersonnelComponent implements OnInit {
   }
 
   modifierHeureTravail(){
+    this.isLoading=true;
     this.emitHoraireTravail.emit({ id: this.data_personnel._id, heureDebutTravail: this.heureDebutTravail, minuteDebutTravail: this.minuteDebutTravail, heureFinTravail: this.heureFinTravail, minuteFinTravail: this.minuteFinTravail })
   }
 
