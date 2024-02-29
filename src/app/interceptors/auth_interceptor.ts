@@ -57,7 +57,10 @@ export class AuthInterceptor implements HttpInterceptor
       console.log("interceptor ");
       return next.handle(req);
     }
-
+    if (url.toString()=="https://salon-beaute-backend.onrender.com/api/service/manager/allService?page=1&limit=50" && method === 'GET') {
+      console.log("interceptor ");
+      return next.handle(req);
+    }
     if (url.endsWith(environment.login_uri) && method === 'POST') {
       req = req.clone({
         setHeaders: {
