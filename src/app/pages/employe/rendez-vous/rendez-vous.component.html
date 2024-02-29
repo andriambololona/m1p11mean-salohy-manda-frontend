@@ -7,7 +7,15 @@
           <mat-label>(client,service)</mat-label>
           <input matInput #input name="recherche" id="recherche" [(ngModel)]="filtre_recherche">
         </mat-form-field>
+        <mat-form-field >
+          <mat-label>Choisir un statut</mat-label>
+          <mat-select [(ngModel)]="filter_statut" name="statut">
+            <mat-option value="tout">Tout</mat-option>
+            <mat-option value="traite">Validé</mat-option>
+            <mat-option value="en cours" >En attente</mat-option>
 
+          </mat-select>
+        </mat-form-field>
 
 
           <button mat-fab extended color="accent"  (click)="filter()">
@@ -21,7 +29,7 @@
 
     <div class="card text-center">
       <div class="card-header">
-        <h1 class="title">Liste de vos rendez-vous à venir</h1>
+        <h1 class="title">Liste des tâches effectuées et en cours de validation</h1>
       </div>
       <div class="card-body">
         <div class="mat-elevation-z8">

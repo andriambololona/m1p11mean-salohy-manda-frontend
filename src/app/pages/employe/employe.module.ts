@@ -19,6 +19,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SuiviComponent } from './suivi/suivi.component';
 
 import { ProfilComponent } from './profil/profil.component';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.service';
+import { PrestationService } from 'src/app/@core/services/prestation.service';
 
 
 
@@ -47,6 +51,10 @@ import { ProfilComponent } from './profil/profil.component';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+    MatDatepickerModule,
+      MatNativeDateModule,
+
+  ],
+  providers:[ {provide:PrestationService,useClass:ApiPrestationService},]
 })
 export class EmployeModule { }

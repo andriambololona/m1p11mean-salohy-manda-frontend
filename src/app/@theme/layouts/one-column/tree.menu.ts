@@ -46,7 +46,7 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
   {
     name: 'Rendez-vous',
     icon:'schedule',
-    children: [{name: 'Listes',link:'/pages/employe/liste_rendez_vous',icon:'assignment_add'}]
+    children: [{name: 'Suivi des taches',link:'/pages/employe/liste_rendez_vous',icon:'assignment_add'}]
   },
   {
     name: 'Profil',
@@ -63,7 +63,7 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
     name: 'Suivi',
     icon:'preview',
     children: [
-      {name: 'tâches',link:'/pages/manager',icon:'task'}, {name: 'Commission',link:'/pages/manager',icon:'payments'},
+      {name: 'tâches et commision',link:'/pages/employe/suivi',icon:'task'}
     ]
   },
 ];
@@ -76,7 +76,7 @@ export const TREE_DATA_MANAGER: FoodNode[] = [
      {name: 'Services',link:'/pages/manager/service',icon:'shop'},
      {name: 'Depenses',link:'/pages/manager/depense',icon:'payments'}
     ],
-     
+
   },
   {
     name: 'Statistiques',

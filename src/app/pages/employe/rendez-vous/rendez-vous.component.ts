@@ -29,7 +29,7 @@ export class RendezVousComponent {
   hidePageSize = false;
   colorToogle: ThemePalette = 'accent';
   filtre_recherche:string="";
-
+  filter_statut:string="";
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private rendezVousService:RendezvousService,private messageModalService:MessageModalService,private snackBarService:SnackBarService){
@@ -64,7 +64,15 @@ export class RendezVousComponent {
 
   filter(){
     this.isLoading=true;
-    this.GetData(true,this.page,this.limit,this.filtre_recherche);
+    console.log(this.filter_statut);
+
+    if(this.filter_statut!=""){
+      this.GetData(true,this.page,this.limit,this.filter_statut);
+    }
+    if(this.filtre_recherche!=""){
+      this.GetData(true,this.page,this.limit,this.filtre_recherche);
+    }
+
   }
 
   deleteRendezVous(id_rendezVous:string){
