@@ -115,7 +115,7 @@ export class PrestationComponent {
   validatePaiement(data_prestation:any){
     this.OpenDialogPaiement(data_prestation).subscribe({
       next:(data_emiter:any)=>{
-        this.messageModalService.confirm("Confirmation","Ete vous").then(confirm=>{
+        this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
           if(confirm){
             this.prestationService.paiement(true,data_emiter).subscribe({
               next:(data)=>{
@@ -144,7 +144,7 @@ export class PrestationComponent {
   ajoutCompte(data_prestation:any){
     this.OpenDialogAjoutCompte(data_prestation).subscribe({
       next:(data_emiter)=>{
-        this.messageModalService.confirm("Confirmation","Ete vous").then(confirm=>{
+        this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
           if(confirm){
             this.prestationService.createCompte(true,data_emiter).subscribe({
               next:(data)=>{
