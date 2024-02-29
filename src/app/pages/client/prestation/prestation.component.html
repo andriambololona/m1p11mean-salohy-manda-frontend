@@ -126,7 +126,7 @@
                           Compte
                         </button>
                       </div>
-                      <div class="example-button-container">
+                      <div class="example-button-container" *ngIf="element.estPaye==undefined ">
 
                         <button mat-fab extended color="accent" (click)="validatePaiement(element)">
                           Payer
