@@ -15,20 +15,24 @@ import { RendezvousService } from '../rendezvous.service';
 import { RendezVousRequest } from '../../entity/request/rendezVousRequest';
 import { Rendezvous } from '../../entity/rendezvous';
 import { ApiResponse } from '../../entity/api-response';
+import { SnackBarService } from '../snack-bar.service';
 
 @Injectable()
 export class ApiRendezvousService extends RendezvousService {
   constructor(
     private apiService: ApiService,
+    private snackBar:SnackBarService
     //private toastrService: NbToastrService
   ) {
     super();
   }
   catchError(showErrorNotif: boolean, error: any): Observable<never> {
     if (error instanceof Error) {
+      this.snackBar.openSnackBarErrorServer();
       throw new Error(error.message);
     } else {
       if (showErrorNotif) {
+        this.snackBar.openSnackBarSuccess(error.message);
        // this.toastrService.danger(error, 'Erreur');
       }
       throw new Error(error);

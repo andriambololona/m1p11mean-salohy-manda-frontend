@@ -100,12 +100,12 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       width: '800px',
       data: {service:service},
     });
-    
+
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-    
+
     return  new Observable((observer)=>{
       dialogRef.componentInstance.emitService.subscribe((result)=>{
         observer.next(result);
@@ -167,11 +167,12 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       next: (data: PromotionServiceRequest) => {
         this.managerService.addPromotion(true, data).subscribe({
           next: (data) => {
+            this.snackBar.openSnackBarSuccess("Ajout de promotion réussie");
             this.dialog.closeAll();
           },
           error: (err)=>{
             console.error(err);
-               
+
           },
           complete: () => {
             this.reloadAllService(this.pageIndex, this.pageSize);
@@ -192,7 +193,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
           next:(data)=>{
             //console.log(data);
             this.dialog.closeAll();
-            this.snackBar.openSnackBarSuccess("Modification du service réussi");
+            this.snackBar.openSnackBarSuccess("Modification du service réussie");
           },
           error:(err)=>{
             console.error(err);
@@ -226,7 +227,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
         console.log(formData.get("image"));
         this.managerService.createService(true,formData).subscribe({
           next:(data)=>{
-
+            this.snackBar.openSnackBarSuccess("Enregistrement du service réussie");
             this.dialog.closeAll();
           },
           error:(err)=>{

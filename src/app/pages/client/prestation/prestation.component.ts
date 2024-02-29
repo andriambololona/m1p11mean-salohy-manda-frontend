@@ -54,6 +54,7 @@ export class PrestationComponent {
   }
 
   GetDataPrestation(showErrorNotif: boolean, page: number, limit: number,dateDebut:string,dateFin:string) {
+    this.isLoading=true;
     const _page = page+1;
     this.prestatiohnService.getAllPrestation(showErrorNotif,_page, limit,dateDebut,dateFin).subscribe({
       next:(data:HttpResponse<ApiResponse<any>>)=>{
@@ -120,12 +121,13 @@ export class PrestationComponent {
             this.prestationService.paiement(true,data_emiter).subscribe({
               next:(data)=>{
                 console.log(data);
+                this.dialog.closeAll();
                 this.snackBar.openSnackBarSuccess("Validation paiement réussi")
                 //this.dialogRefPaiement.close();
                 this.GetDataPrestation(true, this.page, this.limit,null,null);
               },
               error:(err)=>{
-                console.log(err);
+
 
               }
             })
@@ -135,6 +137,7 @@ export class PrestationComponent {
 
       },
       error:(err)=>{
+
         console.log(err);
 
       }
@@ -150,7 +153,7 @@ export class PrestationComponent {
               next:(data)=>{
                 console.log(data);
                 this.snackBar.openSnackBarSuccess("Ajout montant réussi")
-
+                this.dialog.closeAll();
                 this.GetDataPrestation(true, this.page, this.limit,null,null);
               },
               error:(data)=>{

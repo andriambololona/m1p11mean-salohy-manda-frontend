@@ -20,6 +20,7 @@ import { DepenseRequest } from '../../entity/request/depenseRequest';
 
 
 import { PromotionServiceRequest } from '../../entity/request/promotionServiceRequest';
+import { SnackBarService } from '../snack-bar.service';
 
 
 
@@ -28,15 +29,18 @@ import { PromotionServiceRequest } from '../../entity/request/promotionServiceRe
 export class ApiManagerService extends ManagerService {
   constructor(
     private apiService: ApiService,
+    private snackBar:SnackBarService
     //private toastrService: NbToastrService
   ) {
     super();
   }
   catchError(showErrorNotif: boolean, error: any): Observable<never> {
     if (error instanceof Error) {
+      this.snackBar.openSnackBarErrorServer();
       throw new Error(error.message);
     } else {
       if (showErrorNotif) {
+        this.snackBar.openSnackBarSuccess(error.message);
        // this.toastrService.danger(error, 'Erreur');
       }
       throw new Error(error);
@@ -159,7 +163,7 @@ addDepense(showErrorNotif: boolean, depenseRequest: DepenseRequest): Observable<
   return this.apiService.post<ApiResponse<any>>(environment.addDepense_uri, depenseRequest).pipe(
 
     map((x: HttpResponse<ApiResponse<any>> ) => {
-  
+
       return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
     }),
     catchError((error) => {

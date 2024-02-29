@@ -12,6 +12,7 @@ import { PrestationService } from 'src/app/@core/services/prestation.service';
 export class ModalPaiementComponent implements OnInit{
   compte:string;
   data_prestation:any;
+  isLoading:boolean=false;
   @Output() emitDataPaiement=new EventEmitter();
   constructor(
     public dialogRef: MatDialogRef<ModalPaiementComponent>,
@@ -29,7 +30,8 @@ export class ModalPaiementComponent implements OnInit{
       compte:this.compte
     }
     this.emitDataPaiement.emit(obj);
-    this.dialogRef.close();
+    this.isLoading=true;
+    //this.dialogRef.close();
 
   }
 

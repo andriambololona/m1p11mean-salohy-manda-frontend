@@ -12,6 +12,7 @@ import { PromotionServiceRequest } from 'src/app/@core/entity/request/promotionS
 })
 export class ModalAjoutPromotionComponent implements OnInit {
   service: Service=new Service();
+  isLoading:boolean=false;
   promotionServiceRequest: PromotionServiceRequest=new PromotionServiceRequest();
   selectedFile?:File;
 
@@ -30,10 +31,11 @@ export class ModalAjoutPromotionComponent implements OnInit {
     this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir enregistrer cette promotion ?").then(confirm=>{
       if(confirm){
         this.promotionServiceRequest.id = this.service._id;
+        this.isLoading=true;
         this.emitService.emit(this.promotionServiceRequest);
        }
        else{
-       
+
        }
     });
   }

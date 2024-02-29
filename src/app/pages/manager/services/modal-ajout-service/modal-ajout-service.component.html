@@ -59,7 +59,7 @@
       <div class="col-12">
         <label for="files" class="fw-bold py-2">Image de présentation</label>
         <br/>
-        <input type="file" name="files" id="files" (change)="selectFile($event)" 
+        <input type="file" name="files" id="files" (change)="selectFile($event)"
           required  accept="image/*"
         />
       </div>
@@ -69,6 +69,8 @@
       <button mat-fab extended id="btn_valider" [disabled]="!myform.form.valid"
         (click)="registerService()"><mat-icon>done</mat-icon> Valider</button>
     </mat-dialog-actions>
-
+    <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+      <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+    </div>
   </form>
 </mat-dialog-content>

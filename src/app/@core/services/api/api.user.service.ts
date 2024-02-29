@@ -18,20 +18,24 @@ import { ApiResponse } from './api-response';
 import { UserRequest } from '../../entity/request/userRequest';
 import { User } from '../../entity/user';
 import { RendezVousRequest } from '../../entity/request/rendezVousRequest';
+import { SnackBarService } from '../snack-bar.service';
 
 @Injectable()
 export class ApiUserService extends UserService {
   constructor(
     private apiService: ApiService,
+    private snackBar:SnackBarService
     //private toastrService: NbToastrService
   ) {
     super();
   }
   catchError(showErrorNotif: boolean, error: any): Observable<never> {
     if (error instanceof Error) {
+      this.snackBar.openSnackBarErrorServer();
       throw new Error(error.message);
     } else {
       if (showErrorNotif) {
+        this.snackBar.openSnackBarError(error.message);
        // this.toastrService.danger(error, 'Erreur');
       }
       throw new Error(error);
@@ -83,7 +87,7 @@ export class ApiUserService extends UserService {
     showErrorNotif: boolean,
     user: FormData
   ): Observable<HttpResponse<any> | Observable<never>> {
-    
+
     return this.apiService.postMultipart<boolean>(environment.register_uri, user).pipe(
 
       map((x: HttpResponse<boolean>) => {

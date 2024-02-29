@@ -13,12 +13,14 @@ import { ApiService } from './api.service';
 import { environment } from 'src/environments/environment';
 import { PrestationService } from '../prestation.service';
 import { ApiResponse } from '../../entity/api-response';
+import { SnackBarService } from '../snack-bar.service';
 
 @Injectable()
 export class ApiPrestationService extends PrestationService {
 
   constructor(
     private apiService: ApiService,
+    private snnackBar:SnackBarService,
     //private toastrService: NbToastrService
   ) {
     super();
@@ -26,9 +28,12 @@ export class ApiPrestationService extends PrestationService {
 
   catchError(showErrorNotif: boolean, error: any): Observable<never> {
     if (error instanceof Error) {
+      this.snnackBar.openSnackBarErrorServer();
       throw new Error(error.message);
     } else {
       if (showErrorNotif) {
+        this.snnackBar.openSnackBarError(error.message);
+        throw new Error(error);
         // this.toastrService.danger(error, 'Erreur');
       }
       throw new Error(error);
@@ -82,6 +87,8 @@ export class ApiPrestationService extends PrestationService {
           return this.handleResponse<any>(showErrorNotif,x);
       }),
       catchError((error)=>{
+
+
         return this.catchError(showErrorNotif,error);
       })
       );

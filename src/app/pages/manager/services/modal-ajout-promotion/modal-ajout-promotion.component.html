@@ -9,7 +9,7 @@
 			</button>
 		</div>
 	</div>
-	
+
 	<div class="row justify-content-center">
 		<div class="col-12 col-md-8 px-2">
 			<form class="example-form" #myform="ngForm" novalidate>
@@ -17,7 +17,7 @@
 					<mat-label>Description</mat-label>
 					<input matInput type="text" #nom="ngModel" [(ngModel)]="promotionServiceRequest.description" id="description" name="decription" minlength="1" required>
 				</mat-form-field>
-		
+
 				<mat-form-field class="example-full-width">
 					<span matTextPrefix><mat-icon>payments</mat-icon> &nbsp;</span>
 					<mat-label>Taux de réduction</mat-label>
@@ -25,22 +25,25 @@
 						name="pourcentageReduction" minlength="1" placeholder="0" required>
 					<span matTextSuffix>.00</span>
 				</mat-form-field>
-		
+
 				<mat-form-field class="example-full-width" floatLabel="always">
 					<span matTextPrefix><mat-icon>timer</mat-icon> &nbsp;</span>
 					<mat-label>Date de début de la promotion</mat-label>
 					<input matInput type="date" #dure="ngModel" [(ngModel)]="promotionServiceRequest.dateDebut" id="dateDebut" name="dateDebut" required>
 				</mat-form-field>
-		
+
 				<mat-form-field class="example-full-width" floatLabel="always">
 					<span matTextPrefix><mat-icon>timer</mat-icon> &nbsp;</span>
 					<mat-label>Date de fin de la promotion</mat-label>
 					<input matInput type="date" #dure="ngModel" [(ngModel)]="promotionServiceRequest.dateFin" id="dateFin" name="dateFin" required>
 				</mat-form-field>
-		
+
 				<mat-dialog-actions class="justify-content-center" >
 					<button mat-fab extended id="btn_valider"
 						(click)="addPromotion()"><mat-icon>done</mat-icon>Valider</button>
+            <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+              <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+            </div>
 				</mat-dialog-actions>
 			</form>
 		</div>

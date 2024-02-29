@@ -15,6 +15,7 @@ export class ModalAjoutServiceComponent implements OnInit{
   service:Service=new Service();
   serviceReq:ServiceRequest=new ServiceRequest();
   selectedFile?:File;
+  isLoading:boolean=false;
   @Output() emitService=new EventEmitter();
   constructor(private messageModalService: MessageModalService,public dialogRef: MatDialogRef<ModalAjoutServiceComponent>,private managerService:ManagerService){
 
@@ -22,7 +23,7 @@ export class ModalAjoutServiceComponent implements OnInit{
   ngOnInit(): void {
 
   }
-  
+
   registerService(){
     this.messageModalService.confirm("Confirmation","Etes-vous sûr de vouloir continuer ?").then(confirm=>{
       if(confirm){
@@ -30,15 +31,16 @@ export class ModalAjoutServiceComponent implements OnInit{
         this.serviceReq.duree=this.service.duree;
         this.serviceReq.nom=this.service.nom;
         this.serviceReq.prix=this.service.prix;
-        
-        console.log(this.service);
+
+        console.log(this.service)
+        this.isLoading=true;
         this.emitService.emit(this.serviceReq);
        }
        else{
-       
+
        }
 
-      
+
     })
   }
   selectFile(event:any){

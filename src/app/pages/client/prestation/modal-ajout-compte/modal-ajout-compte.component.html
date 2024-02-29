@@ -30,7 +30,9 @@
 
     <mat-dialog-actions>
       <button mat-fab extended id="btn_valider" (click)="registerCompte()"><mat-icon>done</mat-icon> Valider</button>
-
+      <div *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center; background: white;">
+        <mat-progress-spinner color="accent" [diameter]="35" mode="indeterminate"></mat-progress-spinner>
+      </div>
     </mat-dialog-actions>
   </form>
 </mat-dialog-content>

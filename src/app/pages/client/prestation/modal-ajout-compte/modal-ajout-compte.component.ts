@@ -14,6 +14,7 @@ import { PrestationService } from 'src/app/@core/services/prestation.service';
 export class ModalAjoutCompteComponent implements OnInit{
   user:User=new User();
   userReq:UserRequest=new UserRequest();
+  isLoading:boolean=false;
   @Output() emitcompteUser=new EventEmitter();
 
   compte:string;
@@ -42,7 +43,8 @@ export class ModalAjoutCompteComponent implements OnInit{
       montant:this.montant
     }
     this.emitcompteUser.emit(obj);
-    this.dialogRef.close();
+    this.isLoading=true;
+    //this.dialogRef.close();
     /*let obj={
       compte:this.compte,
       montant:this.montant

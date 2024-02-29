@@ -12,6 +12,7 @@ import { ModalAjoutServiceComponent } from '../modal-ajout-service/modal-ajout-s
 })
 export class ModalUpdateServiceComponent implements OnInit {
   service: Service = new Service();
+  isLoading:boolean=false;
   @Output() emitService = new EventEmitter();
   constructor(private messageModalService: MessageModalService, public dialogRef: MatDialogRef<ModalUpdateServiceComponent>,
      private managerService: ManagerService,@Inject(MAT_DIALOG_DATA) public data: any) {
@@ -25,6 +26,7 @@ export class ModalUpdateServiceComponent implements OnInit {
     this.messageModalService.confirm("Confirmation", "Etes-vous sûr de vouloir continuer ?").then(confirm => {
       if (confirm) {
         //console.log(this.service);
+        this.isLoading=true;
         this.emitService.emit(this.service);
       }
       else {

@@ -8,18 +8,21 @@ import { ApiResponse } from '../../entity/api-response';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { UserRequest } from '../../entity/request/userRequest';
+import { SnackBarService } from '../snack-bar.service';
 
 @Injectable()
 export class ApiClientService extends ClientService{
 
-  constructor(private apiService:ApiService) {
+  constructor(private apiService:ApiService,private snackBar:SnackBarService) {
     super();
   }
   catchError(showErrorNotif: boolean, error: any): Observable<never> {
     if (error instanceof Error) {
+      this.snackBar.openSnackBarErrorServer();
       throw new Error(error.message);
     } else {
       if (showErrorNotif) {
+        this.snackBar.openSnackBarSuccess(error.message);
        // this.toastrService.danger(error, 'Erreur');
       }
       throw new Error(error);
