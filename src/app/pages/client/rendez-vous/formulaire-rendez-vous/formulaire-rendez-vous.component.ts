@@ -14,6 +14,7 @@ import { User } from 'src/app/@core/entity/user';
 import { ClientService } from 'src/app/@core/services/client.service';
 import { ManagerService } from 'src/app/@core/services/manager.service';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
+import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
 import { TokenStorageService } from 'src/app/@core/services/token-storage.service';
 
 
@@ -65,7 +66,7 @@ export class FormulaireRendezVousComponent implements OnInit{
   public color: ThemePalette = 'accent';
 
   dateControl=new FormControl("dateControl");
-  constructor(private clientService:ClientService,private managerService:ManagerService
+  constructor(private clientService:ClientService,private managerService:ManagerService,private snackBarService:SnackBarService
     ,private tokenStorage:TokenStorageService,private messageModalService:MessageModalService,private router:Router){
     //super();
   }
@@ -173,12 +174,13 @@ export class FormulaireRendezVousComponent implements OnInit{
           next:(data)=>{
             console.log(data);
             this.isLoading=false;
+            this.snackBarService.openSnackBarSuccess("Ajout rendez-vous réussi");
             this.router.navigateByUrl('/pages/client/historique_rendez_vous');
 
           },
           error:(err)=>{
             console.log(err);
-
+            this.snackBarService.openSnackBarErrorServer();
           }
         })
       }else{

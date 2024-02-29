@@ -33,7 +33,13 @@ export class AuthInterceptor implements HttpInterceptor
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+
+
     let { url, method, headers, body } = req;
+
+    console.log(url.split("/")[6].split("?")[0]);
+    console.log(method);
+
     //return this.handleRequest(req, next, null);
      if (url.endsWith(environment.register_uri) && method === 'POST') {
       /*req = req.clone({
@@ -43,6 +49,11 @@ export class AuthInterceptor implements HttpInterceptor
         },
         //body: body += '&client_id=' + environment.client_id
       });*/
+      console.log("interceptor ");
+      return next.handle(req);
+    }
+
+    if (url.split("/")[6].split("?")[0]=="allService" && method === 'GET') {
       console.log("interceptor ");
       return next.handle(req);
     }

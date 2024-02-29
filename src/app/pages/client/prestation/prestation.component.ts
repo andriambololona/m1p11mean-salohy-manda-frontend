@@ -1,8 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, ViewChild } from '@angular/core';
+import { Component, Inject, Optional, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ApiResponse } from 'src/app/@core/entity/api-response';
@@ -12,6 +12,7 @@ import { ModalPaiementComponent } from './modal-paiement/modal-paiement.componen
 import { ModalAjoutCompteComponent } from './modal-ajout-compte/modal-ajout-compte.component';
 import { Observable } from 'rxjs';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
+import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
 
 @Component({
   selector: 'app-prestation',
@@ -36,7 +37,10 @@ export class PrestationComponent {
   dateFin=new FormControl<Date | null>(null);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private prestatiohnService:PrestationService,private dialog:MatDialog,private messageModalService:MessageModalService,private prestationService:PrestationService){
+  constructor(private prestatiohnService:PrestationService,private snackBar:SnackBarService
+    ,private dialog:MatDialog,private messageModalService:MessageModalService,private prestationService:PrestationService
+
+  ){
 
   }
 
@@ -116,6 +120,8 @@ export class PrestationComponent {
             this.prestationService.paiement(true,data_emiter).subscribe({
               next:(data)=>{
                 console.log(data);
+                this.snackBar.openSnackBarSuccess("Validation paiement réussi")
+                //this.dialogRefPaiement.close();
                 this.GetDataPrestation(true, this.page, this.limit,null,null);
               },
               error:(err)=>{
@@ -143,6 +149,8 @@ export class PrestationComponent {
             this.prestationService.createCompte(true,data_emiter).subscribe({
               next:(data)=>{
                 console.log(data);
+                this.snackBar.openSnackBarSuccess("Ajout montant réussi")
+
                 this.GetDataPrestation(true, this.page, this.limit,null,null);
               },
               error:(data)=>{

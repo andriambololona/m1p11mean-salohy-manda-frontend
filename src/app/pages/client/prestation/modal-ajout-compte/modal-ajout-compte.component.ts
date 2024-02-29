@@ -42,6 +42,7 @@ export class ModalAjoutCompteComponent implements OnInit{
       montant:this.montant
     }
     this.emitcompteUser.emit(obj);
+    this.dialogRef.close();
     /*let obj={
       compte:this.compte,
       montant:this.montant

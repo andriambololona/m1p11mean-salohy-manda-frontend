@@ -29,6 +29,7 @@ export class ModalPaiementComponent implements OnInit{
       compte:this.compte
     }
     this.emitDataPaiement.emit(obj);
+    this.dialogRef.close();
 
   }
 

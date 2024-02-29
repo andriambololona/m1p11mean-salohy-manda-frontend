@@ -58,14 +58,15 @@
             <ng-container matColumnDef="solde">
               <th mat-header-cell *matHeaderCellDef> Solde disponible (Ariary)</th>
               <td mat-cell *matCellDef="let element">
-                <li>
-                  <span *ngIf="element.client.compte.mvola!=undefined">Mvola: {{element.client.compte.mvola }} Ariary</span>
+
+                <li  *ngIf="element.client.compte">
+                  <span *ngIf="element.client.compte.mvola">Mvola: {{element.client.compte.mvola }} Ariary</span>
                 </li>
-                <li>
-                  <span  *ngIf="element.client.compte.airtel!=undefined">Airtel monney: {{element.client.compte.airtel }} Ariary</span>
+                <li *ngIf="element.client.compte">
+                  <span  *ngIf="element.client.compte.airtel">Airtel monney: {{element.client.compte.airtel }} Ariary</span>
                 </li>
-                <li>
-                  <span  *ngIf="element.client.compte.orange!=undefined">Orange monney: {{element.client.compte.orange }} Ariary</span>
+                <li *ngIf="element.client.compte">
+                  <span  *ngIf="element.client.compte.orange">Orange monney: {{element.client.compte.orange }} Ariary</span>
                 </li>
 
               </td>

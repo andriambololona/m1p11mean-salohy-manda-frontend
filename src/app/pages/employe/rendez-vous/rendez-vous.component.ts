@@ -9,6 +9,7 @@ import { Service } from 'src/app/@core/entity/service';
 import { User } from 'src/app/@core/entity/user';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 import { RendezvousService } from 'src/app/@core/services/rendezvous.service';
+import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
 
 @Component({
   selector: 'app-rendez-vous',
@@ -31,7 +32,7 @@ export class RendezVousComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private rendezVousService:RendezvousService,private messageModalService:MessageModalService){
+  constructor(private rendezVousService:RendezvousService,private messageModalService:MessageModalService,private snackBarService:SnackBarService){
 
   }
 
@@ -82,17 +83,15 @@ export class RendezVousComponent {
       if(confirm){
         this.rendezVousService.createPrestationRendezVous(true,body).subscribe({
           next:(data)=>{
-
+            this.snackBarService.openSnackBarSuccess("validation rendez-vous réussie")
             this.GetData(true, this.page, this.limit);
           },
           error:(err)=>{
-
+            this.snackBarService.openSnackBarErrorServer();
           }
         })
       }
-      else{
 
-      }
     });
     //bodyRendezVous._id=id_rendezVous;
       console.log(id_rendezVous);

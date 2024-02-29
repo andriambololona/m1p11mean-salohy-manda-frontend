@@ -32,7 +32,7 @@ import { PrestationService } from 'src/app/@core/services/prestation.service';
 import { ApiPrestationService } from 'src/app/@core/services/api/api.prestation.service';
 import { MAT_DATE_LOCALE, MatNativeDateModule, MatPseudoCheckbox, MatPseudoCheckboxModule } from '@angular/material/core';
 import { ModalPaiementComponent } from './prestation/modal-paiement/modal-paiement.component';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { ModalAjoutCompteComponent } from './prestation/modal-ajout-compte/modal-ajout-compte.component';
 /*const CUSTOM_DATE_FORMATS: NgxMatDateFormats = {
   parse: {
@@ -82,12 +82,14 @@ import { ModalAjoutCompteComponent } from './prestation/modal-ajout-compte/modal
       MatNativeDateModule,
       MatDialogModule,
       MatInputModule,
-     ReactiveFormsModule
+     ReactiveFormsModule,
+
 
       //FormulaireRendezVousModule,
   ],
   providers: [
    // { provide: NGX_MAT_DATE_FORMATS, useValue: CUSTOM_DATE_FORMATS }
+
    {provide:CustomAuthService},
    {provide:PrestationService,useClass:ApiPrestationService},
 
