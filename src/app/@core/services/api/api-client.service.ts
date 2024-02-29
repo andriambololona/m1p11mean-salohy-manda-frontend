@@ -34,6 +34,17 @@ export class ApiClientService extends ClientService{
     return response;
   }
 
+  findService(showErrorNotif:boolean, q: string, page: number = 1, limit: number = 10): Observable<HttpResponse<ApiResponse<any>>|Observable<never>> {
+    return this.apiService.get<ApiResponse<any>>(environment.find_service_uri+`?q=${q}page=${page}&limit=${limit}`).pipe(
+      map((x: HttpResponse<ApiResponse<any>>) => {
+        return this.handleResponse<ApiResponse<any>>(showErrorNotif, x);
+      }),
+        catchError((error) => {
+          return this.catchError(showErrorNotif, error);
+      }),
+    );
+  }
+
   getAllPersonnelEmploye(showErrorNotif: boolean,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>{
     return this.apiService.get<ApiResponse<any>>(environment.getAllersonnelEmploye_uri+"?page="+page+"&limit="+limit).pipe(
 
