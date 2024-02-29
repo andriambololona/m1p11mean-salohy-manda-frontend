@@ -1,0 +1,60 @@
+<div class="container">
+	<div class="row">
+		<div class="col">
+
+			<mat-card class="example-card" *ngIf="isLoading">
+				<mat-card-content>
+					<div class="row justify-content-center">
+						<div class="col-1">
+							<mat-progress-spinner color="accent" [diameter]="50" mode="indeterminate"></mat-progress-spinner>
+						</div>
+					</div>
+				</mat-card-content>
+			</mat-card>
+
+			<mat-card class="example-card" *ngIf="isLoading == false">
+				<mat-card-header>
+					<div class="row w-100">
+						<div class="col-6" >
+							<img src="{{employe.image}}" alt="Photo de profil" height="100" width="100" class="mx-5">
+						</div>
+						<div class="col-6" >
+							<h1>{{employe.nom}} {{employe.prenom}}</h1>
+						</div>
+					</div>
+				</mat-card-header>
+
+				<hr class="my-5 mx-5" />
+
+				<mat-card-content class="px-5">
+					<div class="row">
+						<div class="col-12 col-md-6">
+							<h2>Contact</h2>
+							<p><b>Email</b>: {{ employe.email }}</p>
+						</div>
+						<div class="col-12 col-md-6">
+							<h2>Horaire de travail</h2>
+							<span *ngIf="employe.horaireTravail" >
+								<p><b>Début:</b> {{employe.horaireTravail.heureDebut}}:{{employe.horaireTravail.heureFin}}</p>
+								<p><b>Fin:</b> {{employe.horaireTravail.heureFin}}:{{employe.horaireTravail.minuteFin}}</p>
+							</span>
+							<span *ngIf="!employe.horaireTravail" >
+								<p>Aucune horaire de travail spécifiée</p>
+							</span>
+						</div>
+					</div>
+				</mat-card-content>
+
+				<mat-card-actions>
+					<!-- <button mat-button (click)="onNoClick()">Non</button>
+					<button mat-button cdkFocusInitial (click)="confirm()">D'accord</button> -->
+				</mat-card-actions>
+
+				<mat-card-footer>
+					<!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+				</mat-card-footer>
+
+			</mat-card>
+		</div>
+	</div>
+</div>
