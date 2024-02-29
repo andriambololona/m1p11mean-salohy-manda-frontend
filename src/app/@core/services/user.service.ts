@@ -13,4 +13,5 @@ export abstract class UserService {
   abstract createRendezVous(showErrorNotif:boolean,rendezVousReq:RendezVousRequest):Observable<HttpResponse<boolean>|Observable<never>>
   abstract getTempsTravailMoyen(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>
   abstract getProfil(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>
+  abstract setHoraireTravail(showErrorNotif: boolean, id: string, heureDebut: number, minuteDebut: number, heureFin: number, minuteFin: number):Observable<HttpResponse<any>|Observable<never>>
 }

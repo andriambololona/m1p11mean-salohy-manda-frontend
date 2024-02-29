@@ -46,6 +46,17 @@ export class ApiUserService extends UserService {
     return response;
   }
 
+  setHoraireTravail(showErrorNotif: boolean, id: string, heureDebut: number, minuteDebut: number, heureFin: number, minuteFin: number):Observable<HttpResponse<any>|Observable<never>>{
+    return this.apiService.patch<any>(environment.horaireTravail_uri, {id, heureDebut, minuteDebut, heureFin, minuteFin} ).pipe(
+      map((x: HttpResponse<boolean>) => {
+        return this.handleResponse<any>(showErrorNotif, x);
+      }),
+      catchError((error) => {
+        return this.catchError(showErrorNotif, error);
+      })
+    );
+  }
+
   getProfil(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>{
     return this.apiService.get<any>(environment.profile_uri).pipe(
       map((x: HttpResponse<boolean>) => {

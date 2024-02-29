@@ -14,7 +14,7 @@ import { PromotionServiceRequest } from '../entity/request/promotionServiceReque
 @Injectable()
 export abstract class ManagerService {
 
-  abstract getAllPersonnel(showErrorNotif:boolean,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
+  abstract getAllPersonnel(showErrorNotif:boolean, q: string,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract updateStatusUser(showErrorNotif:boolean,user:UserRequest,status:boolean):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract getAllService(showErrorNotif:boolean,page:number,limit:number):Observable<HttpResponse<ApiResponse<any>>|Observable<never>>
   abstract createService(showErrorNotif:boolean,serviceReq:FormData):Observable<HttpResponse<boolean>|Observable<never>>

@@ -12,6 +12,8 @@ import { ModalDetailsPersonnelComponent } from './modal-details-personnel/modal-
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
+import { Observable } from 'rxjs';
+import { UserService } from 'src/app/@core/services/user.service';
 
 
 @Component({
@@ -39,15 +41,21 @@ export class PersonnelComponent implements OnInit {
   checkedToogle = false;
   disabledToogle = false;
   isLoading:boolean=true;
+  recherche: string = "";
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  constructor(private _snackBar: SnackBarService,private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog, private userService: UserService) { }
+  
+  ngOnInit(): void {
+    this.reloadAllPersonnel();
+
+  }
 
   ngAfterViewInit() {
     if(this.dataSource!=undefined)
       this.dataSource.paginator = this.paginator;
   }
-
-  constructor(private _snackBar: SnackBarService,private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
 
   /*horizontalPosition: MatSnackBarHorizontalPosition = 'right';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
@@ -57,44 +65,64 @@ export class PersonnelComponent implements OnInit {
       verticalPosition: this.verticalPosition});
   }*/
 
-
-  reloadAllPersonnel(page: number, limit: number) {
-    const _page = page + 1;
-    this.managerService.getAllPersonnel(true, _page, limit).subscribe({
+  reloadAllPersonnel() {
+    this.isLoading = true;
+    this.managerService.getAllPersonnel(true, this.recherche, this.pageIndex + 1, this.pageSize).subscribe({
       next: (data: HttpResponse<ApiResponse<User[]>>) => {
-
+        console.log(data.body.data);
         this.dataSource = new MatTableDataSource<any>(data.body.data);
         this.length = data.body.totalItems;
-        this.pageIndex = page;
-        this.pageSize = limit;
+        // this.pageIndex = page;
+        // this.pageSize = limit;
         //this.isCheckedToogle=data.body.data;
         /*data.body.data.forEach(element => {
           this.user.estActif = element.estActif;
         });*/
         //console.log(data.body.data);
         this.isLoading=false;
-
       },
       error: (err) => {
+      }, complete: () => {
+        this.isLoading = false;
+      }
+    })
+  }
 
+  modifierHoraireTravail(data: any){
+    this.openModalDetailPersonnel(data).subscribe({
+      next:(data:any)=>{
+       console.log(data);
+        this.userService.setHoraireTravail(true, data.id, data.heureDebutTravail, data.minuteDebutTravail, data.heureFinTravail, data.minuteFinTravail).subscribe({
+          next:(data)=>{
+            this.reloadAllPersonnel();
+            this.dialog.closeAll();
+          },
+          error:(err)=>{
+            console.error(err);
+          },
+          complete: () => {
+            //this.reloadAllService(this.pageIndex, this.pageSize);
+          },
+        })
+      },
+      error:(err)=>{
       }
     })
   }
 
   openModalDetailPersonnel(data:any){
     const dialogRef = this.dialog.open(ModalDetailsPersonnelComponent, {
-
       data: {personnel: data},
     });
-
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       //this.animal = result;
     });
-  }
-  ngOnInit(): void {
-    this.reloadAllPersonnel(this.pageIndex, this.pageSize);
-
+    return  new Observable((observer)=>{
+      dialogRef.componentInstance.emitHoraireTravail.subscribe((result)=>{
+        observer.next(result);
+      })
+    });
   }
 
   updateStatus(event) {
@@ -108,7 +136,7 @@ export class PersonnelComponent implements OnInit {
         user._id = event.source.id;
         this.managerService.updateStatusUser(true, user, event.checked).subscribe({
           next: (data: HttpResponse<ApiResponse<User>>) => {
-            this, this.reloadAllPersonnel(this.pageIndex, this.pageSize);
+            this, this.reloadAllPersonnel();
             console.log(data.body.data.estActif);
             this._snackBar.openSnackBarSuccess("Modification de status réussi");
             //this.isCheckedToogle=data.body.data.estActif;
@@ -120,7 +148,7 @@ export class PersonnelComponent implements OnInit {
         })
       }
       else{
-        this.reloadAllPersonnel(this.pageIndex, this.pageSize);
+        this.reloadAllPersonnel();
       }
     });
   }
@@ -130,7 +158,7 @@ export class PersonnelComponent implements OnInit {
     this.length = e.length;
     this.pageSize = e.pageSize;
     this.pageIndex = e.pageIndex;
-    this.reloadAllPersonnel(this.pageIndex, this.pageSize)
+    this.reloadAllPersonnel()
   }
 
   setPageSizeOptions(setPageSizeOptionsInput: string) {

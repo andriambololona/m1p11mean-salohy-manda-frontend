@@ -31,6 +31,7 @@ export const environment = {
   update_preference_uri:"/api/user/preference",
   createCompte_uri:"/api/user/compte",
   profile_uri: "/api/user/profile",
+  horaireTravail_uri: "/api/user/horaireTravail",
   /* Rendez-vous */
   getRendezVous: "/api/rendezVous/",
   deleteRendezVous: "/api/rendezVous/",
