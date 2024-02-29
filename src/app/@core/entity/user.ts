@@ -8,6 +8,7 @@ export class User{
   _id:string;
   nom:string;
   prenom:string;
+  image:string;
   email:string;
   password:string;
   passwordConfirmation:string;
