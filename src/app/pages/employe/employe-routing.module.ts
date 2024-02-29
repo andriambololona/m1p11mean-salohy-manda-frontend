@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EmployeComponent } from './employe.component';
 import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
+import { ProfilComponent } from './profil/profil.component';
 
 const routes: Routes = [
   {path:'',component:EmployeComponent},
-  {path:'liste_rendez_vous',component:RendezVousComponent}
+  {path:'liste_rendez_vous',component:RendezVousComponent},
+  {path:'profil',component:ProfilComponent}
 ];
 
 @NgModule({

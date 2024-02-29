@@ -49,12 +49,14 @@ export const TREE_DATA_CLIENT: FoodNode[] = [
     children: [{name: 'Listes',link:'/pages/employe/liste_rendez_vous',icon:'assignment_add'}]
   },
   {
-    name: 'Gestion',
-    icon:'work',
-    children: [
-      {name: 'Profil',link:'/pages/manager',icon:'manage_account'},
-      {name: 'Horaire de travail',link:'/pages/manager',icon:'timer'},
-    ],
+    name: 'Profil',
+    link:'/pages/employe/profil',
+    icon:'manage_account',
+    // icon:'work',
+    // children: [
+    //   {name: 'Profil',link:'/pages/manager',icon:'manage_account'},
+    //   {name: 'Horaire de travail',link:'/pages/manager',icon:'timer'},
+    // ],
   },
 
   {

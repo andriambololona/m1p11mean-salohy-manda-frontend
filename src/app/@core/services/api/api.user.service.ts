@@ -46,6 +46,17 @@ export class ApiUserService extends UserService {
     return response;
   }
 
+  getProfil(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>{
+    return this.apiService.get<any>(environment.profile_uri).pipe(
+      map((x: HttpResponse<boolean>) => {
+        return this.handleResponse<any>(showErrorNotif, x);
+      }),
+      catchError((error) => {
+        return this.catchError(showErrorNotif, error);
+      })
+    );
+  }
+
   getTempsTravailMoyen(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>{
     return this.apiService.get<any>(environment.getTempsTravailMoyen).pipe(
       map((x: HttpResponse<boolean>) => {

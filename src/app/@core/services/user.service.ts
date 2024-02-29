@@ -12,5 +12,5 @@ export abstract class UserService {
   abstract login(showErrorNotif:boolean,user:UserRequest):Observable<HttpResponse<boolean>|Observable<never>>
   abstract createRendezVous(showErrorNotif:boolean,rendezVousReq:RendezVousRequest):Observable<HttpResponse<boolean>|Observable<never>>
   abstract getTempsTravailMoyen(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>
-  
+  abstract getProfil(showErrorNotif: boolean):Observable<HttpResponse<any>|Observable<never>>
 }
