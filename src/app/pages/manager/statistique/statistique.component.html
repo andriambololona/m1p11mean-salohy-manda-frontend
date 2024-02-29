@@ -24,7 +24,7 @@
                 <div class="col">
                   <span *ngIf="rapportCaJour >= 0">+</span>
                   <span *ngIf="rapportCaJour < 0">-</span>
-                  {{ rapportCaJour }} %
+                  {{ rapportCaJour | number : ".2-2" }} %
                   <span *ngIf="rapportCaJour >= 0">
                     <span class="icon material-symbols-outlined" style="color: green;">
                       trending_up
@@ -60,7 +60,7 @@
                 <div class="col">
                   <span *ngIf="rapportCaMois >= 0">+</span>
                   <span *ngIf="rapportCaMois < 0">-</span>
-                  {{ rapportCaMois }} %
+                  {{ rapportCaMois | number : ".2-2" }} %
                   <span *ngIf="rapportCaMois >= 0">
                     <span class="icon material-symbols-outlined" style="color: green;">
                       trending_up
@@ -98,7 +98,7 @@
                 <div class="col">
                   <span *ngIf="rapportBeneficeMois >= 0">+</span>
                   <span *ngIf="rapportBeneficeMois < 0">-</span>
-                  {{ rapportBeneficeMois }} %
+                  {{ rapportBeneficeMois | number : ".2-2" }} %
                   <span *ngIf="rapportBeneficeMois >= 0">
                     <span class="icon material-symbols-outlined" style="color: green;">
                       trending_up
@@ -137,8 +137,8 @@
                 </ng-container>
                 <!-- Temps de travail moyen Column -->
                 <ng-container matColumnDef="tempsTravailMoyen">
-                  <th mat-header-cell *matHeaderCellDef> Temps de travail moyen </th>
-                  <td mat-cell *matCellDef="let element" class="text-end"> {{ element. tempsTravailMoyen}} </td>
+                  <th mat-header-cell *matHeaderCellDef> Temps de travail moyen(Heures/Jour) </th>
+                  <td mat-cell *matCellDef="let element" class="text-end"> {{ element. tempsTravailMoyen | number : ".2-2" }} </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
