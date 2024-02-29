@@ -43,9 +43,9 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
 
-  delete<T>(path: string): Observable<HttpResponse<T> | Observable<never>> {
+  delete<T>(path: string, params: HttpParams = new HttpParams()): Observable<HttpResponse<T> | Observable<never>> {
 
-    return this.http.delete<T>(`${environment.api_host}${path}`, { observe: 'response'})
+    return this.http.delete<T>(`${environment.api_host}${path}`, { observe: 'response',params})
       .pipe(catchError(this.formatErrors));
   }
 

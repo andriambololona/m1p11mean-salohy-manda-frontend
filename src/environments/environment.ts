@@ -38,7 +38,7 @@ export const environment = {
   horaireTravail_uri: "/api/user/horaireTravail",
   /* Rendez-vous */
   getRendezVous: "/api/rendezVous/",
-  deleteRendezVous: "/api/rendezVous/",
+  deleteRendezVous: "/api/rendezVous",
   create_rendezVous_uri: "/api/rendezVous/",
   updateRendezVous: "/api/rendezVous/",
   createPrestationFromRendezVous: "/api/rendezVous/create-prestation",
