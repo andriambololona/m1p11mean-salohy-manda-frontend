@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor
 
     let { url, method, headers, body } = req;
 
-    console.log(url.split("/")[6].split("?")[0]);
+    console.log(url);
     console.log(method);
 
     //return this.handleRequest(req, next, null);
@@ -53,7 +53,7 @@ export class AuthInterceptor implements HttpInterceptor
       return next.handle(req);
     }
 
-    if (url.split("/")[6].split("?")[0]=="allService" && method === 'GET') {
+    if (url.toString()=="http://localhost:3000/api/service/manager/allService?page=1&limit=50" && method === 'GET') {
       console.log("interceptor ");
       return next.handle(req);
     }

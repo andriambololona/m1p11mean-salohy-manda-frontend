@@ -15,13 +15,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { SuiviComponent } from './suivi/suivi.component';
+
+import { ProfilComponent } from './profil/profil.component';
+
 
 
 @NgModule({
   declarations: [
     RendezVousComponent,
-    SuiviComponent
+
+    SuiviComponent,
+
+    ProfilComponent
+
   ],
   imports: [
     CommonModule,
