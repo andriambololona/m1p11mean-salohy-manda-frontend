@@ -25,7 +25,7 @@ export class PrestationComponent {
   isLoading: boolean = false;
   page: number = 0;
   limit: number = 10;
-  displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire','statut','solde','action'];
+  displayedColumns: string[] = ['date', 'prestations', 'montant', 'gestionnaire','statut','action'];
   dataSource = new MatTableDataSource<Prestation[]>([]);
   length: number;//colonne total sans pagination
   pageSize: number=10;//nombre row initial
@@ -35,6 +35,7 @@ export class PrestationComponent {
   filtre_recherche:string="";
   dateDebut=new FormControl<Date | null>(null);
   dateFin=new FormControl<Date | null>(null);
+  data_solde:any={};
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private prestatiohnService:PrestationService,private snackBar:SnackBarService
@@ -59,8 +60,9 @@ export class PrestationComponent {
     this.prestatiohnService.getAllPrestation(showErrorNotif,_page, limit,dateDebut,dateFin).subscribe({
       next:(data:HttpResponse<ApiResponse<any>>)=>{
 
-          console.log(data.body);
-          this.dataSource = new MatTableDataSource<any>(data.body.data);
+          console.log(data.body.data[0]);
+          this.dataSource = new MatTableDataSource<any>(data.body.data)
+          this.data_solde=data.body.data[0].client.compte;
           this.length = data.body.paginator.dataCount;
           this.pageIndex = page;
           this.pageSize = limit;

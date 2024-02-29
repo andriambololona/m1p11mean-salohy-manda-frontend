@@ -50,23 +50,21 @@
               </td>
             </ng-container>
             <ng-container matColumnDef="commision_service">
-              <th mat-header-cell *matHeaderCellDef> Montant commission par service </th>
-              <td mat-cell *matCellDef="let element">
-                <ul>
-                  <li *ngFor="let commission of element.details">
-                    <span>{{ commission.montantCommission }}</span>
-                  </li>
-                </ul>
+              <th mat-header-cell *matHeaderCellDef> Montant commission par service (Ariary)</th>
+              <td mat-cell *matCellDef="let element" style="text-align:right">
+               
+                    <span *ngFor="let commission of element.details">{{ commission.montantCommission | currency: 'Ar'}}</span>
+                 
               </td>
             </ng-container>
             <!-- Montant Column -->
             <ng-container matColumnDef="montant">
               <th mat-header-cell *matHeaderCellDef> Montant total (Ariary)</th>
-              <td mat-cell *matCellDef="let element" style="text-align:right"> {{element.montantTotal}} </td>
+              <td mat-cell *matCellDef="let element" style="text-align:right"> {{element.montantTotal| currency: 'Ar'}} </td>
             </ng-container>
             <ng-container matColumnDef="commission">
               <th mat-header-cell *matHeaderCellDef> Montant total commission (Ariary)</th>
-              <td mat-cell *matCellDef="let element" style="text-align:right"> {{element.montantTotalCommission}} </td>
+              <td mat-cell *matCellDef="let element" style="text-align:right"> {{element.montantTotalCommission| currency: 'Ar'}} </td>
             </ng-container>
 
 

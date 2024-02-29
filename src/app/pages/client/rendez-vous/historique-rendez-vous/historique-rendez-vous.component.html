@@ -31,7 +31,7 @@
             </ng-container>
             <!-- Prestation Column -->
             <ng-container matColumnDef="prestations">
-              <th mat-header-cell *matHeaderCellDef> Prestations </th>
+              <th mat-header-cell *matHeaderCellDef> Services </th>
               <td mat-cell *matCellDef="let element">
                 <ul>
                   <li *ngFor="let prestation of element.prestations">
@@ -42,8 +42,8 @@
             </ng-container>
             <!-- Montant Column -->
             <ng-container matColumnDef="montant">
-              <th mat-header-cell *matHeaderCellDef> montant </th>
-              <td mat-cell *matCellDef="let element"> {{element.montant}} </td>
+              <th mat-header-cell *matHeaderCellDef> Montants (Ariary) </th>
+              <td mat-cell *matCellDef="let element" style="text-align: right;"> {{element.montant| currency: 'Ar'}} </td>
             </ng-container>
             <!-- Gestionnaire Column -->
             <ng-container matColumnDef="gestionnaire">

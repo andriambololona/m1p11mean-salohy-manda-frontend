@@ -13,8 +13,8 @@ export const environment = {
   auth_strategy_name: 'jwt',
   favorisClient: 'pages/favoris',
 
-  //api_host:'https://salon-beaute-backend.onrender.com',
-  api_host:'http://localhost:3000',
+  api_host:'https://salon-beaute-backend.onrender.com',
+  //api_host:'http://localhost:3000',
 
   register_uri:'/api/auth/signup',
   generate_token_uri: '/api/user/token',
