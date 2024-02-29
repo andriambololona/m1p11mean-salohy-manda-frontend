@@ -59,13 +59,13 @@
               <th mat-header-cell *matHeaderCellDef> Solde disponible (Ariary)</th>
               <td mat-cell *matCellDef="let element">
                 <li>
-                  <span>Mvola: {{element.client.compte.mvola }} Ariary</span>
+                  <span *ngIf="element.client.compte.mvola==undefined">Mvola: {{element.client.compte.mvola }} Ariary</span>
                 </li>
                 <li>
-                  <span>Airtel monney: {{element.client.compte.airtel }} Ariary</span>
+                  <span  *ngIf="element.client.compte.airtel==undefined">Airtel monney: {{element.client.compte.airtel }} Ariary</span>
                 </li>
                 <li>
-                  <span>Orange monney: {{element.client.compte.orange }} Ariary</span>
+                  <span  *ngIf="element.client.compte.orange==undefined">Orange monney: {{element.client.compte.orange }} Ariary</span>
                 </li>
 
               </td>
