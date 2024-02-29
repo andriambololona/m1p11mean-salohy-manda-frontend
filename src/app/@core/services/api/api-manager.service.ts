@@ -15,12 +15,12 @@ import { UserRequest } from '../../entity/request/userRequest';
 import { ManagerService } from '../manager.service';
 import { User } from '../../entity/user';
 import { ServiceRequest } from '../../entity/request/serviceRequest';
-<<<<<<< HEAD
+
 import { DepenseRequest } from '../../entity/request/depenseRequest';
 
-=======
+
 import { PromotionServiceRequest } from '../../entity/request/promotionServiceRequest';
->>>>>>> dev-manda
+
 
 
 

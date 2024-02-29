@@ -17,6 +17,7 @@ import { ModalDetailServiceComponent } from './modal-detail-service/modal-detail
 import { ModalUpdateServiceComponent } from './modal-update-service/modal-update-service.component';
 import { PromotionServiceRequest } from 'src/app/@core/entity/request/promotionServiceRequest';
 import { ModalAjoutPromotionComponent } from './modal-ajout-promotion/modal-ajout-promotion.component';
+import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
 
 @Component({
   selector: 'app-services',
@@ -49,7 +50,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
       this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
+  constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog,private snackBar:SnackBarService) { }
 
   reloadAllService(page: number, limit: number) {
     const _page = page + 1;
@@ -144,7 +145,7 @@ export class ServicesComponent implements OnInit,AfterViewInit{
   }
 
   openDialogUpdateService(service:object): Observable<ServiceRequest>{
-    const dialogRef = this.dialog.open(ModalAjoutPromotionComponent, {
+    const dialogRef = this.dialog.open(ModalUpdateServiceComponent, {
       width: '800px',
       data: {service:service},
     });
@@ -191,10 +192,11 @@ export class ServicesComponent implements OnInit,AfterViewInit{
           next:(data)=>{
             //console.log(data);
             this.dialog.closeAll();
+            this.snackBar.openSnackBarSuccess("Modification du service réussi");
           },
           error:(err)=>{
             console.error(err);
-
+            this.snackBar.openSnackBarErrorServer();
           },
           complete: () => {
             this.reloadAllService(this.pageIndex, this.pageSize);

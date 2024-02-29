@@ -28,6 +28,7 @@ import { DepenseComponent } from './depense/depense.component';
 import { ModalAjoutDepenseComponent } from './depense/modal-ajout-depense/modal-ajout-depense.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ModalAjoutPromotionComponent } from './services/modal-ajout-promotion/modal-ajout-promotion.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 
@@ -61,7 +62,7 @@ import { ModalAjoutPromotionComponent } from './services/modal-ajout-promotion/m
     MatDialogModule,
     MatCardModule,
     MatProgressSpinnerModule,
-
+    MatSnackBarModule
   ],
   providers:[
     {provide:CustomAuthService},

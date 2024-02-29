@@ -10,6 +10,8 @@ import { ManagerService } from 'src/app/@core/services/manager.service';
 import { MessageModalService } from 'src/app/@core/services/message-modal.service';
 import { ModalDetailsPersonnelComponent } from './modal-details-personnel/modal-details-personnel.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/@core/services/snack-bar.service';
 
 
 @Component({
@@ -18,6 +20,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./personnel.component.scss']
 })
 export class PersonnelComponent implements OnInit {
+
+ 
 
   user:User=new User();
   pageEvent: PageEvent;
@@ -43,7 +47,16 @@ export class PersonnelComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
   }
 
-  constructor(private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
+  constructor(private _snackBar: SnackBarService,private managerService: ManagerService, private messageModalService: MessageModalService,public dialog: MatDialog) { }
+
+  /*horizontalPosition: MatSnackBarHorizontalPosition = 'right';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action,{duration:5000,horizontalPosition: this.horizontalPosition,
+      verticalPosition: this.verticalPosition});
+  }*/
+
 
   reloadAllPersonnel(page: number, limit: number) {
     const _page = page + 1;
@@ -97,10 +110,12 @@ export class PersonnelComponent implements OnInit {
           next: (data: HttpResponse<ApiResponse<User>>) => {
             this, this.reloadAllPersonnel(this.pageIndex, this.pageSize);
             console.log(data.body.data.estActif);
+            this._snackBar.openSnackBarSuccess("Modification de status réussi");
             //this.isCheckedToogle=data.body.data.estActif;
           },
           error: (err) => {
             console.log(err);
+            this._snackBar.openSnackBarErrorServer();
           }
         })
       }
