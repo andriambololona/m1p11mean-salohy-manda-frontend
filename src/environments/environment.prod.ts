@@ -9,7 +9,7 @@ export const environment = {
   client_id: 'a2934fa2-6f7e-4ac9-8210-681814ac86c4',
   favorisClient: 'pages/favoris',
 
-  // api_host:'https://salon-beaute-backend.onrender.com',
+  //api_host:'http://salon-beaute-backend.onrender.com',
   api_host:'http://localhost:3000',
 
   generate_token_uri: '/api/user/token',
